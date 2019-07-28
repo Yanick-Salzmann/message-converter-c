@@ -17,4 +17,4 @@ include(../../../proto-helper/CMakeLists.txt)
 add_executable(swift-mt-generation main.cpp ${GENERATED_FILES} definition/StandardRepository.cpp definition/StandardRepository.h)
 add_dependencies(swift-mt-generation swift-mt-proto)
 
-target_link_libraries(swift-mt-generation office-utils http-utils utils)
+target_link_libraries(swift-mt-generation office-utils http-utils utils stdc++fs)

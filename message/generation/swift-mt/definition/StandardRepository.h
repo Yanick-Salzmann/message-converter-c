@@ -15,6 +15,8 @@ namespace message::generation::swift::mt {
         std::string _base_url;
         std::string _local_directory;
 
+        void write_file(const std::string& content, const std::string& file);
+
         utils::http::HtmlDocument load_document(const std::string& relative_url);
 
         void for_each_message(const std::function<void (const std::string&, const std::string&, const std::string&)>& callback);

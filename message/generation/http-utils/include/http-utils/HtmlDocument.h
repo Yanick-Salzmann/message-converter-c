@@ -51,6 +51,10 @@ namespace message::utils::http {
 
         std::list<HtmlNode> find_all(const std::string& query);
 
+        [[nodiscard]] std::string content() const {
+            return _content;
+        }
+
         static HtmlDocument from_url(const std::string& url);
     };
 }

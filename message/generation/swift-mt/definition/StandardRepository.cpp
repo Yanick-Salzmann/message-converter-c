@@ -2,6 +2,8 @@
 #include <iostream>
 #include <spdlog/fmt/fmt.h>
 #include <regex>
+#include <filesystem>
+#include <fstream>
 
 namespace message::generation::swift::mt {
     LOGGER_IMPL(StandardRepository);
@@ -18,7 +20,18 @@ namespace message::generation::swift::mt {
     }
 
     void StandardRepository::process_message_definition(const std::string &mt, const std::string &description, const std::string &href) {
-        log->info("Processing message: {} -- SR: {} -- Location: {} -- Desc: {}", mt, _service_release, href, description);
+        log->info("MT{} -> {}", mt, href);
+        auto mt_doc = load_document(href);
+        write_file(mt_doc.content(), fmt::format("MT{}.html", mt));
+    }
+
+    void StandardRepository::write_file(const std::string &content, const std::string &file) {
+        std::filesystem::path base_path(_local_directory);
+        base_path /= file;
+
+        const auto absolute_path = std::filesystem::absolute(base_path);
+        std::ofstream os { absolute_path.string(), std::ios::out | std::ios::binary};
+        os.write(content.c_str(), content.size());
     }
 
     utils::http::HtmlDocument StandardRepository::load_document(const std::string &relative_url) {

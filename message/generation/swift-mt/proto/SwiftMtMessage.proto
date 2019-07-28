@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+package message.definition.swift.mt;
+
+message SwiftMtMessage {
+    string uri = 1;
+}

@@ -2,5 +2,10 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/message/generation/http-utils/curl" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/message/generation/http-utils/gumbo-query" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/message/generation/office-utils/xlnt" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/utils/inja" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/utils/json" vcs="Git" />
   </component>
 </project>

@@ -1,0 +1,15 @@
+[submodule "message/generation/office-utils/xlnt"]
+	path = message/generation/office-utils/xlnt
+	url = https://github.com/tfussell/xlnt.git
+[submodule "message/generation/http-utils/curl"]
+	path = message/generation/http-utils/curl
+	url = https://github.com/curl/curl
+[submodule "utils/inja"]
+	path = utils/inja
+	url = https://github.com/pantor/inja.git
+[submodule "utils/json"]
+	path = utils/json
+	url = https://github.com/nlohmann/json.git
+[submodule "message/generation/http-utils/gumbo-query"]
+	path = message/generation/http-utils/gumbo-query
+	url = https://github.com/lazytiger/gumbo-query.git

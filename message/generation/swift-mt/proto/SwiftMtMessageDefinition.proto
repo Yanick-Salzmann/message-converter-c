@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package message.definition.swift.mt;
+
+message SwiftMtMessageDefinition {
+    string uri = 1;
+    repeated ObjDef objs = 5;
+}
+
+message ObjDef {
+    oneof obj_one_of {
+        SeqDef seq = 1;
+    }
+}
+
+message SeqDef {
+    string tag = 1;
+    string value = 5;
+    bool repeated = 10;
+}
+
+message OptnFrmt {
+    string option = 1;
+    string format = 5;
+    repeated string components = 10;
+}
+
+message FldQlfr {
+    string qualifier = 1;
+    repeated string options = 5;
+    string description = 10;
+}
+
+message FldDef {
+    string tag = 1;
+    string name = 5;
+    repeated OptnFrmt format = 10;
+    repeated FldQlfr qualifier = 15;
+    bool mandatory = 20;
+}

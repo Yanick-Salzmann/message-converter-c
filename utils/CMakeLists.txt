@@ -9,5 +9,9 @@ add_subdirectory(json)
 set(INJA_USE_EMBEDDED_JSON off)
 add_subdirectory(inja)
 
-add_library(utils STATIC include/utils/String.h src/String.cpp)
-target_link_libraries(utils inja)
+add_subdirectory(spdlog)
+
+add_definitions("-DUTILS_SELF_BUILD")
+
+add_library(utils STATIC include/utils/String.h src/String.cpp include/utils/Log.h src/Log.cpp)
+target_link_libraries(utils inja spdlog)

@@ -13,3 +13,6 @@
 [submodule "message/generation/http-utils/gumbo-query"]
 	path = message/generation/http-utils/gumbo-query
 	url = https://github.com/lazytiger/gumbo-query.git
+[submodule "utils/spdlog"]
+	path = utils/spdlog
+	url = https://github.com/gabime/spdlog.git

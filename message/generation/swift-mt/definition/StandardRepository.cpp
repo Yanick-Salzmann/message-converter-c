@@ -22,7 +22,8 @@ namespace message::generation::swift::mt {
     void StandardRepository::process_message_definition(const std::string &mt, const std::string &description, const std::string &href) {
         log->info("MT{} -> {}", mt, href);
         auto mt_doc = load_document(href);
-        write_file(mt_doc.content(), fmt::format("MT{}.html", mt));
+        const auto nodes = mt_doc.find_all("table.fmttable tr");
+        log->info("Found {} format entries", nodes.size());
     }
 
     void StandardRepository::write_file(const std::string &content, const std::string &file) {

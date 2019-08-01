@@ -47,6 +47,8 @@ namespace message::generation::swift::mt {
         log->info("JSON: {}", msg_text);
 
         log->info("----|");
+
+        _message_definition = msg_def;
     }
 
     bool DefinitionParser::is_extended_header_row(const std::list<utils::http::HtmlNode> &header_nodes) {
@@ -268,6 +270,16 @@ namespace message::generation::swift::mt {
     }
 
     void DefinitionParser::add_qualifier_options(definition::swift::mt::FldQlfr &qlfr_def, const std::string &raw_options) {
+        static std::regex group_regex{ "(([A-Z])( or)?)+" };
 
+        auto cur_start = raw_options.begin();
+        std::smatch match;
+
+        while(std::regex_search(cur_start, raw_options.end(), match, group_regex)) {
+            const auto optn = match[2].str();
+            *qlfr_def.mutable_options()->Add() = optn;
+
+            cur_start = match.suffix().first;
+        }
     }
 }

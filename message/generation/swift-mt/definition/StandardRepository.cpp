@@ -21,20 +21,20 @@ namespace message::generation::swift::mt {
     }
 
     void StandardRepository::process_message_definition(const std::string &mt, const std::string &description, const std::string &href) {
-        if(mt != "321") {
+        if (mt != "321") {
             return;
         }
 
         log->info("MT{} -> {}", mt, href);
         auto mt_doc = load_document(href);
         const auto nodes = mt_doc.find_all("table.fmttable tr");
-        DefinitionParser parser{
-            _service_release,
-            mt,
-            description,
-            std::bind(&StandardRepository::load_document, this, std::placeholders::_1),
-            nodes
-        };
+        _message_cache.emplace(mt, DefinitionParser{
+                _service_release,
+                mt,
+                description,
+                std::bind(&StandardRepository::load_document, this, std::placeholders::_1),
+                nodes
+        }.message_definition());
     }
 
     void StandardRepository::write_file(const std::string &content, const std::string &file) {
@@ -42,7 +42,7 @@ namespace message::generation::swift::mt {
         base_path /= file;
 
         const auto absolute_path = std::filesystem::absolute(base_path);
-        std::ofstream os { absolute_path.string(), std::ios::out | std::ios::binary};
+        std::ofstream os{absolute_path.string(), std::ios::out | std::ios::binary};
         os.write(content.c_str(), content.size());
     }
 
@@ -52,25 +52,25 @@ namespace message::generation::swift::mt {
         return utils::http::HtmlDocument::from_url(url);
     }
 
-    void StandardRepository::for_each_message(const std::function<void(const std::string &, const std::string &, const std::string &)>& callback) {
-        std::regex mt_regex{ "MT ([0-9n][0-9]{2}) (.*)$", std::regex::extended};
+    void StandardRepository::for_each_message(const std::function<void(const std::string &, const std::string &, const std::string &)> &callback) {
+        std::regex mt_regex{"MT ([0-9n][0-9]{2}) (.*)$", std::regex::extended};
 
         auto doc = load_document("idx_msg.htm");
         const auto elements = doc.find_all("table.idxtbl tr td a");
 
-        for(const auto& element : elements) {
+        for (const auto &element : elements) {
             const auto own_text = element.node_text();
-            if(own_text.empty()) {
+            if (own_text.empty()) {
                 continue;
             }
 
             const auto link = element.attribute("href");
-            if(link.empty()) {
+            if (link.empty()) {
                 continue;
             }
 
             std::smatch results{};
-            if(!std::regex_match(own_text, results, mt_regex)) {
+            if (!std::regex_match(own_text, results, mt_regex)) {
                 continue;
             }
 

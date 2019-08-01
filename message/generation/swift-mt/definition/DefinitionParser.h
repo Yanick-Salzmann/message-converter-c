@@ -27,6 +27,8 @@ namespace message::generation::swift::mt {
 
         std::list<utils::http::HtmlNode> _field_nodes;
 
+        definition::swift::mt::SwiftMtMessageDefinition _message_definition;
+
         void process();
 
         bool is_extended_header_row(const std::list<utils::http::HtmlNode>& header_nodes);
@@ -47,6 +49,10 @@ namespace message::generation::swift::mt {
 
     public:
         DefinitionParser(std::string sr, std::string mt, std::string description, tDocumentLoader doc_loader, std::list<utils::http::HtmlNode> field_nodes);
+
+        [[nodiscard]] const definition::swift::mt::SwiftMtMessageDefinition& message_definition() const {
+            return _message_definition;
+        }
     };
 }
 

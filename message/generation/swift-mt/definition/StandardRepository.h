@@ -3,6 +3,8 @@
 
 #include <functional>
 #include <string>
+#include <map>
+#include <proto/SwiftMtMessageDefinition.pb.h>
 
 #include "http-utils/HtmlDocument.h"
 #include "utils/Log.h"
@@ -14,6 +16,7 @@ namespace message::generation::swift::mt {
         std::string _service_release;
         std::string _base_url;
         std::string _local_directory;
+        std::map<std::string, definition::swift::mt::SwiftMtMessageDefinition> _message_cache;
 
         void write_file(const std::string& content, const std::string& file);
 
@@ -27,6 +30,10 @@ namespace message::generation::swift::mt {
         StandardRepository(std::string sr, std::string base_url, std::string local_directory);
 
         void generate_definitions();
+
+        definition::swift::mt::SwiftMtMessageDefinition message_definition(const std::string& mt) {
+            return _message_cache.at(mt);
+        }
     };
 }
 

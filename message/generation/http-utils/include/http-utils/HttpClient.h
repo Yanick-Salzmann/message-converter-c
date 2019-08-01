@@ -6,10 +6,8 @@
 #include <vector>
 #include <cstdint>
 
-#include "http-utils/config.h"
-
 namespace message::utils::http {
-    class HU_DLL_API HttpClient {
+    class HttpClient {
         static std::size_t data_callback(char *ptr, std::size_t size, size_t nmemb, void *userdata);
 
         CURL* _curl;

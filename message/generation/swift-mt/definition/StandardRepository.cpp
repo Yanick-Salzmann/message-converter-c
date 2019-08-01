@@ -1,4 +1,5 @@
 #include "StandardRepository.h"
+#include "DefinitionParser.h"
 #include <iostream>
 #include <spdlog/fmt/fmt.h>
 #include <regex>
@@ -20,10 +21,20 @@ namespace message::generation::swift::mt {
     }
 
     void StandardRepository::process_message_definition(const std::string &mt, const std::string &description, const std::string &href) {
+        if(mt != "321") {
+            return;
+        }
+
         log->info("MT{} -> {}", mt, href);
         auto mt_doc = load_document(href);
         const auto nodes = mt_doc.find_all("table.fmttable tr");
-        log->info("Found {} format entries", nodes.size());
+        DefinitionParser parser{
+            _service_release,
+            mt,
+            description,
+            std::bind(&StandardRepository::load_document, this, std::placeholders::_1),
+            nodes
+        };
     }
 
     void StandardRepository::write_file(const std::string &content, const std::string &file) {

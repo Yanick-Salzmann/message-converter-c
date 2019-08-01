@@ -12,7 +12,7 @@
 	url = https://github.com/nlohmann/json.git
 [submodule "message/generation/http-utils/gumbo-query"]
 	path = message/generation/http-utils/gumbo-query
-	url = https://github.com/lazytiger/gumbo-query.git
+	url = https://github.com/Yanick-Salzmann/gumbo-query.git
 [submodule "utils/spdlog"]
 	path = utils/spdlog
 	url = https://github.com/gabime/spdlog.git

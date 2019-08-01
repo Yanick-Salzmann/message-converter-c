@@ -10,6 +10,7 @@ message SwiftMtMessageDefinition {
 message ObjDef {
     oneof obj_one_of {
         SeqDef seq = 1;
+        FldDef fld = 5;
     }
 }
 
@@ -17,6 +18,9 @@ message SeqDef {
     string tag = 1;
     string value = 5;
     bool repeated = 10;
+    bool mandatory = 20;
+
+    repeated ObjDef children = 25;
 }
 
 message OptnFrmt {
@@ -37,4 +41,5 @@ message FldDef {
     repeated OptnFrmt format = 10;
     repeated FldQlfr qualifier = 15;
     bool mandatory = 20;
+    bool repeated = 25;
 }

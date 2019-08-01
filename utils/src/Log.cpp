@@ -41,7 +41,7 @@ namespace message::utils {
 #ifndef NDEBUG
         _logger->set_level (spdlog::level::debug);
 #else
-        mLogger->set_level (spdlog::level::info);
+        _logger->set_level (spdlog::level::info);
 #endif
     }
 

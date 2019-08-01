@@ -98,4 +98,17 @@ namespace message::utils::http {
     std::string HtmlNode::attribute(const std::string &key) const {
         return _node->attribute(key);
     }
+
+    std::list<HtmlNode> HtmlNode::find_all(const std::string &query) const {
+        CSelection selection{_node->find(query)};
+        const auto num_elements = selection.nodeNum();
+
+        std::list<HtmlNode> nodes;
+
+        for(auto i = std::size_t{0}; i < num_elements; ++i) {
+            nodes.emplace_back(HtmlNode{selection.nodeAt(i)});
+        }
+
+        return nodes;
+    }
 }

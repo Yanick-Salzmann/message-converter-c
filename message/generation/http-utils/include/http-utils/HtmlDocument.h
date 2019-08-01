@@ -1,8 +1,6 @@
 #ifndef MESSAGE_CONVERTER_C_HTMLDOCUMENT_H
 #define MESSAGE_CONVERTER_C_HTMLDOCUMENT_H
 
-#include "config.h"
-
 #include <string>
 #include <memory>
 #include <list>
@@ -11,7 +9,7 @@ class CDocument;
 class CNode;
 
 namespace message::utils::http {
-    class HU_DLL_API HtmlNode {
+    class HtmlNode {
         friend class HtmlDocument;
 
         std::unique_ptr<CNode> _node;
@@ -27,13 +25,15 @@ namespace message::utils::http {
         HtmlNode& operator = (const HtmlNode& other);
         HtmlNode& operator = (HtmlNode&& other) noexcept;
 
+        [[nodiscard]] std::list<HtmlNode> find_all(const std::string& query) const;
+
         [[nodiscard]] std::string own_text() const;
         [[nodiscard]] std::string node_text() const;
 
         [[nodiscard]] std::string attribute(const std::string& key) const;
     };
 
-    class HU_DLL_API HtmlDocument {
+    class HtmlDocument {
         std::string _content;
         std::unique_ptr<CDocument> _document;
 

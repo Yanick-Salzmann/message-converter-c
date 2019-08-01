@@ -6,6 +6,7 @@ find_package(PkgConfig)
 set(CMAKE_CXX_STANDARD 17)
 
 set(CMAKE_USE_OPENSSL on)
+set(BUILD_SHARED_LIBS off)
 add_subdirectory(curl)
 
 add_subdirectory(gumbo-query)
@@ -19,7 +20,7 @@ include_directories(${PROJECT_SOURCE_DIR}/include)
 include_directories(${CMAKE_SOURCE_DIR}/utils/include)
 include_directories(${PROJECT_SOURCE_DIR}/gumbo-query/src)
 
-add_library(http-utils SHARED include/http-utils/config.h include/http-utils/HttpClient.h src/HttpClient.cpp include/http-utils/HtmlDocument.h src/HtmlDocument.cpp)
+add_library(http-utils STATIC include/http-utils/HttpClient.h src/HttpClient.cpp include/http-utils/HtmlDocument.h src/HtmlDocument.cpp)
 
 link_directories(${gumbo_LIBRARY_DIRS})
 

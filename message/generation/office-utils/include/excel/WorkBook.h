@@ -1,7 +1,6 @@
 #ifndef MESSAGE_CONVERTER_C_WORKBOOK_H
 #define MESSAGE_CONVERTER_C_WORKBOOK_H
 
-#include "config.h"
 #include "Sheet.h"
 
 #include <iostream>
@@ -10,7 +9,7 @@
 #include <xlnt/xlnt.hpp>
 
 namespace message::utils::office::excel {
-    class OU_DLL_API WorkBook {
+    class WorkBook {
         xlnt::workbook _work_book;
         std::vector<Sheet> _sheets;
 

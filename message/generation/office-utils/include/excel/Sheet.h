@@ -1,8 +1,6 @@
 #ifndef MESSAGE_CONVERTER_C_SHEET_H
 #define MESSAGE_CONVERTER_C_SHEET_H
 
-#include "config.h"
-
 #include <memory>
 #include <string>
 #include <utility>
@@ -75,7 +73,7 @@ namespace message::utils::office::excel {
         }
     };
 
-    class OU_DLL_API Sheet {
+    class Sheet {
         xlnt::worksheet _sheet;
 
     public:

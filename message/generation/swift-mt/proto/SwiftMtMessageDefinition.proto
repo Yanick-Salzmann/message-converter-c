@@ -23,10 +23,15 @@ message SeqDef {
     repeated ObjDef children = 25;
 }
 
+message CmpDef {
+    string name = 1;
+    string constant = 5;
+}
+
 message OptnFrmt {
     string option = 1;
     string format = 5;
-    repeated string components = 10;
+    repeated CmpDef components = 10;
 }
 
 message FldQlfr {

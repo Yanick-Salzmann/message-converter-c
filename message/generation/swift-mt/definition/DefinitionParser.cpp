@@ -98,19 +98,23 @@ namespace message::generation::swift::mt {
             fld_def.set_name(is_empty_string(field_name_generic) ? field_name : field_name_generic);
             fld_def.set_mandatory(status == "M");
 
-            auto fld_links = field_name_node.find_all("a");
-            if(fld_links.empty()) {
-                log->warn("No link to field definition found for field {}", field_name);
-                continue;
-            }
+            if(tag == "16R" || tag == "16S") {
+                handle_marker_field(fld_def, tag, content_options);
+            } else {
+                auto fld_links = field_name_node.find_all("a");
+                if (fld_links.empty()) {
+                    log->warn("No link to field definition found for field {}", field_name);
+                    continue;
+                }
 
-            const auto field_def_link = fld_links.front().attribute("href");
-            if(field_def_link.empty()) {
-                log->warn("Link to field definition for field {} is empty", field_name);
-                continue;
-            }
+                const auto field_def_link = fld_links.front().attribute("href");
+                if (field_def_link.empty()) {
+                    log->warn("Link to field definition for field {} is empty", field_name);
+                    continue;
+                }
 
-            load_field_definition(fld_def, field_def_link);
+                load_field_definition(fld_def, field_def_link);
+            }
 
             definition::swift::mt::ObjDef obj_def;
             obj_def.mutable_fld()->MergeFrom(fld_def);
@@ -126,7 +130,7 @@ namespace message::generation::swift::mt {
     }
 
     bool DefinitionParser::parse_sequence(const std::string &code, SequenceStack &sequence_stack) {
-        static std::regex sequence_regex { "((-----(>|\\|)) )?((((Mandatory)|(Optional)) (Repetitive )?)|(End of ))((Subs)|S)equence ([A-Z0-9]+) (.*)"};
+        static std::regex sequence_regex { "((-----(>|\\|)) )?((((Mandatory)|(Optional)) (Repetitive )?)|(End of ))((Subs)|S)equence ([A-Z0-9]{1,2}[a-z]?) (.*)"};
 
         std::smatch result;
         if(!std::regex_match(code, result, sequence_regex)) {
@@ -217,7 +221,8 @@ namespace message::generation::swift::mt {
             opt->set_format(format);
             const auto comps = split_components(components);
             for(const auto& comp : comps) {
-                *opt->mutable_components()->Add() = comp;
+                auto cmp = opt->mutable_components()->Add();
+                cmp->set_name(comp);
             }
         }
     }
@@ -280,6 +285,24 @@ namespace message::generation::swift::mt {
             *qlfr_def.mutable_options()->Add() = optn;
 
             cur_start = match.suffix().first;
+        }
+    }
+
+    void DefinitionParser::handle_marker_field(definition::swift::mt::FldDef &fld_def, const std::string &tag, const std::string &block) {
+        if(tag == "16R") {
+            auto frmt = fld_def.mutable_format()->Add();
+            const auto cmp = frmt->mutable_components()->Add();
+            cmp->set_name("Blk");
+            cmp->set_constant(block);
+            frmt->set_option("R");
+            frmt->set_format(block);
+        } else {
+            auto frmt = fld_def.mutable_format()->Add();
+            const auto cmp = frmt->mutable_components()->Add();
+            cmp->set_name("Blk");
+            cmp->set_constant(block);
+            frmt->set_option("S");
+            frmt->set_format(block);
         }
     }
 }

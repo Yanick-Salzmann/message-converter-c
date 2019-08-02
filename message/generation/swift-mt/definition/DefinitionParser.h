@@ -41,6 +41,7 @@ namespace message::generation::swift::mt {
         static void load_field_qualifiers(definition::swift::mt::FldDef& fld_def, utils::http::HtmlDocument& doc);
 
         static void add_qualifier_options(definition::swift::mt::FldQlfr& qlfr_def, const std::string& raw_options);
+        static void handle_marker_field(definition::swift::mt::FldDef& fld_def, const std::string& tag, const std::string& block);
 
         static bool parse_sequence(const std::string& code, SequenceStack& sequence_stack);
         static bool is_empty_string(const std::string& str);

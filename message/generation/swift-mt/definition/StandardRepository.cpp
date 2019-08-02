@@ -21,7 +21,7 @@ namespace message::generation::swift::mt {
     }
 
     void StandardRepository::process_message_definition(const std::string &mt, const std::string &description, const std::string &href) {
-        if (mt != "321") {
+        if (mt != "564") {
             return;
         }
 

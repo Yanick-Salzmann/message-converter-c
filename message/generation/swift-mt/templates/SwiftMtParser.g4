@@ -1,4 +1,4 @@
-grammar SwiftMtParser;
+grammar SwiftMtParser_MT{{message_type}};
 
 message                : bh ah uh? mt tr? EOF;
 bh                     : TAG_BH bh_content RBRACE ;
@@ -16,11 +16,13 @@ sys_element            : LBRACE sys_element_key COLON sys_element_content RBRACE
 sys_element_key        : ~( COLON | RBRACE )+ ;
 sys_element_content    : ~( RBRACE )+ ;
 
-mt                     : TAG_MT CRLF mt_field+ MT_END;
+mt                     : TAG_MT {{print_mt_body}} MT_END;
 
-mt_field               : ':' ~(CRLF)+ CRLF;
+{{print_sequences}}
 
 {{print_fields}}
+
+{{print_field_options}}
 
 TAG_BH                 : '{1:' ;
 TAG_AH                 : '{2:' ;
@@ -40,5 +42,47 @@ CRLF                   : '\r'?'\n';
 
 DIGIT                  : '0'..'9';
 CHARACTER              : 'A'..'Z';
+
+START_OF_FIELD         : '\r'? '\n:' ;
+
+CHAR_SET_X             : ('a'..'z') |
+                         ('A'..'Z') |
+                         ('0'..'9') |
+                         '/' |
+                         '-' |
+                         '?' |
+                         ':' |
+                         '(' |
+                         ')' |
+                         '.' |
+                         ',' |
+                         '\'' |
+                         '+' |
+                         ('\r''\n')
+                       ;
+
+CHAR_SET_Y             : ('A'..'Z') |
+                         ('0'..'9') |
+                         '.' |
+                         ',' |
+                         '-' |
+                         '(' |
+                         ')' |
+                         '/' |
+                         '=' |
+                         '\'' |
+                         '+' |
+                         ':' |
+                         '?' |
+                         '!' |
+                         '"' |
+                         '%' |
+                         '&' |
+                         '*' |
+                         '<' |
+                         '>' |
+                         ';' |
+                         ' '
+                        ;
 
 ANY                    : . ;

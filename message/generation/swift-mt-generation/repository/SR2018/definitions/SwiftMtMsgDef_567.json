@@ -1,0 +1,1421 @@
+{
+ "uri": "urn::msg::swift::mt::SR2018::567",
+ "objs": [
+  {
+   "seq": {
+    "tag": "A",
+    "value": "General Information",
+    "mandatory": true,
+    "children": [
+     {
+      "fld": {
+       "tag": "16R",
+       "name": "Start of Block",
+       "format": [
+        {
+         "option": "R",
+         "format": "GENL",
+         "components": [
+          {
+           "name": "Blk",
+           "constant": "GENL"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "20C",
+       "name": "Reference",
+       "format": [
+        {
+         "option": "C",
+         "format": ":4!c//16x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Reference"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "CORP",
+         "options": [
+          "C"
+         ],
+         "description": "Corporate Action Reference"
+        },
+        {
+         "qualifier": "SEME",
+         "options": [
+          "C"
+         ],
+         "description": "Sender's Message Reference"
+        },
+        {
+         "qualifier": "COAF",
+         "options": [
+          "C"
+         ],
+         "description": "Official Corporate Action Event Reference"
+        }
+       ],
+       "mandatory": true,
+       "repeated": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "23G",
+       "name": "Function of the Message",
+       "format": [
+        {
+         "option": "G",
+         "format": "4!c[/4!c]",
+         "components": [
+          {
+           "name": "Function"
+          },
+          {
+           "name": "Subfunction"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "22F",
+       "name": "Indicator",
+       "format": [
+        {
+         "option": "F",
+         "format": ":4!c/[8c]/4!c",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Data Source Scheme"
+          },
+          {
+           "name": "Indicator"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "CAEV",
+         "options": [
+          "F"
+         ],
+         "description": "Corporate Action Event Indicator"
+        }
+       ],
+       "mandatory": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "98a",
+       "name": "Date/Time",
+       "format": [
+        {
+         "option": "A",
+         "format": ":4!c//8!n",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Date"
+          }
+         ]
+        },
+        {
+         "option": "C",
+         "format": ":4!c//8!n6!n",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Date"
+          },
+          {
+           "name": "Time"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "PREP",
+         "options": [
+          "A",
+          "C"
+         ],
+         "description": "Preparation Date/Time"
+        }
+       ]
+      }
+     },
+     {
+      "seq": {
+       "tag": "A/A1",
+       "value": "Linkages",
+       "repeated": true,
+       "mandatory": true,
+       "children": [
+        {
+         "fld": {
+          "tag": "16R",
+          "name": "Start of Block",
+          "format": [
+           {
+            "option": "R",
+            "format": "LINK",
+            "components": [
+             {
+              "name": "Blk",
+              "constant": "LINK"
+             }
+            ]
+           }
+          ],
+          "mandatory": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "13a",
+          "name": "Number Identification",
+          "format": [
+           {
+            "option": "A",
+            "format": ":4!c//3!c",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Number Id"
+             }
+            ]
+           },
+           {
+            "option": "B",
+            "format": ":4!c/[8c]/30x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Data Source Scheme"
+             },
+             {
+              "name": "Number"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "LINK",
+            "options": [
+             "A",
+             "B"
+            ],
+            "description": "Linked Message"
+           }
+          ]
+         }
+        },
+        {
+         "fld": {
+          "tag": "20C",
+          "name": "Reference",
+          "format": [
+           {
+            "option": "C",
+            "format": ":4!c//16x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Reference"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "CORP",
+            "options": [
+             "C"
+            ],
+            "description": "Corporate Action Reference"
+           },
+           {
+            "qualifier": "PREV",
+            "options": [
+             "C"
+            ],
+            "description": "Previous Message Reference"
+           },
+           {
+            "qualifier": "RELA",
+            "options": [
+             "C"
+            ],
+            "description": "Related Message Reference"
+           },
+           {
+            "qualifier": "CACN",
+            "options": [
+             "C"
+            ],
+            "description": "Case Number"
+           },
+           {
+            "qualifier": "COAF",
+            "options": [
+             "C"
+            ],
+            "description": "Official Corporate Action Event Reference"
+           }
+          ],
+          "mandatory": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "16S",
+          "name": "End of Block",
+          "format": [
+           {
+            "option": "S",
+            "format": "LINK",
+            "components": [
+             {
+              "name": "Blk",
+              "constant": "LINK"
+             }
+            ]
+           }
+          ],
+          "mandatory": true
+         }
+        }
+       ]
+      }
+     },
+     {
+      "seq": {
+       "tag": "A/A2",
+       "value": "Status",
+       "repeated": true,
+       "mandatory": true,
+       "children": [
+        {
+         "fld": {
+          "tag": "16R",
+          "name": "Start of Block",
+          "format": [
+           {
+            "option": "R",
+            "format": "STAT",
+            "components": [
+             {
+              "name": "Blk",
+              "constant": "STAT"
+             }
+            ]
+           }
+          ],
+          "mandatory": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "25D",
+          "name": "Status Code",
+          "format": [
+           {
+            "option": "D",
+            "format": ":4!c/[8c]/4!c",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Data Source Scheme"
+             },
+             {
+              "name": "Status Code"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "CPRC",
+            "options": [
+             "D"
+            ],
+            "description": "Cancellation Processing Status"
+           },
+           {
+            "qualifier": "EPRC",
+            "options": [
+             "D"
+            ],
+            "description": "Corporate Action Event Processing Status"
+           },
+           {
+            "qualifier": "IPRC",
+            "options": [
+             "D"
+            ],
+            "description": "Instruction Processing Status"
+           }
+          ],
+          "mandatory": true
+         }
+        },
+        {
+         "seq": {
+          "tag": "A/A2/A2a",
+          "value": "Reason",
+          "repeated": true,
+          "children": [
+           {
+            "fld": {
+             "tag": "16R",
+             "name": "Start of Block",
+             "format": [
+              {
+               "option": "R",
+               "format": "REAS",
+               "components": [
+                {
+                 "name": "Blk",
+                 "constant": "REAS"
+                }
+               ]
+              }
+             ],
+             "mandatory": true
+            }
+           },
+           {
+            "fld": {
+             "tag": "24B",
+             "name": "Reason Code",
+             "format": [
+              {
+               "option": "B",
+               "format": ":4!c/[8c]/4!c",
+               "components": [
+                {
+                 "name": "Qualifier"
+                },
+                {
+                 "name": "Data Source Scheme"
+                },
+                {
+                 "name": "Reason Code"
+                }
+               ]
+              }
+             ],
+             "qualifier": [
+              {
+               "qualifier": "PEND",
+               "options": [
+                "B"
+               ],
+               "description": "Pending Reason"
+              },
+              {
+               "qualifier": "REJT",
+               "options": [
+                "B"
+               ],
+               "description": "Rejection Reason"
+              },
+              {
+               "qualifier": "CAND",
+               "options": [
+                "B"
+               ],
+               "description": "Cancellation Reason"
+              },
+              {
+               "qualifier": "CANP",
+               "options": [
+                "B"
+               ],
+               "description": "Cancellation Pending Reason"
+              },
+              {
+               "qualifier": "PACK",
+               "options": [
+                "B"
+               ],
+               "description": "Accepted Reason"
+              }
+             ],
+             "mandatory": true
+            }
+           },
+           {
+            "fld": {
+             "tag": "70D",
+             "name": "Narrative",
+             "format": [
+              {
+               "option": "D",
+               "format": ":4!c//6*35x",
+               "components": [
+                {
+                 "name": "Qualifier"
+                },
+                {
+                 "name": "Narrative"
+                }
+               ]
+              }
+             ],
+             "qualifier": [
+              {
+               "qualifier": "REAS",
+               "options": [
+                "D"
+               ],
+               "description": "Reason Narrative"
+              }
+             ]
+            }
+           },
+           {
+            "fld": {
+             "tag": "16S",
+             "name": "End of Block",
+             "format": [
+              {
+               "option": "S",
+               "format": "REAS",
+               "components": [
+                {
+                 "name": "Blk",
+                 "constant": "REAS"
+                }
+               ]
+              }
+             ],
+             "mandatory": true
+            }
+           }
+          ]
+         }
+        },
+        {
+         "fld": {
+          "tag": "16S",
+          "name": "End of Block",
+          "format": [
+           {
+            "option": "S",
+            "format": "STAT",
+            "components": [
+             {
+              "name": "Blk",
+              "constant": "STAT"
+             }
+            ]
+           }
+          ],
+          "mandatory": true
+         }
+        }
+       ]
+      }
+     },
+     {
+      "fld": {
+       "tag": "16S",
+       "name": "End of Block",
+       "format": [
+        {
+         "option": "S",
+         "format": "GENL",
+         "components": [
+          {
+           "name": "Blk",
+           "constant": "GENL"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     }
+    ]
+   }
+  },
+  {
+   "seq": {
+    "tag": "B",
+    "value": "Corporate Action Details",
+    "children": [
+     {
+      "fld": {
+       "tag": "16R",
+       "name": "Start of Block",
+       "format": [
+        {
+         "option": "R",
+         "format": "CADETL",
+         "components": [
+          {
+           "name": "Blk",
+           "constant": "CADETL"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "13A",
+       "name": "Number Identification",
+       "format": [
+        {
+         "option": "A",
+         "format": ":4!c//3!c",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Number Id"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "CAON",
+         "options": [
+          "A"
+         ],
+         "description": "CA Option Number"
+        }
+       ]
+      }
+     },
+     {
+      "fld": {
+       "tag": "22a",
+       "name": "Indicator",
+       "format": [
+        {
+         "option": "F",
+         "format": ":4!c/[8c]/4!c",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Data Source Scheme"
+          },
+          {
+           "name": "Indicator"
+          }
+         ]
+        },
+        {
+         "option": "H",
+         "format": ":4!c//4!c",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Indicator"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "CAOP",
+         "options": [
+          "F",
+          "H"
+         ],
+         "description": "Corporate Action Option Code Indicator"
+        }
+       ]
+      }
+     },
+     {
+      "fld": {
+       "tag": "95a",
+       "name": "Party",
+       "format": [
+        {
+         "option": "P",
+         "format": ":4!c//4!a2!a2!c[3!c]",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Identifier Code"
+          }
+         ]
+        },
+        {
+         "option": "R",
+         "format": ":4!c/8c/34x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Data Source Scheme"
+          },
+          {
+           "name": "Proprietary Code"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "ACOW",
+         "options": [
+          "P",
+          "R"
+         ],
+         "description": "Account Owner"
+        }
+       ]
+      }
+     },
+     {
+      "fld": {
+       "tag": "97a",
+       "name": "Account",
+       "format": [
+        {
+         "option": "A",
+         "format": ":4!c//35x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Account Number"
+          }
+         ]
+        },
+        {
+         "option": "E",
+         "format": ":4!c//34x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "International Bank Account Number"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "SAFE",
+         "options": [
+          "A"
+         ],
+         "description": "Safekeeping Account"
+        },
+        {
+         "qualifier": "CASH",
+         "options": [
+          "A",
+          "E"
+         ],
+         "description": "Cash Account"
+        }
+       ],
+       "repeated": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "94a",
+       "name": "Place",
+       "format": [
+        {
+         "option": "B",
+         "format": ":4!c/[8c]/4!c[/30x]",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Data Source Scheme"
+          },
+          {
+           "name": "Place Code"
+          },
+          {
+           "name": "Narrative"
+          }
+         ]
+        },
+        {
+         "option": "C",
+         "format": ":4!c//2!a",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Country Code"
+          }
+         ]
+        },
+        {
+         "option": "F",
+         "format": ":4!c//4!c/4!a2!a2!c[3!c]",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Place Code"
+          },
+          {
+           "name": "Identifier Code"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "SAFE",
+         "options": [
+          "B",
+          "C",
+          "F"
+         ],
+         "description": "Place of Safekeeping"
+        }
+       ]
+      }
+     },
+     {
+      "fld": {
+       "tag": "35B",
+       "name": "Identification of the Financial Instrument",
+       "format": [
+        {
+         "option": "B",
+         "format": "[ISIN1!e12!c][4*35x]",
+         "components": [
+          {
+           "name": "Identification of Security"
+          },
+          {
+           "name": "Description of Security"
+          }
+         ]
+        }
+       ]
+      }
+     },
+     {
+      "fld": {
+       "tag": "36B",
+       "name": "Quantity of Financial Instrument",
+       "format": [
+        {
+         "option": "B",
+         "format": ":4!c//4!c/15d",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Quantity Type Code"
+          },
+          {
+           "name": "Quantity"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "STAQ",
+         "options": [
+          "B"
+         ],
+         "description": "Status Quantity"
+        }
+       ],
+       "repeated": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "19B",
+       "name": "Amount",
+       "format": [
+        {
+         "option": "B",
+         "format": ":4!c//3!a15d",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Currency Code"
+          },
+          {
+           "name": "Amount"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "CAPG",
+         "options": [
+          "B"
+         ],
+         "description": "Capital Gains Amount"
+        },
+        {
+         "qualifier": "INDM",
+         "options": [
+          "B"
+         ],
+         "description": "Indemnity Amount"
+        },
+        {
+         "qualifier": "CINL",
+         "options": [
+          "B"
+         ],
+         "description": "Cash in Lieu of Shares"
+        },
+        {
+         "qualifier": "CHAR",
+         "options": [
+          "B"
+         ],
+         "description": "Charges/Fees Amount"
+        },
+        {
+         "qualifier": "FLFR",
+         "options": [
+          "B"
+         ],
+         "description": "Fully Franked Amount"
+        },
+        {
+         "qualifier": "UNFR",
+         "options": [
+          "B"
+         ],
+         "description": "Unfranked Amount"
+        },
+        {
+         "qualifier": "TXFR",
+         "options": [
+          "B"
+         ],
+         "description": "Tax Free Amount"
+        },
+        {
+         "qualifier": "TXDF",
+         "options": [
+          "B"
+         ],
+         "description": "Tax Deferred Amount"
+        },
+        {
+         "qualifier": "SOIC",
+         "options": [
+          "B"
+         ],
+         "description": "Sundry/Other Income Amount"
+        },
+        {
+         "qualifier": "GRSS",
+         "options": [
+          "B"
+         ],
+         "description": "Gross Amount"
+        },
+        {
+         "qualifier": "INTR",
+         "options": [
+          "B"
+         ],
+         "description": "Interest Amount"
+        },
+        {
+         "qualifier": "INCO",
+         "options": [
+          "B"
+         ],
+         "description": "Income Portion"
+        },
+        {
+         "qualifier": "MKTC",
+         "options": [
+          "B"
+         ],
+         "description": "Market Claim"
+        },
+        {
+         "qualifier": "NETT",
+         "options": [
+          "B"
+         ],
+         "description": "Net Cash Amount"
+        },
+        {
+         "qualifier": "PRIN",
+         "options": [
+          "B"
+         ],
+         "description": "Principal or Corpus"
+        },
+        {
+         "qualifier": "REIN",
+         "options": [
+          "B"
+         ],
+         "description": "Reinvestment Amount"
+        },
+        {
+         "qualifier": "TAXC",
+         "options": [
+          "B"
+         ],
+         "description": "Amount of Tax Credit"
+        },
+        {
+         "qualifier": "TAXR",
+         "options": [
+          "B"
+         ],
+         "description": "Withholding Tax Amount"
+        },
+        {
+         "qualifier": "WITL",
+         "options": [
+          "B"
+         ],
+         "description": "Second Level Tax Amount"
+        },
+        {
+         "qualifier": "REDP",
+         "options": [
+          "B"
+         ],
+         "description": "Redemption Premium Amount"
+        },
+        {
+         "qualifier": "ATAX",
+         "options": [
+          "B"
+         ],
+         "description": "Additional Tax Amount"
+        },
+        {
+         "qualifier": "COUN",
+         "options": [
+          "B"
+         ],
+         "description": "Country, National, Federal Tax"
+        },
+        {
+         "qualifier": "EXEC",
+         "options": [
+          "B"
+         ],
+         "description": "Executing Broker's Amount"
+        },
+        {
+         "qualifier": "ISDI",
+         "options": [
+          "B"
+         ],
+         "description": "Issue Discount Amount"
+        },
+        {
+         "qualifier": "LEVY",
+         "options": [
+          "B"
+         ],
+         "description": "Payment Levy Tax"
+        },
+        {
+         "qualifier": "LOCL",
+         "options": [
+          "B"
+         ],
+         "description": "Local Tax"
+        },
+        {
+         "qualifier": "LOCO",
+         "options": [
+          "B"
+         ],
+         "description": "Local Broker's Commission"
+        },
+        {
+         "qualifier": "PAMM",
+         "options": [
+          "B"
+         ],
+         "description": "Paying/Sub-paying Agent Commission"
+        },
+        {
+         "qualifier": "REGF",
+         "options": [
+          "B"
+         ],
+         "description": "Regulatory Fees"
+        },
+        {
+         "qualifier": "SHIP",
+         "options": [
+          "B"
+         ],
+         "description": "Shipping"
+        },
+        {
+         "qualifier": "SOFE",
+         "options": [
+          "B"
+         ],
+         "description": "Solicitation Fee"
+        },
+        {
+         "qualifier": "SPCN",
+         "options": [
+          "B"
+         ],
+         "description": "Special Concessions"
+        },
+        {
+         "qualifier": "STAM",
+         "options": [
+          "B"
+         ],
+         "description": "Stamp Duty"
+        },
+        {
+         "qualifier": "STEX",
+         "options": [
+          "B"
+         ],
+         "description": "Stock Exchange Tax"
+        },
+        {
+         "qualifier": "SUBS",
+         "options": [
+          "B"
+         ],
+         "description": "Additional Subscription Costs"
+        },
+        {
+         "qualifier": "TRAN",
+         "options": [
+          "B"
+         ],
+         "description": "Transfer Tax"
+        },
+        {
+         "qualifier": "TRAX",
+         "options": [
+          "B"
+         ],
+         "description": "Transaction Tax"
+        },
+        {
+         "qualifier": "VATA",
+         "options": [
+          "B"
+         ],
+         "description": "Value-Added Tax"
+        },
+        {
+         "qualifier": "TXRC",
+         "options": [
+          "B"
+         ],
+         "description": "Reclaim of Taxes"
+        },
+        {
+         "qualifier": "STAC",
+         "options": [
+          "B"
+         ],
+         "description": "Status Cash Amount"
+        }
+       ],
+       "repeated": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "93B",
+       "name": "Balance",
+       "format": [
+        {
+         "option": "B",
+         "format": ":4!c/[8c]/4!c/[N]15d",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Data Source Scheme"
+          },
+          {
+           "name": "Quantity Type Code"
+          },
+          {
+           "name": "Sign"
+          },
+          {
+           "name": "Balance"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "ELIG",
+         "options": [
+          "B"
+         ],
+         "description": "Total Eligible for Corporate Action Balance"
+        },
+        {
+         "qualifier": "INBA",
+         "options": [
+          "B"
+         ],
+         "description": "Instructed Balance"
+        },
+        {
+         "qualifier": "UNBA",
+         "options": [
+          "B"
+         ],
+         "description": "Uninstructed Balance"
+        }
+       ],
+       "repeated": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "16S",
+       "name": "End of Block",
+       "format": [
+        {
+         "option": "S",
+         "format": "CADETL",
+         "components": [
+          {
+           "name": "Blk",
+           "constant": "CADETL"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     }
+    ]
+   }
+  },
+  {
+   "seq": {
+    "tag": "C",
+    "value": "Additional Information",
+    "children": [
+     {
+      "fld": {
+       "tag": "16R",
+       "name": "Start of Block",
+       "format": [
+        {
+         "option": "R",
+         "format": "ADDINFO",
+         "components": [
+          {
+           "name": "Blk",
+           "constant": "ADDINFO"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "70E",
+       "name": "Narrative",
+       "format": [
+        {
+         "option": "E",
+         "format": ":4!c//10*35x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Narrative"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "ADTX",
+         "options": [
+          "E"
+         ],
+         "description": "Additional Text"
+        },
+        {
+         "qualifier": "PACO",
+         "options": [
+          "E"
+         ],
+         "description": "Party Contact Narrative"
+        }
+       ],
+       "repeated": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "95a",
+       "name": "Party",
+       "format": [
+        {
+         "option": "P",
+         "format": ":4!c//4!a2!a2!c[3!c]",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Identifier Code"
+          }
+         ]
+        },
+        {
+         "option": "Q",
+         "format": ":4!c//4*35x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Name and Address"
+          }
+         ]
+        },
+        {
+         "option": "R",
+         "format": ":4!c/8c/34x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Data Source Scheme"
+          },
+          {
+           "name": "Proprietary Code"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "MEOR",
+         "options": [
+          "P",
+          "Q",
+          "R"
+         ],
+         "description": "Originator of Message"
+        },
+        {
+         "qualifier": "MERE",
+         "options": [
+          "P",
+          "Q",
+          "R"
+         ],
+         "description": "Recipient of Message"
+        }
+       ],
+       "repeated": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "16S",
+       "name": "End of Block",
+       "format": [
+        {
+         "option": "S",
+         "format": "ADDINFO",
+         "components": [
+          {
+           "name": "Blk",
+           "constant": "ADDINFO"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     }
+    ]
+   }
+  }
+ ]
+}

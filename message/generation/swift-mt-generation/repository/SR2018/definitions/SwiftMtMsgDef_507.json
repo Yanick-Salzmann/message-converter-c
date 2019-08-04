@@ -1,0 +1,1073 @@
+{
+ "uri": "urn::msg::swift::mt::SR2018::507",
+ "objs": [
+  {
+   "seq": {
+    "tag": "A",
+    "value": "General Information",
+    "mandatory": true,
+    "children": [
+     {
+      "fld": {
+       "tag": "16R",
+       "name": "Start of Block",
+       "format": [
+        {
+         "option": "R",
+         "format": "GENL",
+         "components": [
+          {
+           "name": "Blk",
+           "constant": "GENL"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "20C",
+       "name": "Reference",
+       "format": [
+        {
+         "option": "C",
+         "format": ":4!c//16x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Reference"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "SEME",
+         "options": [
+          "C"
+         ],
+         "description": "Sender's Message Reference"
+        },
+        {
+         "qualifier": "SCTR",
+         "options": [
+          "C"
+         ],
+         "description": "Sender's Collateral Transaction Reference"
+        },
+        {
+         "qualifier": "RCTR",
+         "options": [
+          "C"
+         ],
+         "description": "Receiver's Collateral Transaction Reference"
+        }
+       ],
+       "mandatory": true,
+       "repeated": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "23G",
+       "name": "Function of the Message",
+       "format": [
+        {
+         "option": "G",
+         "format": "4!c[/4!c]",
+         "components": [
+          {
+           "name": "Function"
+          },
+          {
+           "name": "Subfunction"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     },
+     {
+      "seq": {
+       "tag": "A/A1",
+       "value": "Agreement",
+       "repeated": true,
+       "mandatory": true,
+       "children": [
+        {
+         "fld": {
+          "tag": "16R",
+          "name": "Start of Block",
+          "format": [
+           {
+            "option": "R",
+            "format": "AGRE",
+            "components": [
+             {
+              "name": "Blk",
+              "constant": "AGRE"
+             }
+            ]
+           }
+          ],
+          "mandatory": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "22F",
+          "name": "Indicator",
+          "format": [
+           {
+            "option": "F",
+            "format": ":4!c/[8c]/4!c",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Data Source Scheme"
+             },
+             {
+              "name": "Indicator"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "AGRE",
+            "options": [
+             "F"
+            ],
+            "description": "Agreement Indicator"
+           }
+          ]
+         }
+        },
+        {
+         "fld": {
+          "tag": "98A",
+          "name": "Date/Time",
+          "format": [
+           {
+            "option": "A",
+            "format": ":4!c//8!n",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Date"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "AGRE",
+            "options": [
+             "A"
+            ],
+            "description": "Agreement Date"
+           }
+          ]
+         }
+        },
+        {
+         "fld": {
+          "tag": "13B",
+          "name": "Number Identification",
+          "format": [
+           {
+            "option": "B",
+            "format": ":4!c/[8c]/30x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Data Source Scheme"
+             },
+             {
+              "name": "Number"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "AGRE",
+            "options": [
+             "B"
+            ],
+            "description": "Agreement Version Number"
+           }
+          ]
+         }
+        },
+        {
+         "fld": {
+          "tag": "70C",
+          "name": "Narrative",
+          "format": [
+           {
+            "option": "C",
+            "format": ":4!c//4*35x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Narrative"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "AGRE",
+            "options": [
+             "C"
+            ],
+            "description": "Agreement Narrative"
+           }
+          ]
+         }
+        },
+        {
+         "fld": {
+          "tag": "16S",
+          "name": "End of Block",
+          "format": [
+           {
+            "option": "S",
+            "format": "AGRE",
+            "components": [
+             {
+              "name": "Blk",
+              "constant": "AGRE"
+             }
+            ]
+           }
+          ],
+          "mandatory": true
+         }
+        }
+       ]
+      }
+     },
+     {
+      "fld": {
+       "tag": "98a",
+       "name": "Date/Time",
+       "format": [
+        {
+         "option": "A",
+         "format": ":4!c//8!n",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Date"
+          }
+         ]
+        },
+        {
+         "option": "C",
+         "format": ":4!c//8!n6!n",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Date"
+          },
+          {
+           "name": "Time"
+          }
+         ]
+        },
+        {
+         "option": "E",
+         "format": ":4!c//8!n6!n[,3n][/[N]2!n[2!n]]",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Date"
+          },
+          {
+           "name": "Time"
+          },
+          {
+           "name": "Decimals"
+          },
+          {
+           "name": "UTC Indicator"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "PREP",
+         "options": [
+          "A",
+          "C",
+          "E"
+         ],
+         "description": "Preparation Date/Time"
+        }
+       ]
+      }
+     },
+     {
+      "fld": {
+       "tag": "22a",
+       "name": "Indicator",
+       "format": [
+        {
+         "option": "F",
+         "format": ":4!c/[8c]/4!c",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Data Source Scheme"
+          },
+          {
+           "name": "Indicator"
+          }
+         ]
+        },
+        {
+         "option": "H",
+         "format": ":4!c//4!c",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Indicator"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "COLA",
+         "options": [
+          "F",
+          "H"
+         ],
+         "description": "Exposure Type Indicator"
+        }
+       ],
+       "mandatory": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "95a",
+       "name": "Party",
+       "format": [
+        {
+         "option": "P",
+         "format": ":4!c//4!a2!a2!c[3!c]",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Identifier Code"
+          }
+         ]
+        },
+        {
+         "option": "Q",
+         "format": ":4!c//4*35x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Name and Address"
+          }
+         ]
+        },
+        {
+         "option": "R",
+         "format": ":4!c/8c/34x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Data Source Scheme"
+          },
+          {
+           "name": "Proprietary Code"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "PTYA",
+         "options": [
+          "P",
+          "Q",
+          "R"
+         ],
+         "description": "Party A"
+        },
+        {
+         "qualifier": "PTYB",
+         "options": [
+          "P",
+          "Q",
+          "R"
+         ],
+         "description": "Party B"
+        }
+       ],
+       "mandatory": true,
+       "repeated": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "25D",
+       "name": "Status Code",
+       "format": [
+        {
+         "option": "D",
+         "format": ":4!c/[8c]/4!c",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Data Source Scheme"
+          },
+          {
+           "name": "Status Code"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "REST",
+         "options": [
+          "D"
+         ],
+         "description": "Response Status"
+        },
+        {
+         "qualifier": "IPRC",
+         "options": [
+          "D"
+         ],
+         "description": "Instruction Processing Status"
+        },
+        {
+         "qualifier": "CPRC",
+         "options": [
+          "D"
+         ],
+         "description": "Cancellation Processing Status"
+        }
+       ],
+       "mandatory": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "24B",
+       "name": "Reason Code",
+       "format": [
+        {
+         "option": "B",
+         "format": ":4!c/[8c]/4!c",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Data Source Scheme"
+          },
+          {
+           "name": "Reason Code"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "REJT",
+         "options": [
+          "B"
+         ],
+         "description": "Rejection Reason"
+        },
+        {
+         "qualifier": "CAND",
+         "options": [
+          "B"
+         ],
+         "description": "Cancellation Reason"
+        },
+        {
+         "qualifier": "DEND",
+         "options": [
+          "B"
+         ],
+         "description": "Denied Reason"
+        }
+       ]
+      }
+     },
+     {
+      "fld": {
+       "tag": "70a",
+       "name": "Narrative",
+       "format": [
+        {
+         "option": "C",
+         "format": ":4!c//4*35x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Narrative"
+          }
+         ]
+        },
+        {
+         "option": "D",
+         "format": ":4!c//6*35x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Narrative"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "REAS",
+         "options": [
+          "D"
+         ],
+         "description": "Reason Narrative"
+        },
+        {
+         "qualifier": "PACO",
+         "options": [
+          "C"
+         ],
+         "description": "Party Narrative"
+        }
+       ],
+       "repeated": true
+      }
+     },
+     {
+      "seq": {
+       "tag": "A/A2",
+       "value": "Linkages",
+       "repeated": true,
+       "mandatory": true,
+       "children": [
+        {
+         "fld": {
+          "tag": "16R",
+          "name": "Start of Block",
+          "format": [
+           {
+            "option": "R",
+            "format": "LINK",
+            "components": [
+             {
+              "name": "Blk",
+              "constant": "LINK"
+             }
+            ]
+           }
+          ],
+          "mandatory": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "13a",
+          "name": "Number Identification",
+          "format": [
+           {
+            "option": "A",
+            "format": ":4!c//3!c",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Number Id"
+             }
+            ]
+           },
+           {
+            "option": "B",
+            "format": ":4!c/[8c]/30x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Data Source Scheme"
+             },
+             {
+              "name": "Number"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "LINK",
+            "options": [
+             "A",
+             "B"
+            ],
+            "description": "Linked Message"
+           }
+          ]
+         }
+        },
+        {
+         "fld": {
+          "tag": "20C",
+          "name": "Reference",
+          "format": [
+           {
+            "option": "C",
+            "format": ":4!c//16x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Reference"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "RELA",
+            "options": [
+             "C"
+            ],
+            "description": "Related Message Reference"
+           },
+           {
+            "qualifier": "PREV",
+            "options": [
+             "C"
+            ],
+            "description": "Previous Message Reference"
+           }
+          ],
+          "mandatory": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "16S",
+          "name": "End of Block",
+          "format": [
+           {
+            "option": "S",
+            "format": "LINK",
+            "components": [
+             {
+              "name": "Blk",
+              "constant": "LINK"
+             }
+            ]
+           }
+          ],
+          "mandatory": true
+         }
+        }
+       ]
+      }
+     },
+     {
+      "fld": {
+       "tag": "16S",
+       "name": "End of Block",
+       "format": [
+        {
+         "option": "S",
+         "format": "GENL",
+         "components": [
+          {
+           "name": "Blk",
+           "constant": "GENL"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     }
+    ]
+   }
+  },
+  {
+   "seq": {
+    "tag": "B",
+    "value": "Collateral Details",
+    "repeated": true,
+    "children": [
+     {
+      "fld": {
+       "tag": "16R",
+       "name": "Start of Block",
+       "format": [
+        {
+         "option": "R",
+         "format": "COLD",
+         "components": [
+          {
+           "name": "Blk",
+           "constant": "COLD"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "20C",
+       "name": "Reference",
+       "format": [
+        {
+         "option": "C",
+         "format": ":4!c//16x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Reference"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "COLR",
+         "options": [
+          "C"
+         ],
+         "description": "Collateral Reference"
+        }
+       ],
+       "mandatory": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "22H",
+       "name": "Indicator",
+       "format": [
+        {
+         "option": "H",
+         "format": ":4!c//4!c",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Indicator"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "COLL",
+         "options": [
+          "H"
+         ],
+         "description": "Collateral Type Indicator"
+        }
+       ],
+       "mandatory": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "25D",
+       "name": "Status Code",
+       "format": [
+        {
+         "option": "D",
+         "format": ":4!c/[8c]/4!c",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Data Source Scheme"
+          },
+          {
+           "name": "Status Code"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "COLL",
+         "options": [
+          "D"
+         ],
+         "description": "Collateral Status"
+        }
+       ],
+       "mandatory": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "24B",
+       "name": "Reason Code",
+       "format": [
+        {
+         "option": "B",
+         "format": ":4!c/[8c]/4!c",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Data Source Scheme"
+          },
+          {
+           "name": "Reason Code"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "REJT",
+         "options": [
+          "B"
+         ],
+         "description": "Rejection Reason"
+        }
+       ]
+      }
+     },
+     {
+      "fld": {
+       "tag": "70D",
+       "name": "Narrative",
+       "format": [
+        {
+         "option": "D",
+         "format": ":4!c//6*35x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Narrative"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "REAS",
+         "options": [
+          "D"
+         ],
+         "description": "Reason Narrative"
+        }
+       ]
+      }
+     },
+     {
+      "seq": {
+       "tag": "B/B1",
+       "value": "General Settlement Details",
+       "children": [
+        {
+         "fld": {
+          "tag": "16R",
+          "name": "Start of Block",
+          "format": [
+           {
+            "option": "R",
+            "format": "SETTL",
+            "components": [
+             {
+              "name": "Blk",
+              "constant": "SETTL"
+             }
+            ]
+           }
+          ],
+          "mandatory": true
+         }
+        },
+        {
+         "seq": {
+          "tag": "B/B1/B1a",
+          "value": "Settlement Details",
+          "children": [
+           {
+            "fld": {
+             "tag": "16R",
+             "name": "Start of Block",
+             "format": [
+              {
+               "option": "R",
+               "format": "SETDET",
+               "components": [
+                {
+                 "name": "Blk",
+                 "constant": "SETDET"
+                }
+               ]
+              }
+             ],
+             "mandatory": true
+            }
+           },
+           {
+            "fld": {
+             "tag": "22a",
+             "name": "Indicator",
+             "format": [
+              {
+               "option": "F",
+               "format": ":4!c/[8c]/4!c",
+               "components": [
+                {
+                 "name": "Qualifier"
+                },
+                {
+                 "name": "Data Source Scheme"
+                },
+                {
+                 "name": "Indicator"
+                }
+               ]
+              },
+              {
+               "option": "H",
+               "format": ":4!c//4!c",
+               "components": [
+                {
+                 "name": "Qualifier"
+                },
+                {
+                 "name": "Indicator"
+                }
+               ]
+              }
+             ],
+             "qualifier": [
+              {
+               "qualifier": "SCOL",
+               "options": [
+                "H"
+               ],
+               "description": "Collateral Settlement Type Indicator"
+              },
+              {
+               "qualifier": "STCO",
+               "options": [
+                "F"
+               ],
+               "description": "Settlement Transaction Condition Indicator"
+              },
+              {
+               "qualifier": "TRCA",
+               "options": [
+                "F"
+               ],
+               "description": "Party Capacity Indicator"
+              },
+              {
+               "qualifier": "STAM",
+               "options": [
+                "F"
+               ],
+               "description": "Stamp Duty Indicator"
+              },
+              {
+               "qualifier": "RTGS",
+               "options": [
+                "F"
+               ],
+               "description": "Securities Real-Time Gross Settlement Indicator"
+              },
+              {
+               "qualifier": "REGT",
+               "options": [
+                "F"
+               ],
+               "description": "Registration Indicator"
+              },
+              {
+               "qualifier": "BENE",
+               "options": [
+                "F"
+               ],
+               "description": "Beneficial Ownership Indicator"
+              },
+              {
+               "qualifier": "CASY",
+               "options": [
+                "F"
+               ],
+               "description": "Cash Settlement System Indicator"
+              }
+             ],
+             "mandatory": true,
+             "repeated": true
+            }
+           }
+          ]
+         }
+        }
+       ]
+      }
+     }
+    ]
+   }
+  }
+ ]
+}

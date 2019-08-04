@@ -1,0 +1,1783 @@
+{
+ "uri": "urn::msg::swift::mt::SR2018::503",
+ "objs": [
+  {
+   "seq": {
+    "tag": "A",
+    "value": "General Information",
+    "mandatory": true,
+    "children": [
+     {
+      "fld": {
+       "tag": "16R",
+       "name": "Start of Block",
+       "format": [
+        {
+         "option": "R",
+         "format": "GENL",
+         "components": [
+          {
+           "name": "Blk",
+           "constant": "GENL"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "20C",
+       "name": "Reference",
+       "format": [
+        {
+         "option": "C",
+         "format": ":4!c//16x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Reference"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "SEME",
+         "options": [
+          "C"
+         ],
+         "description": "Sender's Message Reference"
+        },
+        {
+         "qualifier": "SCTR",
+         "options": [
+          "C"
+         ],
+         "description": "Sender's Collateral Transaction Reference"
+        },
+        {
+         "qualifier": "RCTR",
+         "options": [
+          "C"
+         ],
+         "description": "Receiver's Collateral Transaction Reference"
+        }
+       ],
+       "mandatory": true,
+       "repeated": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "23G",
+       "name": "Function of the Message",
+       "format": [
+        {
+         "option": "G",
+         "format": "4!c[/4!c]",
+         "components": [
+          {
+           "name": "Function"
+          },
+          {
+           "name": "Subfunction"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     },
+     {
+      "seq": {
+       "tag": "A/A1",
+       "value": "Agreement",
+       "repeated": true,
+       "mandatory": true,
+       "children": [
+        {
+         "fld": {
+          "tag": "16R",
+          "name": "Start of Block",
+          "format": [
+           {
+            "option": "R",
+            "format": "AGRE",
+            "components": [
+             {
+              "name": "Blk",
+              "constant": "AGRE"
+             }
+            ]
+           }
+          ],
+          "mandatory": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "22F",
+          "name": "Indicator",
+          "format": [
+           {
+            "option": "F",
+            "format": ":4!c/[8c]/4!c",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Data Source Scheme"
+             },
+             {
+              "name": "Indicator"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "AGRE",
+            "options": [
+             "F"
+            ],
+            "description": "Agreement Indicator"
+           }
+          ]
+         }
+        },
+        {
+         "fld": {
+          "tag": "98A",
+          "name": "Date/Time",
+          "format": [
+           {
+            "option": "A",
+            "format": ":4!c//8!n",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Date"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "AGRE",
+            "options": [
+             "A"
+            ],
+            "description": "Agreement Date"
+           }
+          ]
+         }
+        },
+        {
+         "fld": {
+          "tag": "13B",
+          "name": "Number Identification",
+          "format": [
+           {
+            "option": "B",
+            "format": ":4!c/[8c]/30x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Data Source Scheme"
+             },
+             {
+              "name": "Number"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "AGRE",
+            "options": [
+             "B"
+            ],
+            "description": "Agreement Version Number"
+           }
+          ]
+         }
+        },
+        {
+         "fld": {
+          "tag": "70C",
+          "name": "Narrative",
+          "format": [
+           {
+            "option": "C",
+            "format": ":4!c//4*35x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Narrative"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "AGRE",
+            "options": [
+             "C"
+            ],
+            "description": "Agreement Narrative"
+           }
+          ]
+         }
+        },
+        {
+         "fld": {
+          "tag": "16S",
+          "name": "End of Block",
+          "format": [
+           {
+            "option": "S",
+            "format": "AGRE",
+            "components": [
+             {
+              "name": "Blk",
+              "constant": "AGRE"
+             }
+            ]
+           }
+          ],
+          "mandatory": true
+         }
+        }
+       ]
+      }
+     },
+     {
+      "fld": {
+       "tag": "98a",
+       "name": "Date/Time",
+       "format": [
+        {
+         "option": "A",
+         "format": ":4!c//8!n",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Date"
+          }
+         ]
+        },
+        {
+         "option": "C",
+         "format": ":4!c//8!n6!n",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Date"
+          },
+          {
+           "name": "Time"
+          }
+         ]
+        },
+        {
+         "option": "E",
+         "format": ":4!c//8!n6!n[,3n][/[N]2!n[2!n]]",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Date"
+          },
+          {
+           "name": "Time"
+          },
+          {
+           "name": "Decimals"
+          },
+          {
+           "name": "UTC Indicator"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "PREP",
+         "options": [
+          "A",
+          "C",
+          "E"
+         ],
+         "description": "Preparation Date/Time"
+        }
+       ]
+      }
+     },
+     {
+      "fld": {
+       "tag": "22a",
+       "name": "Indicator",
+       "format": [
+        {
+         "option": "F",
+         "format": ":4!c/[8c]/4!c",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Data Source Scheme"
+          },
+          {
+           "name": "Indicator"
+          }
+         ]
+        },
+        {
+         "option": "H",
+         "format": ":4!c//4!c",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Indicator"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "COAL",
+         "options": [
+          "H"
+         ],
+         "description": "Collateral Action Type Indicator"
+        },
+        {
+         "qualifier": "COLA",
+         "options": [
+          "F",
+          "H"
+         ],
+         "description": "Exposure Type Indicator"
+        }
+       ],
+       "mandatory": true,
+       "repeated": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "95a",
+       "name": "Party",
+       "format": [
+        {
+         "option": "P",
+         "format": ":4!c//4!a2!a2!c[3!c]",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Identifier Code"
+          }
+         ]
+        },
+        {
+         "option": "Q",
+         "format": ":4!c//4*35x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Name and Address"
+          }
+         ]
+        },
+        {
+         "option": "R",
+         "format": ":4!c/8c/34x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Data Source Scheme"
+          },
+          {
+           "name": "Proprietary Code"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "PTYA",
+         "options": [
+          "P",
+          "Q",
+          "R"
+         ],
+         "description": "Party A"
+        },
+        {
+         "qualifier": "PTYB",
+         "options": [
+          "P",
+          "Q",
+          "R"
+         ],
+         "description": "Party B"
+        }
+       ],
+       "mandatory": true,
+       "repeated": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "70C",
+       "name": "Narrative",
+       "format": [
+        {
+         "option": "C",
+         "format": ":4!c//4*35x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Narrative"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "PACO",
+         "options": [
+          "C"
+         ],
+         "description": "Party Narrative"
+        }
+       ]
+      }
+     },
+     {
+      "seq": {
+       "tag": "A/A2",
+       "value": "Linkages",
+       "repeated": true,
+       "children": [
+        {
+         "fld": {
+          "tag": "16R",
+          "name": "Start of Block",
+          "format": [
+           {
+            "option": "R",
+            "format": "LINK",
+            "components": [
+             {
+              "name": "Blk",
+              "constant": "LINK"
+             }
+            ]
+           }
+          ],
+          "mandatory": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "13a",
+          "name": "Number Identification",
+          "format": [
+           {
+            "option": "A",
+            "format": ":4!c//3!c",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Number Id"
+             }
+            ]
+           },
+           {
+            "option": "B",
+            "format": ":4!c/[8c]/30x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Data Source Scheme"
+             },
+             {
+              "name": "Number"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "LINK",
+            "options": [
+             "A",
+             "B"
+            ],
+            "description": "Linked Message"
+           }
+          ]
+         }
+        },
+        {
+         "fld": {
+          "tag": "20C",
+          "name": "Reference",
+          "format": [
+           {
+            "option": "C",
+            "format": ":4!c//16x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Reference"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "RELA",
+            "options": [
+             "C"
+            ],
+            "description": "Related Message Reference"
+           },
+           {
+            "qualifier": "PREV",
+            "options": [
+             "C"
+            ],
+            "description": "Previous Message Reference"
+           }
+          ],
+          "mandatory": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "16S",
+          "name": "End of Block",
+          "format": [
+           {
+            "option": "S",
+            "format": "LINK",
+            "components": [
+             {
+              "name": "Blk",
+              "constant": "LINK"
+             }
+            ]
+           }
+          ],
+          "mandatory": true
+         }
+        }
+       ]
+      }
+     },
+     {
+      "fld": {
+       "tag": "16S",
+       "name": "End of Block",
+       "format": [
+        {
+         "option": "S",
+         "format": "GENL",
+         "components": [
+          {
+           "name": "Blk",
+           "constant": "GENL"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     }
+    ]
+   }
+  },
+  {
+   "seq": {
+    "tag": "B",
+    "value": "Summary",
+    "mandatory": true,
+    "children": [
+     {
+      "fld": {
+       "tag": "16R",
+       "name": "Start of Block",
+       "format": [
+        {
+         "option": "R",
+         "format": "SUMM",
+         "components": [
+          {
+           "name": "Blk",
+           "constant": "SUMM"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "95a",
+       "name": "Party",
+       "format": [
+        {
+         "option": "P",
+         "format": ":4!c//4!a2!a2!c[3!c]",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Identifier Code"
+          }
+         ]
+        },
+        {
+         "option": "Q",
+         "format": ":4!c//4*35x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Name and Address"
+          }
+         ]
+        },
+        {
+         "option": "R",
+         "format": ":4!c/8c/34x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Data Source Scheme"
+          },
+          {
+           "name": "Proprietary Code"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "EXPP",
+         "options": [
+          "P",
+          "Q",
+          "R"
+         ],
+         "description": "Exposed Party"
+        }
+       ]
+      }
+     },
+     {
+      "fld": {
+       "tag": "19B",
+       "name": "Amount",
+       "format": [
+        {
+         "option": "B",
+         "format": ":4!c//3!a15d",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Currency Code"
+          },
+          {
+           "name": "Amount"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "COVA",
+         "options": [
+          "B"
+         ],
+         "description": "Value of Collateral Held"
+        },
+        {
+         "qualifier": "CCAL",
+         "options": [
+          "B"
+         ],
+         "description": "Collateral Call Amount"
+        },
+        {
+         "qualifier": "CRET",
+         "options": [
+          "B"
+         ],
+         "description": "Value of Collateral to be Returned"
+        },
+        {
+         "qualifier": "TEXA",
+         "options": [
+          "B"
+         ],
+         "description": "Total Exposure Amount"
+        },
+        {
+         "qualifier": "TCRL",
+         "options": [
+          "B"
+         ],
+         "description": "Total Credit Line Amount"
+        },
+        {
+         "qualifier": "PTYB",
+         "options": [
+          "B"
+         ],
+         "description": "Party B's Exposure Amount"
+        }
+       ],
+       "mandatory": true,
+       "repeated": true
+      }
+     },
+     {
+      "seq": {
+       "tag": "B/B1",
+       "value": "Summary Details",
+       "children": [
+        {
+         "fld": {
+          "tag": "16R",
+          "name": "Start of Block",
+          "format": [
+           {
+            "option": "R",
+            "format": "SUMD",
+            "components": [
+             {
+              "name": "Blk",
+              "constant": "SUMD"
+             }
+            ]
+           }
+          ],
+          "mandatory": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "19B",
+          "name": "Amount",
+          "format": [
+           {
+            "option": "B",
+            "format": ":4!c//3!a15d",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Currency Code"
+             },
+             {
+              "name": "Amount"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "THRS",
+            "options": [
+             "B"
+            ],
+            "description": "Secured Threshold Amount"
+           },
+           {
+            "qualifier": "THRU",
+            "options": [
+             "B"
+            ],
+            "description": "Unsecured Threshold Amount"
+           },
+           {
+            "qualifier": "PRHA",
+            "options": [
+             "B"
+            ],
+            "description": "Pre-haircut Collateral Value Amount"
+           },
+           {
+            "qualifier": "AEXP",
+            "options": [
+             "B"
+            ],
+            "description": "Adjusted Exposure Amount"
+           },
+           {
+            "qualifier": "CORE",
+            "options": [
+             "B"
+            ],
+            "description": "Collateral Required Amount"
+           },
+           {
+            "qualifier": "RADD",
+            "options": [
+             "B"
+            ],
+            "description": "Basic Amount"
+           },
+           {
+            "qualifier": "NRAD",
+            "options": [
+             "B"
+            ],
+            "description": "Netted Independent Amount"
+           },
+           {
+            "qualifier": "MITR",
+            "options": [
+             "B"
+            ],
+            "description": "Minimum Transfer Amount"
+           },
+           {
+            "qualifier": "ROUN",
+            "options": [
+             "B"
+            ],
+            "description": "Rounding Integer Amount"
+           }
+          ],
+          "repeated": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "98a",
+          "name": "Date/Time",
+          "format": [
+           {
+            "option": "A",
+            "format": ":4!c//8!n",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Date"
+             }
+            ]
+           },
+           {
+            "option": "C",
+            "format": ":4!c//8!n6!n",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Date"
+             },
+             {
+              "name": "Time"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "VALE",
+            "options": [
+             "A",
+             "C"
+            ],
+            "description": "Date/Time of Valuation of the Exposure"
+           },
+           {
+            "qualifier": "VALC",
+            "options": [
+             "A",
+             "C"
+            ],
+            "description": "Date/Time of Valuation of the Collateral"
+           },
+           {
+            "qualifier": "RSET",
+            "options": [
+             "A"
+            ],
+            "description": "Requested Settlement Date"
+           }
+          ],
+          "repeated": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "16S",
+          "name": "End of Block",
+          "format": [
+           {
+            "option": "S",
+            "format": "SUMD",
+            "components": [
+             {
+              "name": "Blk",
+              "constant": "SUMD"
+             }
+            ]
+           }
+          ],
+          "mandatory": true
+         }
+        }
+       ]
+      }
+     },
+     {
+      "fld": {
+       "tag": "16S",
+       "name": "End of Block",
+       "format": [
+        {
+         "option": "S",
+         "format": "SUMM",
+         "components": [
+          {
+           "name": "Blk",
+           "constant": "SUMM"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     }
+    ]
+   }
+  },
+  {
+   "seq": {
+    "tag": "C",
+    "value": "Collateral Details",
+    "repeated": true,
+    "children": [
+     {
+      "fld": {
+       "tag": "16R",
+       "name": "Start of Block",
+       "format": [
+        {
+         "option": "R",
+         "format": "COLD",
+         "components": [
+          {
+           "name": "Blk",
+           "constant": "COLD"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "20C",
+       "name": "Reference",
+       "format": [
+        {
+         "option": "C",
+         "format": ":4!c//16x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Reference"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "COLR",
+         "options": [
+          "C"
+         ],
+         "description": "Collateral Reference"
+        }
+       ],
+       "mandatory": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "22a",
+       "name": "Indicator",
+       "format": [
+        {
+         "option": "F",
+         "format": ":4!c/[8c]/4!c",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Data Source Scheme"
+          },
+          {
+           "name": "Indicator"
+          }
+         ]
+        },
+        {
+         "option": "H",
+         "format": ":4!c//4!c",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Indicator"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "COLL",
+         "options": [
+          "H"
+         ],
+         "description": "Collateral Type Indicator"
+        },
+        {
+         "qualifier": "INOU",
+         "options": [
+          "H"
+         ],
+         "description": "In/Out Indicator"
+        },
+        {
+         "qualifier": "TYCO",
+         "options": [
+          "F",
+          "H"
+         ],
+         "description": "Type of Collateralisation Indicator"
+        }
+       ],
+       "mandatory": true,
+       "repeated": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "98A",
+       "name": "Date/Time",
+       "format": [
+        {
+         "option": "A",
+         "format": ":4!c//8!n",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Date"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "SETT",
+         "options": [
+          "A"
+         ],
+         "description": "Settlement/Delivery Date"
+        }
+       ]
+      }
+     },
+     {
+      "seq": {
+       "tag": "C/C1",
+       "value": "Securities Collateral Details",
+       "children": [
+        {
+         "fld": {
+          "tag": "16R",
+          "name": "Start of Block",
+          "format": [
+           {
+            "option": "R",
+            "format": "SCOL",
+            "components": [
+             {
+              "name": "Blk",
+              "constant": "SCOL"
+             }
+            ]
+           }
+          ],
+          "mandatory": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "35B",
+          "name": "Identification of Financial Instrument",
+          "format": [
+           {
+            "option": "B",
+            "format": "[ISIN1!e12!c][4*35x]",
+            "components": [
+             {
+              "name": "Identification of Security"
+             },
+             {
+              "name": "Description of Security"
+             }
+            ]
+           }
+          ],
+          "mandatory": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "36B",
+          "name": "Quantity of Financial Instrument",
+          "format": [
+           {
+            "option": "B",
+            "format": ":4!c//4!c/15d",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Quantity Type Code"
+             },
+             {
+              "name": "Quantity"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "COLL",
+            "options": [
+             "B"
+            ],
+            "description": "Quantity of Securities Collateral"
+           }
+          ],
+          "mandatory": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "17B",
+          "name": "Flag",
+          "format": [
+           {
+            "option": "B",
+            "format": ":4!c//1!a",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Flag"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "OWNF",
+            "options": [
+             "B"
+            ],
+            "description": "Ownership Flag"
+           }
+          ]
+         }
+        },
+        {
+         "fld": {
+          "tag": "16S",
+          "name": "End of Block",
+          "format": [
+           {
+            "option": "S",
+            "format": "SCOL",
+            "components": [
+             {
+              "name": "Blk",
+              "constant": "SCOL"
+             }
+            ]
+           }
+          ],
+          "mandatory": true
+         }
+        }
+       ]
+      }
+     },
+     {
+      "seq": {
+       "tag": "C/C2",
+       "value": "Cash Collateral Details",
+       "children": [
+        {
+         "fld": {
+          "tag": "16R",
+          "name": "Start of Block",
+          "format": [
+           {
+            "option": "R",
+            "format": "CCOL",
+            "components": [
+             {
+              "name": "Blk",
+              "constant": "CCOL"
+             }
+            ]
+           }
+          ],
+          "mandatory": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "19B",
+          "name": "Amount",
+          "format": [
+           {
+            "option": "B",
+            "format": ":4!c//3!a15d",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Currency Code"
+             },
+             {
+              "name": "Amount"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "DEPO",
+            "options": [
+             "B"
+            ],
+            "description": "Deposit Amount"
+           }
+          ],
+          "mandatory": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "22H",
+          "name": "Indicator",
+          "format": [
+           {
+            "option": "H",
+            "format": ":4!c//4!c",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Indicator"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "DEPO",
+            "options": [
+             "H"
+            ],
+            "description": "Type of Deposit Indicator"
+           }
+          ],
+          "mandatory": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "98A",
+          "name": "Date/Time",
+          "format": [
+           {
+            "option": "A",
+            "format": ":4!c//8!n",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Date"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "TERM",
+            "options": [
+             "A"
+            ],
+            "description": "Maturity Date"
+           }
+          ]
+         }
+        },
+        {
+         "fld": {
+          "tag": "16S",
+          "name": "End of Block",
+          "format": [
+           {
+            "option": "S",
+            "format": "CCOL",
+            "components": [
+             {
+              "name": "Blk",
+              "constant": "CCOL"
+             }
+            ]
+           }
+          ],
+          "mandatory": true
+         }
+        }
+       ]
+      }
+     },
+     {
+      "seq": {
+       "tag": "C/C3",
+       "value": "Other Collateral Details",
+       "children": [
+        {
+         "fld": {
+          "tag": "16R",
+          "name": "Start of Block",
+          "format": [
+           {
+            "option": "R",
+            "format": "BCOL",
+            "components": [
+             {
+              "name": "Blk",
+              "constant": "BCOL"
+             }
+            ]
+           }
+          ],
+          "mandatory": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "22H",
+          "name": "Indicator",
+          "format": [
+           {
+            "option": "H",
+            "format": ":4!c//4!c",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Indicator"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "BCOL",
+            "options": [
+             "H"
+            ],
+            "description": "Type of Other Collateral Indicator"
+           }
+          ],
+          "mandatory": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "98a",
+          "name": "Date/Time",
+          "format": [
+           {
+            "option": "A",
+            "format": ":4!c//8!n",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Date"
+             }
+            ]
+           },
+           {
+            "option": "B",
+            "format": ":4!c/[8c]/4!c",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Data Source Scheme"
+             },
+             {
+              "name": "Date Code"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "ISSU",
+            "options": [
+             "A"
+            ],
+            "description": "Issue Date"
+           },
+           {
+            "qualifier": "EXPI",
+            "options": [
+             "A",
+             "B"
+            ],
+            "description": "Expiry Date"
+           }
+          ],
+          "mandatory": true,
+          "repeated": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "95a",
+          "name": "Party",
+          "format": [
+           {
+            "option": "P",
+            "format": ":4!c//4!a2!a2!c[3!c]",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Identifier Code"
+             }
+            ]
+           },
+           {
+            "option": "Q",
+            "format": ":4!c//4*35x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Name and Address"
+             }
+            ]
+           },
+           {
+            "option": "R",
+            "format": ":4!c/8c/34x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Data Source Scheme"
+             },
+             {
+              "name": "Proprietary Code"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "ISSU",
+            "options": [
+             "P",
+             "Q",
+             "R"
+            ],
+            "description": "Issuer"
+           }
+          ],
+          "mandatory": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "19B",
+          "name": "Amount",
+          "format": [
+           {
+            "option": "B",
+            "format": ":4!c//3!a15d",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Currency Code"
+             },
+             {
+              "name": "Amount"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "GUAR",
+            "options": [
+             "B"
+            ],
+            "description": "Guarantee Amount"
+           },
+           {
+            "qualifier": "LOCR",
+            "options": [
+             "B"
+            ],
+            "description": "Letter of Credit Amount"
+           }
+          ],
+          "mandatory": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "16S",
+          "name": "End of Block",
+          "format": [
+           {
+            "option": "S",
+            "format": "BCOL",
+            "components": [
+             {
+              "name": "Blk",
+              "constant": "BCOL"
+             }
+            ]
+           }
+          ],
+          "mandatory": true
+         }
+        }
+       ]
+      }
+     },
+     {
+      "fld": {
+       "tag": "16S",
+       "name": "End of Block",
+       "format": [
+        {
+         "option": "S",
+         "format": "COLD",
+         "components": [
+          {
+           "name": "Blk",
+           "constant": "COLD"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     }
+    ]
+   }
+  },
+  {
+   "seq": {
+    "tag": "D",
+    "value": "Additional Information",
+    "children": [
+     {
+      "fld": {
+       "tag": "16R",
+       "name": "Start of Block",
+       "format": [
+        {
+         "option": "R",
+         "format": "ADDINFO",
+         "components": [
+          {
+           "name": "Blk",
+           "constant": "ADDINFO"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "95a",
+       "name": "Party",
+       "format": [
+        {
+         "option": "P",
+         "format": ":4!c//4!a2!a2!c[3!c]",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Identifier Code"
+          }
+         ]
+        },
+        {
+         "option": "Q",
+         "format": ":4!c//4*35x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Name and Address"
+          }
+         ]
+        },
+        {
+         "option": "R",
+         "format": ":4!c/8c/34x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Data Source Scheme"
+          },
+          {
+           "name": "Proprietary Code"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "MEOR",
+         "options": [
+          "P",
+          "Q",
+          "R"
+         ],
+         "description": "Originator of Message"
+        },
+        {
+         "qualifier": "MERE",
+         "options": [
+          "P",
+          "Q",
+          "R"
+         ],
+         "description": "Recipient of Message"
+        }
+       ],
+       "repeated": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "16S",
+       "name": "End of Block",
+       "format": [
+        {
+         "option": "S",
+         "format": "ADDINFO",
+         "components": [
+          {
+           "name": "Blk",
+           "constant": "ADDINFO"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     }
+    ]
+   }
+  }
+ ]
+}

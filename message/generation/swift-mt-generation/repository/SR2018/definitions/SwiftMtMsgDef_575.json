@@ -1,0 +1,895 @@
+{
+ "uri": "urn::msg::swift::mt::SR2018::575",
+ "objs": [
+  {
+   "seq": {
+    "tag": "A",
+    "value": "General Information",
+    "mandatory": true,
+    "children": [
+     {
+      "fld": {
+       "tag": "16R",
+       "name": "Start of Block",
+       "format": [
+        {
+         "option": "R",
+         "format": "GENL",
+         "components": [
+          {
+           "name": "Blk",
+           "constant": "GENL"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "28E",
+       "name": "Page Number/Continuation Indicator",
+       "format": [
+        {
+         "option": "E",
+         "format": "5n/4!c",
+         "components": [
+          {
+           "name": "Page Number"
+          },
+          {
+           "name": "Continuation Indicator"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "13A",
+       "name": "Number Identification",
+       "format": [
+        {
+         "option": "A",
+         "format": ":4!c//3!c",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Number Id"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "STAT",
+         "options": [
+          "A"
+         ],
+         "description": "Statement Number"
+        }
+       ]
+      }
+     },
+     {
+      "fld": {
+       "tag": "20C",
+       "name": "Reference",
+       "format": [
+        {
+         "option": "C",
+         "format": ":4!c//16x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Reference"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "SEME",
+         "options": [
+          "C"
+         ],
+         "description": "Sender's Message Reference"
+        }
+       ],
+       "mandatory": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "23G",
+       "name": "Function of the Message",
+       "format": [
+        {
+         "option": "G",
+         "format": "4!c[/4!c]",
+         "components": [
+          {
+           "name": "Function"
+          },
+          {
+           "name": "Subfunction"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "98a",
+       "name": "Date/Time",
+       "format": [
+        {
+         "option": "A",
+         "format": ":4!c//8!n",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Date"
+          }
+         ]
+        },
+        {
+         "option": "C",
+         "format": ":4!c//8!n6!n",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Date"
+          },
+          {
+           "name": "Time"
+          }
+         ]
+        },
+        {
+         "option": "E",
+         "format": ":4!c//8!n6!n[,3n][/[N]2!n[2!n]]",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Date"
+          },
+          {
+           "name": "Time"
+          },
+          {
+           "name": "Decimals"
+          },
+          {
+           "name": "UTC Indicator"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "PREP",
+         "options": [
+          "A",
+          "C",
+          "E"
+         ],
+         "description": "Preparation Date/Time"
+        }
+       ]
+      }
+     },
+     {
+      "fld": {
+       "tag": "69a",
+       "name": "Period",
+       "format": [
+        {
+         "option": "A",
+         "format": ":4!c//8!n/8!n",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Date"
+          },
+          {
+           "name": "Date"
+          }
+         ]
+        },
+        {
+         "option": "B",
+         "format": ":4!c//8!n6!n/8!n6!n",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Date"
+          },
+          {
+           "name": "Time"
+          },
+          {
+           "name": "Date"
+          },
+          {
+           "name": "Time"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "STAT",
+         "options": [
+          "A",
+          "B"
+         ],
+         "description": "Statement Period"
+        }
+       ],
+       "mandatory": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "22F",
+       "name": "Indicator",
+       "format": [
+        {
+         "option": "F",
+         "format": ":4!c/[8c]/4!c",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Data Source Scheme"
+          },
+          {
+           "name": "Indicator"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "SFRE",
+         "options": [
+          "F"
+         ],
+         "description": "Statement Frequency Indicator"
+        },
+        {
+         "qualifier": "CODE",
+         "options": [
+          "F"
+         ],
+         "description": "Complete/Updates Indicator"
+        }
+       ],
+       "repeated": true
+      }
+     },
+     {
+      "seq": {
+       "tag": "A/A1",
+       "value": "Linkages",
+       "repeated": true,
+       "children": [
+        {
+         "fld": {
+          "tag": "16R",
+          "name": "Start of Block",
+          "format": [
+           {
+            "option": "R",
+            "format": "LINK",
+            "components": [
+             {
+              "name": "Blk",
+              "constant": "LINK"
+             }
+            ]
+           }
+          ],
+          "mandatory": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "13a",
+          "name": "Number Identification",
+          "format": [
+           {
+            "option": "A",
+            "format": ":4!c//3!c",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Number Id"
+             }
+            ]
+           },
+           {
+            "option": "B",
+            "format": ":4!c/[8c]/30x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Data Source Scheme"
+             },
+             {
+              "name": "Number"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "LINK",
+            "options": [
+             "A",
+             "B"
+            ],
+            "description": "Linked Message"
+           }
+          ]
+         }
+        },
+        {
+         "fld": {
+          "tag": "20C",
+          "name": "Reference",
+          "format": [
+           {
+            "option": "C",
+            "format": ":4!c//16x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Reference"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "PREV",
+            "options": [
+             "C"
+            ],
+            "description": "Previous Message Reference"
+           },
+           {
+            "qualifier": "RELA",
+            "options": [
+             "C"
+            ],
+            "description": "Related Message Reference"
+           }
+          ],
+          "mandatory": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "16S",
+          "name": "End of Block",
+          "format": [
+           {
+            "option": "S",
+            "format": "LINK",
+            "components": [
+             {
+              "name": "Blk",
+              "constant": "LINK"
+             }
+            ]
+           }
+          ],
+          "mandatory": true
+         }
+        }
+       ]
+      }
+     },
+     {
+      "fld": {
+       "tag": "95a",
+       "name": "Party",
+       "format": [
+        {
+         "option": "L",
+         "format": ":4!c//18!c2!n",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Legal Entity Identifier"
+          }
+         ]
+        },
+        {
+         "option": "P",
+         "format": ":4!c//4!a2!a2!c[3!c]",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Identifier Code"
+          }
+         ]
+        },
+        {
+         "option": "R",
+         "format": ":4!c/8c/34x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Data Source Scheme"
+          },
+          {
+           "name": "Proprietary Code"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "ACOW",
+         "options": [
+          "P",
+          "R"
+         ],
+         "description": "Account Owner"
+        },
+        {
+         "qualifier": "ALTE",
+         "options": [
+          "L"
+         ],
+         "description": "Alternate Identification"
+        }
+       ],
+       "repeated": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "97a",
+       "name": "Account",
+       "format": [
+        {
+         "option": "A",
+         "format": ":4!c//35x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Account Number"
+          }
+         ]
+        },
+        {
+         "option": "B",
+         "format": ":4!c/[8c]/4!c/35x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Data Source Scheme"
+          },
+          {
+           "name": "Account Type Code"
+          },
+          {
+           "name": "Account Number"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "SAFE",
+         "options": [
+          "A",
+          "B"
+         ],
+         "description": "Safekeeping Account"
+        }
+       ]
+      }
+     },
+     {
+      "fld": {
+       "tag": "17B",
+       "name": "Flag",
+       "format": [
+        {
+         "option": "B",
+         "format": ":4!c//1!a",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Flag"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "ACTI",
+         "options": [
+          "B"
+         ],
+         "description": "Activity Flag"
+        }
+       ],
+       "mandatory": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "16S",
+       "name": "End of Block",
+       "format": [
+        {
+         "option": "S",
+         "format": "GENL",
+         "components": [
+          {
+           "name": "Blk",
+           "constant": "GENL"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     }
+    ]
+   }
+  },
+  {
+   "seq": {
+    "tag": "B",
+    "value": "Cash Account Activity",
+    "repeated": true,
+    "children": [
+     {
+      "fld": {
+       "tag": "16R",
+       "name": "Start of Block",
+       "format": [
+        {
+         "option": "R",
+         "format": "CASHACCT",
+         "components": [
+          {
+           "name": "Blk",
+           "constant": "CASHACCT"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "95a",
+       "name": "Party",
+       "format": [
+        {
+         "option": "L",
+         "format": ":4!c//18!c2!n",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Legal Entity Identifier"
+          }
+         ]
+        },
+        {
+         "option": "P",
+         "format": ":4!c//4!a2!a2!c[3!c]",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Identifier Code"
+          }
+         ]
+        },
+        {
+         "option": "R",
+         "format": ":4!c/8c/34x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Data Source Scheme"
+          },
+          {
+           "name": "Proprietary Code"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "ACOW",
+         "options": [
+          "P",
+          "R"
+         ],
+         "description": "Account Owner"
+        },
+        {
+         "qualifier": "ALTE",
+         "options": [
+          "L"
+         ],
+         "description": "Alternate Identification"
+        }
+       ],
+       "repeated": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "97a",
+       "name": "Account",
+       "format": [
+        {
+         "option": "A",
+         "format": ":4!c//35x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Account Number"
+          }
+         ]
+        },
+        {
+         "option": "E",
+         "format": ":4!c//34x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "International Bank Account Number"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "CASH",
+         "options": [
+          "A",
+          "E"
+         ],
+         "description": "Cash Account"
+        }
+       ],
+       "mandatory": true
+      }
+     },
+     {
+      "seq": {
+       "tag": "B/B1",
+       "value": "Activity Information Per Currency",
+       "repeated": true,
+       "mandatory": true,
+       "children": [
+        {
+         "fld": {
+          "tag": "16R",
+          "name": "Start of Block",
+          "format": [
+           {
+            "option": "R",
+            "format": "ACTCURR",
+            "components": [
+             {
+              "name": "Blk",
+              "constant": "ACTCURR"
+             }
+            ]
+           }
+          ],
+          "mandatory": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "11A",
+          "name": "Currency",
+          "format": [
+           {
+            "option": "A",
+            "format": ":4!c//3!a",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Currency Code"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "ACCT",
+            "options": [
+             "A"
+            ],
+            "description": "Currency of Account"
+           }
+          ],
+          "mandatory": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "17B",
+          "name": "Flag",
+          "format": [
+           {
+            "option": "B",
+            "format": ":4!c//1!a",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Flag"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "ACTI",
+            "options": [
+             "B"
+            ],
+            "description": "Activity Flag"
+           }
+          ],
+          "mandatory": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "93D",
+          "name": "Balance",
+          "format": [
+           {
+            "option": "D",
+            "format": ":4!c//[N]15d",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Sign"
+             },
+             {
+              "name": "Balance"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "FIOP",
+            "options": [
+             "D"
+            ],
+            "description": "First Opening Balance"
+           },
+           {
+            "qualifier": "INOP",
+            "options": [
+             "D"
+            ],
+            "description": "Intermediary Opening Balance"
+           },
+           {
+            "qualifier": "FICL",
+            "options": [
+             "D"
+            ],
+            "description": "Final Closing Balance"
+           },
+           {
+            "qualifier": "INCL",
+            "options": [
+             "D"
+            ],
+            "description": "Intermediary Closing Balance"
+           }
+          ],
+          "mandatory": true,
+          "repeated": true
+         }
+        },
+        {
+         "seq": {
+          "tag": "B/B1/B1a",
+          "value": "Activity Information Per Transaction",
+          "repeated": true,
+          "children": [
+           {
+            "fld": {
+             "tag": "16R",
+             "name": "Start of Block",
+             "format": [
+              {
+               "option": "R",
+               "format": "ACTINFO",
+               "components": [
+                {
+                 "name": "Blk",
+                 "constant": "ACTINFO"
+                }
+               ]
+              }
+             ],
+             "mandatory": true
+            }
+           }
+          ]
+         }
+        }
+       ]
+      }
+     }
+    ]
+   }
+  }
+ ]
+}

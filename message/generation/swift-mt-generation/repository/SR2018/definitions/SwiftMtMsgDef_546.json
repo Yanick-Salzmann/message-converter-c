@@ -1,0 +1,4482 @@
+{
+ "uri": "urn::msg::swift::mt::SR2018::546",
+ "objs": [
+  {
+   "seq": {
+    "tag": "A",
+    "value": "General Information",
+    "mandatory": true,
+    "children": [
+     {
+      "fld": {
+       "tag": "16R",
+       "name": "Start of Block",
+       "format": [
+        {
+         "option": "R",
+         "format": "GENL",
+         "components": [
+          {
+           "name": "Blk",
+           "constant": "GENL"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "20C",
+       "name": "Reference",
+       "format": [
+        {
+         "option": "C",
+         "format": ":4!c//16x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Reference"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "SEME",
+         "options": [
+          "C"
+         ],
+         "description": "Sender's Message Reference"
+        }
+       ],
+       "mandatory": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "23G",
+       "name": "Function of the Message",
+       "format": [
+        {
+         "option": "G",
+         "format": "4!c[/4!c]",
+         "components": [
+          {
+           "name": "Function"
+          },
+          {
+           "name": "Subfunction"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "98a",
+       "name": "Date/Time",
+       "format": [
+        {
+         "option": "A",
+         "format": ":4!c//8!n",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Date"
+          }
+         ]
+        },
+        {
+         "option": "C",
+         "format": ":4!c//8!n6!n",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Date"
+          },
+          {
+           "name": "Time"
+          }
+         ]
+        },
+        {
+         "option": "E",
+         "format": ":4!c//8!n6!n[,3n][/[N]2!n[2!n]]",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Date"
+          },
+          {
+           "name": "Time"
+          },
+          {
+           "name": "Decimals"
+          },
+          {
+           "name": "UTC Indicator"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "PREP",
+         "options": [
+          "A",
+          "C",
+          "E"
+         ],
+         "description": "Preparation Date/Time"
+        }
+       ]
+      }
+     },
+     {
+      "fld": {
+       "tag": "22a",
+       "name": "Indicator",
+       "format": [
+        {
+         "option": "F",
+         "format": ":4!c/[8c]/4!c",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Data Source Scheme"
+          },
+          {
+           "name": "Indicator"
+          }
+         ]
+        },
+        {
+         "option": "H",
+         "format": ":4!c//4!c",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Indicator"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "PREC",
+         "options": [
+          "H"
+         ],
+         "description": "Pre-Confirmation Indicator"
+        },
+        {
+         "qualifier": "PARS",
+         "options": [
+          "F"
+         ],
+         "description": "Partial Settlement Indicator"
+        }
+       ],
+       "repeated": true
+      }
+     },
+     {
+      "seq": {
+       "tag": "A/A1",
+       "value": "Linkages",
+       "repeated": true,
+       "mandatory": true,
+       "children": [
+        {
+         "fld": {
+          "tag": "16R",
+          "name": "Start of Block",
+          "format": [
+           {
+            "option": "R",
+            "format": "LINK",
+            "components": [
+             {
+              "name": "Blk",
+              "constant": "LINK"
+             }
+            ]
+           }
+          ],
+          "mandatory": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "22F",
+          "name": "Indicator",
+          "format": [
+           {
+            "option": "F",
+            "format": ":4!c/[8c]/4!c",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Data Source Scheme"
+             },
+             {
+              "name": "Indicator"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "LINK",
+            "options": [
+             "F"
+            ],
+            "description": "Linkage Type Indicator"
+           }
+          ]
+         }
+        },
+        {
+         "fld": {
+          "tag": "13a",
+          "name": "Number Identification",
+          "format": [
+           {
+            "option": "A",
+            "format": ":4!c//3!c",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Number Id"
+             }
+            ]
+           },
+           {
+            "option": "B",
+            "format": ":4!c/[8c]/30x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Data Source Scheme"
+             },
+             {
+              "name": "Number"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "LINK",
+            "options": [
+             "A",
+             "B"
+            ],
+            "description": "Linked Message"
+           }
+          ]
+         }
+        },
+        {
+         "fld": {
+          "tag": "20C",
+          "name": "Reference",
+          "format": [
+           {
+            "option": "C",
+            "format": ":4!c//16x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Reference"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "POOL",
+            "options": [
+             "C"
+            ],
+            "description": "Pool Reference"
+           },
+           {
+            "qualifier": "PREV",
+            "options": [
+             "C"
+            ],
+            "description": "Previous Message Reference"
+           },
+           {
+            "qualifier": "RELA",
+            "options": [
+             "C"
+            ],
+            "description": "Related Message Reference"
+           },
+           {
+            "qualifier": "TRRF",
+            "options": [
+             "C"
+            ],
+            "description": "Deal Reference"
+           },
+           {
+            "qualifier": "COMM",
+            "options": [
+             "C"
+            ],
+            "description": "Common Reference"
+           },
+           {
+            "qualifier": "COLR",
+            "options": [
+             "C"
+            ],
+            "description": "Collateral Reference"
+           },
+           {
+            "qualifier": "CERT",
+            "options": [
+             "C"
+            ],
+            "description": "Certification Reference"
+           },
+           {
+            "qualifier": "CORP",
+            "options": [
+             "C"
+            ],
+            "description": "Corporate Action Reference"
+           },
+           {
+            "qualifier": "TCTR",
+            "options": [
+             "C"
+            ],
+            "description": "Triparty-Agent's/Service-Provider's Collateral Transaction Reference"
+           },
+           {
+            "qualifier": "CLTR",
+            "options": [
+             "C"
+            ],
+            "description": "Client's Triparty Collateral Transaction Reference"
+           },
+           {
+            "qualifier": "CLCI",
+            "options": [
+             "C"
+            ],
+            "description": "Client's Collateral Instruction Reference"
+           },
+           {
+            "qualifier": "TRCI",
+            "options": [
+             "C"
+            ],
+            "description": "Triparty-Agent's/Service-Provider's Collateral Instruction Reference"
+           },
+           {
+            "qualifier": "MITI",
+            "options": [
+             "C"
+            ],
+            "description": "Market Infrastructure Transaction Identification"
+           },
+           {
+            "qualifier": "PCTI",
+            "options": [
+             "C"
+            ],
+            "description": "Processor Transaction Identification"
+           }
+          ],
+          "mandatory": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "16S",
+          "name": "End of Block",
+          "format": [
+           {
+            "option": "S",
+            "format": "LINK",
+            "components": [
+             {
+              "name": "Blk",
+              "constant": "LINK"
+             }
+            ]
+           }
+          ],
+          "mandatory": true
+         }
+        }
+       ]
+      }
+     },
+     {
+      "fld": {
+       "tag": "16S",
+       "name": "End of Block",
+       "format": [
+        {
+         "option": "S",
+         "format": "GENL",
+         "components": [
+          {
+           "name": "Blk",
+           "constant": "GENL"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     }
+    ]
+   }
+  },
+  {
+   "seq": {
+    "tag": "B",
+    "value": "Trade Details",
+    "mandatory": true,
+    "children": [
+     {
+      "fld": {
+       "tag": "16R",
+       "name": "Start of Block",
+       "format": [
+        {
+         "option": "R",
+         "format": "TRADDET",
+         "components": [
+          {
+           "name": "Blk",
+           "constant": "TRADDET"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "94a",
+       "name": "Place",
+       "format": [
+        {
+         "option": "B",
+         "format": ":4!c/[8c]/4!c[/30x]",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Data Source Scheme"
+          },
+          {
+           "name": "Place Code"
+          },
+          {
+           "name": "Narrative"
+          }
+         ]
+        },
+        {
+         "option": "H",
+         "format": ":4!c//4!a2!a2!c[3!c]",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Identifier Code"
+          }
+         ]
+        },
+        {
+         "option": "L",
+         "format": ":4!c//18!c2!n",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Legal Entity Identifier"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "CLEA",
+         "options": [
+          "H",
+          "L"
+         ],
+         "description": "Place of Clearing"
+        },
+        {
+         "qualifier": "TRAD",
+         "options": [
+          "B",
+          "L"
+         ],
+         "description": "Place of Trade"
+        }
+       ],
+       "repeated": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "98a",
+       "name": "Date/Time",
+       "format": [
+        {
+         "option": "A",
+         "format": ":4!c//8!n",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Date"
+          }
+         ]
+        },
+        {
+         "option": "B",
+         "format": ":4!c/[8c]/4!c",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Data Source Scheme"
+          },
+          {
+           "name": "Date Code"
+          }
+         ]
+        },
+        {
+         "option": "C",
+         "format": ":4!c//8!n6!n",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Date"
+          },
+          {
+           "name": "Time"
+          }
+         ]
+        },
+        {
+         "option": "E",
+         "format": ":4!c//8!n6!n[,3n][/[N]2!n[2!n]]",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Date"
+          },
+          {
+           "name": "Time"
+          },
+          {
+           "name": "Decimals"
+          },
+          {
+           "name": "UTC Indicator"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "SETT",
+         "options": [
+          "A",
+          "B",
+          "C"
+         ],
+         "description": "Settlement Date/Time"
+        },
+        {
+         "qualifier": "TRAD",
+         "options": [
+          "A",
+          "B",
+          "C",
+          "E"
+         ],
+         "description": "Trade Date/Time"
+        },
+        {
+         "qualifier": "ESET",
+         "options": [
+          "A",
+          "B",
+          "C"
+         ],
+         "description": "Effective Settlement Date/Time"
+        },
+        {
+         "qualifier": "CERT",
+         "options": [
+          "A",
+          "C"
+         ],
+         "description": "Certification Date/Time"
+        }
+       ],
+       "mandatory": true,
+       "repeated": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "90a",
+       "name": "Price",
+       "format": [
+        {
+         "option": "A",
+         "format": ":4!c//4!c/[N]15d",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Percentage Type Code"
+          },
+          {
+           "name": "Sign"
+          },
+          {
+           "name": "Price"
+          }
+         ]
+        },
+        {
+         "option": "B",
+         "format": ":4!c//4!c/3!a15d",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Amount Type Code"
+          },
+          {
+           "name": "Currency Code"
+          },
+          {
+           "name": "Price"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "DEAL",
+         "options": [
+          "A",
+          "B"
+         ],
+         "description": "Deal Price"
+        }
+       ]
+      }
+     },
+     {
+      "fld": {
+       "tag": "99A",
+       "name": "Number Count",
+       "format": [
+        {
+         "option": "A",
+         "format": ":4!c//[N]3!n",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Sign"
+          },
+          {
+           "name": "Number"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "DAAC",
+         "options": [
+          "A"
+         ],
+         "description": "Number of Days Accrued"
+        }
+       ]
+      }
+     },
+     {
+      "fld": {
+       "tag": "35B",
+       "name": "Identification of the Financial Instrument",
+       "format": [
+        {
+         "option": "B",
+         "format": "[ISIN1!e12!c][4*35x]",
+         "components": [
+          {
+           "name": "Identification of Security"
+          },
+          {
+           "name": "Description of Security"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     },
+     {
+      "seq": {
+       "tag": "B/B1",
+       "value": "Financial Instrument Attributes",
+       "children": [
+        {
+         "fld": {
+          "tag": "16R",
+          "name": "Start of Block",
+          "format": [
+           {
+            "option": "R",
+            "format": "FIA",
+            "components": [
+             {
+              "name": "Blk",
+              "constant": "FIA"
+             }
+            ]
+           }
+          ],
+          "mandatory": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "94B",
+          "name": "Place",
+          "format": [
+           {
+            "option": "B",
+            "format": ":4!c/[8c]/4!c[/30x]",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Data Source Scheme"
+             },
+             {
+              "name": "Place Code"
+             },
+             {
+              "name": "Narrative"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "PLIS",
+            "options": [
+             "B"
+            ],
+            "description": "Place of Listing"
+           }
+          ]
+         }
+        },
+        {
+         "fld": {
+          "tag": "22F",
+          "name": "Indicator",
+          "format": [
+           {
+            "option": "F",
+            "format": ":4!c/[8c]/4!c",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Data Source Scheme"
+             },
+             {
+              "name": "Indicator"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "MICO",
+            "options": [
+             "F"
+            ],
+            "description": "Method of Interest Computation Indicator"
+           },
+           {
+            "qualifier": "FORM",
+            "options": [
+             "F"
+            ],
+            "description": "Form of Securities Indicator"
+           },
+           {
+            "qualifier": "PFRE",
+            "options": [
+             "F"
+            ],
+            "description": "Payment Frequency Indicator"
+           },
+           {
+            "qualifier": "PAYS",
+            "options": [
+             "F"
+            ],
+            "description": "Payment Status Indicator"
+           },
+           {
+            "qualifier": "CFRE",
+            "options": [
+             "F"
+            ],
+            "description": "Variable Rate Change Frequency Indicator"
+           }
+          ],
+          "repeated": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "12a",
+          "name": "Type of Financial Instrument",
+          "format": [
+           {
+            "option": "A",
+            "format": ":4!c/[8c]/30x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Data Source Scheme"
+             },
+             {
+              "name": "Instrument Code or Description"
+             }
+            ]
+           },
+           {
+            "option": "B",
+            "format": ":4!c/[8c]/4!c",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Data Source Scheme"
+             },
+             {
+              "name": "Instrument Type Code"
+             }
+            ]
+           },
+           {
+            "option": "C",
+            "format": ":4!c//6!c",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "CFI Code"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "CLAS",
+            "options": [
+             "A",
+             "C"
+            ],
+            "description": "Classification Type"
+           },
+           {
+            "qualifier": "OPST",
+            "options": [
+             "B"
+            ],
+            "description": "Option Style"
+           },
+           {
+            "qualifier": "OPTI",
+            "options": [
+             "B"
+            ],
+            "description": "Option Type"
+           }
+          ],
+          "repeated": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "11A",
+          "name": "Currency",
+          "format": [
+           {
+            "option": "A",
+            "format": ":4!c//3!a",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Currency Code"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "DENO",
+            "options": [
+             "A"
+            ],
+            "description": "Currency of Denomination"
+           }
+          ]
+         }
+        },
+        {
+         "fld": {
+          "tag": "98A",
+          "name": "Date/Time",
+          "format": [
+           {
+            "option": "A",
+            "format": ":4!c//8!n",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Date"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "COUP",
+            "options": [
+             "A"
+            ],
+            "description": "Coupon Date"
+           },
+           {
+            "qualifier": "EXPI",
+            "options": [
+             "A"
+            ],
+            "description": "Expiry Date"
+           },
+           {
+            "qualifier": "FRNR",
+            "options": [
+             "A"
+            ],
+            "description": "Floating Rate Note Reset Date"
+           },
+           {
+            "qualifier": "MATU",
+            "options": [
+             "A"
+            ],
+            "description": "Maturity Date"
+           },
+           {
+            "qualifier": "ISSU",
+            "options": [
+             "A"
+            ],
+            "description": "Issue Date"
+           },
+           {
+            "qualifier": "CALD",
+            "options": [
+             "A"
+            ],
+            "description": "Call Date"
+           },
+           {
+            "qualifier": "PUTT",
+            "options": [
+             "A"
+            ],
+            "description": "Put Date"
+           },
+           {
+            "qualifier": "DDTE",
+            "options": [
+             "A"
+            ],
+            "description": "Dated Date"
+           },
+           {
+            "qualifier": "FCOU",
+            "options": [
+             "A"
+            ],
+            "description": "First Coupon Date"
+           }
+          ],
+          "repeated": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "92A",
+          "name": "Rate",
+          "format": [
+           {
+            "option": "A",
+            "format": ":4!c//[N]15d",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Sign"
+             },
+             {
+              "name": "Rate"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "PRFC",
+            "options": [
+             "A"
+            ],
+            "description": "Previous Factor"
+           },
+           {
+            "qualifier": "CUFC",
+            "options": [
+             "A"
+            ],
+            "description": "Current Factor"
+           },
+           {
+            "qualifier": "NWFC",
+            "options": [
+             "A"
+            ],
+            "description": "Next Factor"
+           },
+           {
+            "qualifier": "INTR",
+            "options": [
+             "A"
+            ],
+            "description": "Interest Rate"
+           },
+           {
+            "qualifier": "NXRT",
+            "options": [
+             "A"
+            ],
+            "description": "Next Interest Rate"
+           },
+           {
+            "qualifier": "INDX",
+            "options": [
+             "A"
+            ],
+            "description": "Index Factor"
+           },
+           {
+            "qualifier": "YTMR",
+            "options": [
+             "A"
+            ],
+            "description": "Yield To Maturity Rate"
+           }
+          ],
+          "repeated": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "13a",
+          "name": "Number Identification",
+          "format": [
+           {
+            "option": "A",
+            "format": ":4!c//3!c",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Number Id"
+             }
+            ]
+           },
+           {
+            "option": "B",
+            "format": ":4!c/[8c]/30x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Data Source Scheme"
+             },
+             {
+              "name": "Number"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "COUP",
+            "options": [
+             "A",
+             "B"
+            ],
+            "description": "Coupon Number"
+           },
+           {
+            "qualifier": "POOL",
+            "options": [
+             "B"
+            ],
+            "description": "Pool Number"
+           }
+          ],
+          "repeated": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "17B",
+          "name": "Flag",
+          "format": [
+           {
+            "option": "B",
+            "format": ":4!c//1!a",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Flag"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "FRNF",
+            "options": [
+             "B"
+            ],
+            "description": "Floating Rate Note Flag"
+           },
+           {
+            "qualifier": "CALL",
+            "options": [
+             "B"
+            ],
+            "description": "Callable Flag"
+           },
+           {
+            "qualifier": "PUTT",
+            "options": [
+             "B"
+            ],
+            "description": "Putable Flag"
+           }
+          ],
+          "repeated": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "90a",
+          "name": "Price",
+          "format": [
+           {
+            "option": "A",
+            "format": ":4!c//4!c/[N]15d",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Percentage Type Code"
+             },
+             {
+              "name": "Sign"
+             },
+             {
+              "name": "Price"
+             }
+            ]
+           },
+           {
+            "option": "B",
+            "format": ":4!c//4!c/3!a15d",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Amount Type Code"
+             },
+             {
+              "name": "Currency Code"
+             },
+             {
+              "name": "Price"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "INDC",
+            "options": [
+             "A",
+             "B"
+            ],
+            "description": "Indicative Price"
+           },
+           {
+            "qualifier": "MRKT",
+            "options": [
+             "A",
+             "B"
+            ],
+            "description": "Market Price"
+           },
+           {
+            "qualifier": "EXER",
+            "options": [
+             "A",
+             "B"
+            ],
+            "description": "Exercise Price"
+           }
+          ],
+          "repeated": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "36B",
+          "name": "Quantity of Financial Instrument",
+          "format": [
+           {
+            "option": "B",
+            "format": ":4!c//4!c/15d",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Quantity Type Code"
+             },
+             {
+              "name": "Quantity"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "MINO",
+            "options": [
+             "B"
+            ],
+            "description": "Minimum Nominal Quantity"
+           },
+           {
+            "qualifier": "SIZE",
+            "options": [
+             "B"
+            ],
+            "description": "Contract Size"
+           }
+          ],
+          "repeated": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "35B",
+          "name": "Identification of the Financial Instrument",
+          "format": [
+           {
+            "option": "B",
+            "format": "[ISIN1!e12!c][4*35x]",
+            "components": [
+             {
+              "name": "Identification of Security"
+             },
+             {
+              "name": "Description of Security"
+             }
+            ]
+           }
+          ],
+          "repeated": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "70E",
+          "name": "Narrative",
+          "format": [
+           {
+            "option": "E",
+            "format": ":4!c//10*35x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Narrative"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "FIAN",
+            "options": [
+             "E"
+            ],
+            "description": "Financial Instrument Attribute Narrative"
+           }
+          ]
+         }
+        },
+        {
+         "fld": {
+          "tag": "16S",
+          "name": "End of Block",
+          "format": [
+           {
+            "option": "S",
+            "format": "FIA",
+            "components": [
+             {
+              "name": "Blk",
+              "constant": "FIA"
+             }
+            ]
+           }
+          ],
+          "mandatory": true
+         }
+        }
+       ]
+      }
+     },
+     {
+      "fld": {
+       "tag": "22F",
+       "name": "Indicator",
+       "format": [
+        {
+         "option": "F",
+         "format": ":4!c/[8c]/4!c",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Data Source Scheme"
+          },
+          {
+           "name": "Indicator"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "PROC",
+         "options": [
+          "F"
+         ],
+         "description": "Processing Indicator"
+        },
+        {
+         "qualifier": "RPOR",
+         "options": [
+          "F"
+         ],
+         "description": "Reporting Indicator"
+        },
+        {
+         "qualifier": "PRIR",
+         "options": [
+          "F"
+         ],
+         "description": "Priority Indicator"
+        },
+        {
+         "qualifier": "BORR",
+         "options": [
+          "F"
+         ],
+         "description": "Automatic Borrowing Indicator"
+        },
+        {
+         "qualifier": "TTCO",
+         "options": [
+          "F"
+         ],
+         "description": "Trade Transaction Condition Indicator"
+        },
+        {
+         "qualifier": "INCA",
+         "options": [
+          "F"
+         ],
+         "description": "Investor Capacity Indicator"
+        },
+        {
+         "qualifier": "TRCA",
+         "options": [
+          "F"
+         ],
+         "description": "Party Capacity Indicator"
+        },
+        {
+         "qualifier": "PRIC",
+         "options": [
+          "F"
+         ],
+         "description": "Type of Price Indicator"
+        }
+       ],
+       "repeated": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "70E",
+       "name": "Narrative",
+       "format": [
+        {
+         "option": "E",
+         "format": ":4!c//10*35x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Narrative"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "FXIN",
+         "options": [
+          "E"
+         ],
+         "description": "FX Instructions Narrative"
+        },
+        {
+         "qualifier": "SPRO",
+         "options": [
+          "E"
+         ],
+         "description": "Settlement Instruction Processing Narrative"
+        }
+       ],
+       "repeated": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "16S",
+       "name": "End of Block",
+       "format": [
+        {
+         "option": "S",
+         "format": "TRADDET",
+         "components": [
+          {
+           "name": "Blk",
+           "constant": "TRADDET"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     }
+    ]
+   }
+  },
+  {
+   "seq": {
+    "tag": "C",
+    "value": "Financial Instrument/Account",
+    "mandatory": true,
+    "children": [
+     {
+      "fld": {
+       "tag": "16R",
+       "name": "Start of Block",
+       "format": [
+        {
+         "option": "R",
+         "format": "FIAC",
+         "components": [
+          {
+           "name": "Blk",
+           "constant": "FIAC"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "36B",
+       "name": "Quantity of Financial Instrument",
+       "format": [
+        {
+         "option": "B",
+         "format": ":4!c//4!c/15d",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Quantity Type Code"
+          },
+          {
+           "name": "Quantity"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "ESTT",
+         "options": [
+          "B"
+         ],
+         "description": "Quantity of Financial Instrument Settled"
+        },
+        {
+         "qualifier": "PSTT",
+         "options": [
+          "B"
+         ],
+         "description": "Quantity of Financial Instrument Previously Settled"
+        },
+        {
+         "qualifier": "RSTT",
+         "options": [
+          "B"
+         ],
+         "description": "Quantity of Financial Instrument Remaining to be Settled"
+        }
+       ],
+       "mandatory": true,
+       "repeated": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "19A",
+       "name": "Amount",
+       "format": [
+        {
+         "option": "A",
+         "format": ":4!c//[N]3!a15d",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Sign"
+          },
+          {
+           "name": "Currency Code"
+          },
+          {
+           "name": "Amount"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "PSTT",
+         "options": [
+          "A"
+         ],
+         "description": "Previously Settled Amount"
+        },
+        {
+         "qualifier": "RSTT",
+         "options": [
+          "A"
+         ],
+         "description": "Remaining Settlement Amount"
+        }
+       ],
+       "repeated": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "70D",
+       "name": "Narrative",
+       "format": [
+        {
+         "option": "D",
+         "format": ":4!c//6*35x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Narrative"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "DENC",
+         "options": [
+          "D"
+         ],
+         "description": "Denomination Choice"
+        }
+       ]
+      }
+     },
+     {
+      "fld": {
+       "tag": "13B",
+       "name": "Number Identification",
+       "format": [
+        {
+         "option": "B",
+         "format": ":4!c/[8c]/30x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Data Source Scheme"
+          },
+          {
+           "name": "Number"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "CERT",
+         "options": [
+          "B"
+         ],
+         "description": "Certificate Number"
+        }
+       ],
+       "repeated": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "95a",
+       "name": "Party",
+       "format": [
+        {
+         "option": "L",
+         "format": ":4!c//18!c2!n",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Legal Entity Identifier"
+          }
+         ]
+        },
+        {
+         "option": "P",
+         "format": ":4!c//4!a2!a2!c[3!c]",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Identifier Code"
+          }
+         ]
+        },
+        {
+         "option": "R",
+         "format": ":4!c/8c/34x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Data Source Scheme"
+          },
+          {
+           "name": "Proprietary Code"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "ACOW",
+         "options": [
+          "P",
+          "R"
+         ],
+         "description": "Account Owner"
+        },
+        {
+         "qualifier": "ALTE",
+         "options": [
+          "L"
+         ],
+         "description": "Alternate Identification"
+        }
+       ],
+       "repeated": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "97a",
+       "name": "Account",
+       "format": [
+        {
+         "option": "A",
+         "format": ":4!c//35x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Account Number"
+          }
+         ]
+        },
+        {
+         "option": "B",
+         "format": ":4!c/[8c]/4!c/35x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Data Source Scheme"
+          },
+          {
+           "name": "Account Type Code"
+          },
+          {
+           "name": "Account Number"
+          }
+         ]
+        },
+        {
+         "option": "E",
+         "format": ":4!c//34x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "International Bank Account Number"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "SAFE",
+         "options": [
+          "A",
+          "B"
+         ],
+         "description": "Safekeeping Account"
+        },
+        {
+         "qualifier": "CASH",
+         "options": [
+          "A",
+          "E"
+         ],
+         "description": "Cash Account"
+        },
+        {
+         "qualifier": "REGI",
+         "options": [
+          "A",
+          "B"
+         ],
+         "description": "Registrar Account"
+        }
+       ],
+       "mandatory": true,
+       "repeated": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "94a",
+       "name": "Place",
+       "format": [
+        {
+         "option": "B",
+         "format": ":4!c/[8c]/4!c[/30x]",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Data Source Scheme"
+          },
+          {
+           "name": "Place Code"
+          },
+          {
+           "name": "Narrative"
+          }
+         ]
+        },
+        {
+         "option": "C",
+         "format": ":4!c//2!a",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Country Code"
+          }
+         ]
+        },
+        {
+         "option": "F",
+         "format": ":4!c//4!c/4!a2!a2!c[3!c]",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Place Code"
+          },
+          {
+           "name": "Identifier Code"
+          }
+         ]
+        },
+        {
+         "option": "L",
+         "format": ":4!c//18!c2!n",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Legal Entity Identifier"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "SAFE",
+         "options": [
+          "B",
+          "C",
+          "F",
+          "L"
+         ],
+         "description": "Place of Safekeeping"
+        }
+       ],
+       "repeated": true
+      }
+     },
+     {
+      "seq": {
+       "tag": "C/C1",
+       "value": "Quantity Breakdown",
+       "repeated": true,
+       "children": [
+        {
+         "fld": {
+          "tag": "16R",
+          "name": "Start of Block",
+          "format": [
+           {
+            "option": "R",
+            "format": "BREAK",
+            "components": [
+             {
+              "name": "Blk",
+              "constant": "BREAK"
+             }
+            ]
+           }
+          ],
+          "mandatory": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "13B",
+          "name": "Number Identification",
+          "format": [
+           {
+            "option": "B",
+            "format": ":4!c/[8c]/30x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Data Source Scheme"
+             },
+             {
+              "name": "Number"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "LOTS",
+            "options": [
+             "B"
+            ],
+            "description": "Lot Number"
+           }
+          ]
+         }
+        },
+        {
+         "fld": {
+          "tag": "36B",
+          "name": "Quantity of Financial Instrument",
+          "format": [
+           {
+            "option": "B",
+            "format": ":4!c//4!c/15d",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Quantity Type Code"
+             },
+             {
+              "name": "Quantity"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "LOTS",
+            "options": [
+             "B"
+            ],
+            "description": "Quantity of Financial Instrument In The Lot"
+           }
+          ]
+         }
+        },
+        {
+         "fld": {
+          "tag": "98a",
+          "name": "Date/Time",
+          "format": [
+           {
+            "option": "A",
+            "format": ":4!c//8!n",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Date"
+             }
+            ]
+           },
+           {
+            "option": "C",
+            "format": ":4!c//8!n6!n",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Date"
+             },
+             {
+              "name": "Time"
+             }
+            ]
+           },
+           {
+            "option": "E",
+            "format": ":4!c//8!n6!n[,3n][/[N]2!n[2!n]]",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Date"
+             },
+             {
+              "name": "Time"
+             },
+             {
+              "name": "Decimals"
+             },
+             {
+              "name": "UTC Indicator"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "LOTS",
+            "options": [
+             "A",
+             "C",
+             "E"
+            ],
+            "description": "Lot Date/Time"
+           }
+          ]
+         }
+        },
+        {
+         "fld": {
+          "tag": "90a",
+          "name": "Price",
+          "format": [
+           {
+            "option": "A",
+            "format": ":4!c//4!c/[N]15d",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Percentage Type Code"
+             },
+             {
+              "name": "Sign"
+             },
+             {
+              "name": "Price"
+             }
+            ]
+           },
+           {
+            "option": "B",
+            "format": ":4!c//4!c/3!a15d",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Amount Type Code"
+             },
+             {
+              "name": "Currency Code"
+             },
+             {
+              "name": "Price"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "LOTS",
+            "options": [
+             "A",
+             "B"
+            ],
+            "description": "Book/Lot Price"
+           }
+          ]
+         }
+        },
+        {
+         "fld": {
+          "tag": "22F",
+          "name": "Indicator",
+          "format": [
+           {
+            "option": "F",
+            "format": ":4!c/[8c]/4!c",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Data Source Scheme"
+             },
+             {
+              "name": "Indicator"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "PRIC",
+            "options": [
+             "F"
+            ],
+            "description": "Type of Price Indicator"
+           },
+           {
+            "qualifier": "SSBT",
+            "options": [
+             "F"
+            ],
+            "description": "Securities Sub Balance Type Indicator"
+           }
+          ],
+          "repeated": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "16S",
+          "name": "End of Block",
+          "format": [
+           {
+            "option": "S",
+            "format": "BREAK",
+            "components": [
+             {
+              "name": "Blk",
+              "constant": "BREAK"
+             }
+            ]
+           }
+          ],
+          "mandatory": true
+         }
+        }
+       ]
+      }
+     },
+     {
+      "fld": {
+       "tag": "16S",
+       "name": "End of Block",
+       "format": [
+        {
+         "option": "S",
+         "format": "FIAC",
+         "components": [
+          {
+           "name": "Blk",
+           "constant": "FIAC"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     }
+    ]
+   }
+  },
+  {
+   "seq": {
+    "tag": "D",
+    "value": "Two Leg Transaction Details",
+    "children": [
+     {
+      "fld": {
+       "tag": "16R",
+       "name": "Start of Block",
+       "format": [
+        {
+         "option": "R",
+         "format": "REPO",
+         "components": [
+          {
+           "name": "Blk",
+           "constant": "REPO"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "98a",
+       "name": "Date/Time",
+       "format": [
+        {
+         "option": "A",
+         "format": ":4!c//8!n",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Date"
+          }
+         ]
+        },
+        {
+         "option": "B",
+         "format": ":4!c/[8c]/4!c",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Data Source Scheme"
+          },
+          {
+           "name": "Date Code"
+          }
+         ]
+        },
+        {
+         "option": "C",
+         "format": ":4!c//8!n6!n",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Date"
+          },
+          {
+           "name": "Time"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "TERM",
+         "options": [
+          "A",
+          "B",
+          "C"
+         ],
+         "description": "Closing Date/Time"
+        },
+        {
+         "qualifier": "RERA",
+         "options": [
+          "A",
+          "C"
+         ],
+         "description": "Rate Change Date/Time"
+        }
+       ],
+       "repeated": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "22F",
+       "name": "Indicator",
+       "format": [
+        {
+         "option": "F",
+         "format": ":4!c/[8c]/4!c",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Data Source Scheme"
+          },
+          {
+           "name": "Indicator"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "RERT",
+         "options": [
+          "F"
+         ],
+         "description": "Rate Type"
+        },
+        {
+         "qualifier": "MICO",
+         "options": [
+          "F"
+         ],
+         "description": "Method of Interest Computation Indicator"
+        },
+        {
+         "qualifier": "REVA",
+         "options": [
+          "F"
+         ],
+         "description": "Revaluation Indicator"
+        },
+        {
+         "qualifier": "LEGA",
+         "options": [
+          "F"
+         ],
+         "description": "Legal Framework Indicator"
+        },
+        {
+         "qualifier": "INTR",
+         "options": [
+          "F"
+         ],
+         "description": "Interest Payment Indicator"
+        }
+       ],
+       "repeated": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "20C",
+       "name": "Reference",
+       "format": [
+        {
+         "option": "C",
+         "format": ":4!c//16x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Reference"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "SECO",
+         "options": [
+          "C"
+         ],
+         "description": "Second Leg Reference"
+        },
+        {
+         "qualifier": "REPO",
+         "options": [
+          "C"
+         ],
+         "description": "Transaction Reference"
+        }
+       ],
+       "repeated": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "92a",
+       "name": "Rate",
+       "format": [
+        {
+         "option": "A",
+         "format": ":4!c//[N]15d",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Sign"
+          },
+          {
+           "name": "Rate"
+          }
+         ]
+        },
+        {
+         "option": "C",
+         "format": ":4!c/[8c]/24x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Data Source Scheme"
+          },
+          {
+           "name": "Rate Name"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "VASU",
+         "options": [
+          "C"
+         ],
+         "description": "Variable Rate Support"
+        },
+        {
+         "qualifier": "REPO",
+         "options": [
+          "A"
+         ],
+         "description": "Repurchase Rate"
+        },
+        {
+         "qualifier": "RSPR",
+         "options": [
+          "A"
+         ],
+         "description": "Spread Rate"
+        },
+        {
+         "qualifier": "PRIC",
+         "options": [
+          "A",
+          "C"
+         ],
+         "description": "Pricing Rate"
+        },
+        {
+         "qualifier": "SLMG",
+         "options": [
+          "A"
+         ],
+         "description": "Stock Loan Margin"
+        },
+        {
+         "qualifier": "SHAI",
+         "options": [
+          "A"
+         ],
+         "description": "Securities Haircut"
+        }
+       ],
+       "repeated": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "99B",
+       "name": "Number Count",
+       "format": [
+        {
+         "option": "B",
+         "format": ":4!c//3!n",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Number"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "CADE",
+         "options": [
+          "B"
+         ],
+         "description": "Transaction Call Delay"
+        },
+        {
+         "qualifier": "TOCO",
+         "options": [
+          "B"
+         ],
+         "description": "Total Number of Collateral Instructions"
+        }
+       ],
+       "repeated": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "19A",
+       "name": "Amount",
+       "format": [
+        {
+         "option": "A",
+         "format": ":4!c//[N]3!a15d",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Sign"
+          },
+          {
+           "name": "Currency Code"
+          },
+          {
+           "name": "Amount"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "FORF",
+         "options": [
+          "A"
+         ],
+         "description": "Forfeit Amount"
+        },
+        {
+         "qualifier": "TRTE",
+         "options": [
+          "A"
+         ],
+         "description": "Termination Transaction Amount"
+        },
+        {
+         "qualifier": "REPP",
+         "options": [
+          "A"
+         ],
+         "description": "Premium Amount"
+        },
+        {
+         "qualifier": "ACRU",
+         "options": [
+          "A"
+         ],
+         "description": "Accrued Interest Amount"
+        },
+        {
+         "qualifier": "DEAL",
+         "options": [
+          "A"
+         ],
+         "description": "Deal Amount"
+        },
+        {
+         "qualifier": "TAPC",
+         "options": [
+          "A"
+         ],
+         "description": "Termination Amount per Piece of Collateral"
+        }
+       ],
+       "repeated": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "70C",
+       "name": "Narrative",
+       "format": [
+        {
+         "option": "C",
+         "format": ":4!c//4*35x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Narrative"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "SECO",
+         "options": [
+          "C"
+         ],
+         "description": "Second Leg Narrative"
+        }
+       ]
+      }
+     },
+     {
+      "fld": {
+       "tag": "16S",
+       "name": "End of Block",
+       "format": [
+        {
+         "option": "S",
+         "format": "REPO",
+         "components": [
+          {
+           "name": "Blk",
+           "constant": "REPO"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     }
+    ]
+   }
+  },
+  {
+   "seq": {
+    "tag": "E",
+    "value": "Settlement Details",
+    "mandatory": true,
+    "children": [
+     {
+      "fld": {
+       "tag": "16R",
+       "name": "Start of Block",
+       "format": [
+        {
+         "option": "R",
+         "format": "SETDET",
+         "components": [
+          {
+           "name": "Blk",
+           "constant": "SETDET"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "22F",
+       "name": "Indicator",
+       "format": [
+        {
+         "option": "F",
+         "format": ":4!c/[8c]/4!c",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Data Source Scheme"
+          },
+          {
+           "name": "Indicator"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "STCO",
+         "options": [
+          "F"
+         ],
+         "description": "Settlement Transaction Condition Indicator"
+        },
+        {
+         "qualifier": "SETR",
+         "options": [
+          "F"
+         ],
+         "description": "Type of Settlement Transaction Indicator"
+        },
+        {
+         "qualifier": "TRCA",
+         "options": [
+          "F"
+         ],
+         "description": "Party Capacity Indicator"
+        },
+        {
+         "qualifier": "STAM",
+         "options": [
+          "F"
+         ],
+         "description": "Stamp Duty Indicator"
+        },
+        {
+         "qualifier": "RTGS",
+         "options": [
+          "F"
+         ],
+         "description": "Securities Real-Time Gross Settlement Indicator"
+        },
+        {
+         "qualifier": "REGT",
+         "options": [
+          "F"
+         ],
+         "description": "Registration Indicator"
+        },
+        {
+         "qualifier": "BENE",
+         "options": [
+          "F"
+         ],
+         "description": "Beneficial Ownership Indicator"
+        },
+        {
+         "qualifier": "CASY",
+         "options": [
+          "F"
+         ],
+         "description": "Cash Settlement System Indicator"
+        },
+        {
+         "qualifier": "DBNM",
+         "options": [
+          "F"
+         ],
+         "description": "Settlement Standing Instruction Database Indicator"
+        },
+        {
+         "qualifier": "TCPI",
+         "options": [
+          "F"
+         ],
+         "description": "Tax Capacity Party Indicator"
+        },
+        {
+         "qualifier": "MACL",
+         "options": [
+          "F"
+         ],
+         "description": "Market Side Indicator"
+        },
+        {
+         "qualifier": "BLOC",
+         "options": [
+          "F"
+         ],
+         "description": "Block Trade Indicator"
+        },
+        {
+         "qualifier": "REST",
+         "options": [
+          "F"
+         ],
+         "description": "Restrictions Indicator"
+        },
+        {
+         "qualifier": "SETS",
+         "options": [
+          "F"
+         ],
+         "description": "Settlement System/Method Indicator"
+        },
+        {
+         "qualifier": "NETT",
+         "options": [
+          "F"
+         ],
+         "description": "Netting Eligibility Indicator"
+        },
+        {
+         "qualifier": "CCPT",
+         "options": [
+          "F"
+         ],
+         "description": "CCP Eligibility Indicator"
+        },
+        {
+         "qualifier": "LEOG",
+         "options": [
+          "F"
+         ],
+         "description": "Letter of Guarantee Indicator"
+        },
+        {
+         "qualifier": "COLA",
+         "options": [
+          "F"
+         ],
+         "description": "Exposure Type Indicator"
+        },
+        {
+         "qualifier": "REPT",
+         "options": [
+          "F"
+         ],
+         "description": "Repurchase Type Indicator"
+        },
+        {
+         "qualifier": "COLE",
+         "options": [
+          "F"
+         ],
+         "description": "Collateral Pool Indicator"
+        },
+        {
+         "qualifier": "SSBT",
+         "options": [
+          "F"
+         ],
+         "description": "Securities Sub Balance Type Indicator"
+        },
+        {
+         "qualifier": "CSBT",
+         "options": [
+          "F"
+         ],
+         "description": "Cash Sub Balance Type Indicator"
+        }
+       ],
+       "mandatory": true,
+       "repeated": true
+      }
+     },
+     {
+      "seq": {
+       "tag": "E/E1",
+       "value": "Settlement Parties",
+       "repeated": true,
+       "mandatory": true,
+       "children": [
+        {
+         "fld": {
+          "tag": "16R",
+          "name": "Start of Block",
+          "format": [
+           {
+            "option": "R",
+            "format": "SETPRTY",
+            "components": [
+             {
+              "name": "Blk",
+              "constant": "SETPRTY"
+             }
+            ]
+           }
+          ],
+          "mandatory": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "95a",
+          "name": "Party",
+          "format": [
+           {
+            "option": "C",
+            "format": ":4!c//2!a",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Country Code"
+             }
+            ]
+           },
+           {
+            "option": "L",
+            "format": ":4!c//18!c2!n",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Legal Entity Identifier"
+             }
+            ]
+           },
+           {
+            "option": "P",
+            "format": ":4!c//4!a2!a2!c[3!c]",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Identifier Code"
+             }
+            ]
+           },
+           {
+            "option": "Q",
+            "format": ":4!c//4*35x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Name and Address"
+             }
+            ]
+           },
+           {
+            "option": "R",
+            "format": ":4!c/8c/34x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Data Source Scheme"
+             },
+             {
+              "name": "Proprietary Code"
+             }
+            ]
+           },
+           {
+            "option": "S",
+            "format": ":4!c/[8c]/4!c/2!a/30x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Data Source Scheme"
+             },
+             {
+              "name": "Type of ID"
+             },
+             {
+              "name": "Country Code"
+             },
+             {
+              "name": "Alternate ID"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "BUYR",
+            "options": [
+             "P",
+             "Q",
+             "R"
+            ],
+            "description": "Buyer"
+           },
+           {
+            "qualifier": "DEAG",
+            "options": [
+             "P",
+             "Q",
+             "R"
+            ],
+            "description": "Delivering Agent"
+           },
+           {
+            "qualifier": "DECU",
+            "options": [
+             "P",
+             "Q",
+             "R"
+            ],
+            "description": "Deliverer's Custodian"
+           },
+           {
+            "qualifier": "DEI1",
+            "options": [
+             "P",
+             "Q",
+             "R"
+            ],
+            "description": "Deliverer's Intermediary 1"
+           },
+           {
+            "qualifier": "DEI2",
+            "options": [
+             "P",
+             "Q",
+             "R"
+            ],
+            "description": "Deliverer's Intermediary 2"
+           },
+           {
+            "qualifier": "PSET",
+            "options": [
+             "C",
+             "P",
+             "Q"
+            ],
+            "description": "Place of Settlement"
+           },
+           {
+            "qualifier": "REAG",
+            "options": [
+             "P",
+             "Q",
+             "R"
+            ],
+            "description": "Receiving Agent"
+           },
+           {
+            "qualifier": "RECU",
+            "options": [
+             "P",
+             "Q",
+             "R"
+            ],
+            "description": "Receiver's Custodian"
+           },
+           {
+            "qualifier": "REI1",
+            "options": [
+             "P",
+             "Q",
+             "R"
+            ],
+            "description": "Receiver's Intermediary 1"
+           },
+           {
+            "qualifier": "REI2",
+            "options": [
+             "P",
+             "Q",
+             "R"
+            ],
+            "description": "Receiver's Intermediary 2"
+           },
+           {
+            "qualifier": "SELL",
+            "options": [
+             "P",
+             "Q",
+             "R"
+            ],
+            "description": "Seller"
+           },
+           {
+            "qualifier": "ALTE",
+            "options": [
+             "L",
+             "S"
+            ],
+            "description": "Alternate Identification"
+           }
+          ],
+          "mandatory": true,
+          "repeated": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "97a",
+          "name": "Account",
+          "format": [
+           {
+            "option": "A",
+            "format": ":4!c//35x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Account Number"
+             }
+            ]
+           },
+           {
+            "option": "B",
+            "format": ":4!c/[8c]/4!c/35x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Data Source Scheme"
+             },
+             {
+              "name": "Account Type Code"
+             },
+             {
+              "name": "Account Number"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "SAFE",
+            "options": [
+             "A",
+             "B"
+            ],
+            "description": "Safekeeping Account"
+           }
+          ]
+         }
+        },
+        {
+         "fld": {
+          "tag": "98a",
+          "name": "Date/Time",
+          "format": [
+           {
+            "option": "A",
+            "format": ":4!c//8!n",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Date"
+             }
+            ]
+           },
+           {
+            "option": "C",
+            "format": ":4!c//8!n6!n",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Date"
+             },
+             {
+              "name": "Time"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "PROC",
+            "options": [
+             "A",
+             "C"
+            ],
+            "description": "Processing Date/Time"
+           }
+          ]
+         }
+        },
+        {
+         "fld": {
+          "tag": "20C",
+          "name": "Reference",
+          "format": [
+           {
+            "option": "C",
+            "format": ":4!c//16x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Reference"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "PROC",
+            "options": [
+             "C"
+            ],
+            "description": "Processing Reference"
+           }
+          ]
+         }
+        },
+        {
+         "fld": {
+          "tag": "70a",
+          "name": "Narrative",
+          "format": [
+           {
+            "option": "C",
+            "format": ":4!c//4*35x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Narrative"
+             }
+            ]
+           },
+           {
+            "option": "D",
+            "format": ":4!c//6*35x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Narrative"
+             }
+            ]
+           },
+           {
+            "option": "E",
+            "format": ":4!c//10*35x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Narrative"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "DECL",
+            "options": [
+             "E"
+            ],
+            "description": "Declaration Details"
+           },
+           {
+            "qualifier": "REGI",
+            "options": [
+             "D"
+            ],
+            "description": "Registration Details"
+           },
+           {
+            "qualifier": "PACO",
+            "options": [
+             "C"
+            ],
+            "description": "Party Narrative"
+           }
+          ],
+          "repeated": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "16S",
+          "name": "End of Block",
+          "format": [
+           {
+            "option": "S",
+            "format": "SETPRTY",
+            "components": [
+             {
+              "name": "Blk",
+              "constant": "SETPRTY"
+             }
+            ]
+           }
+          ],
+          "mandatory": true
+         }
+        }
+       ]
+      }
+     },
+     {
+      "seq": {
+       "tag": "E/E2",
+       "value": "Cash Parties",
+       "repeated": true,
+       "children": [
+        {
+         "fld": {
+          "tag": "16R",
+          "name": "Start of Block",
+          "format": [
+           {
+            "option": "R",
+            "format": "CSHPRTY",
+            "components": [
+             {
+              "name": "Blk",
+              "constant": "CSHPRTY"
+             }
+            ]
+           }
+          ],
+          "mandatory": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "95a",
+          "name": "Party",
+          "format": [
+           {
+            "option": "L",
+            "format": ":4!c//18!c2!n",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Legal Entity Identifier"
+             }
+            ]
+           },
+           {
+            "option": "P",
+            "format": ":4!c//4!a2!a2!c[3!c]",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Identifier Code"
+             }
+            ]
+           },
+           {
+            "option": "Q",
+            "format": ":4!c//4*35x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Name and Address"
+             }
+            ]
+           },
+           {
+            "option": "R",
+            "format": ":4!c/8c/34x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Data Source Scheme"
+             },
+             {
+              "name": "Proprietary Code"
+             }
+            ]
+           },
+           {
+            "option": "S",
+            "format": ":4!c/[8c]/4!c/2!a/30x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Data Source Scheme"
+             },
+             {
+              "name": "Type of ID"
+             },
+             {
+              "name": "Country Code"
+             },
+             {
+              "name": "Alternate ID"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "ACCW",
+            "options": [
+             "P",
+             "Q",
+             "R"
+            ],
+            "description": "Account With Institution"
+           },
+           {
+            "qualifier": "BENM",
+            "options": [
+             "P",
+             "Q",
+             "R"
+            ],
+            "description": "Beneficiary of Money"
+           },
+           {
+            "qualifier": "DEBT",
+            "options": [
+             "P",
+             "Q",
+             "R"
+            ],
+            "description": "Debtor"
+           },
+           {
+            "qualifier": "INTM",
+            "options": [
+             "P",
+             "Q",
+             "R"
+            ],
+            "description": "Intermediary"
+           },
+           {
+            "qualifier": "PAYE",
+            "options": [
+             "P",
+             "Q",
+             "R"
+            ],
+            "description": "Paying Institution"
+           },
+           {
+            "qualifier": "ALTE",
+            "options": [
+             "L",
+             "S"
+            ],
+            "description": "Alternate Identification"
+           }
+          ],
+          "mandatory": true,
+          "repeated": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "97a",
+          "name": "Account",
+          "format": [
+           {
+            "option": "A",
+            "format": ":4!c//35x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Account Number"
+             }
+            ]
+           },
+           {
+            "option": "E",
+            "format": ":4!c//34x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "International Bank Account Number"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "CASH",
+            "options": [
+             "A",
+             "E"
+            ],
+            "description": "Cash Account"
+           },
+           {
+            "qualifier": "CHAR",
+            "options": [
+             "A",
+             "E"
+            ],
+            "description": "Charges Account"
+           },
+           {
+            "qualifier": "COMM",
+            "options": [
+             "A",
+             "E"
+            ],
+            "description": "Commission Account"
+           },
+           {
+            "qualifier": "TAXE",
+            "options": [
+             "A",
+             "E"
+            ],
+            "description": "Tax Account"
+           }
+          ],
+          "repeated": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "20C",
+          "name": "Reference",
+          "format": [
+           {
+            "option": "C",
+            "format": ":4!c//16x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Reference"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "PROC",
+            "options": [
+             "C"
+            ],
+            "description": "Processing Reference"
+           }
+          ]
+         }
+        },
+        {
+         "fld": {
+          "tag": "70a",
+          "name": "Narrative",
+          "format": [
+           {
+            "option": "C",
+            "format": ":4!c//4*35x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Narrative"
+             }
+            ]
+           },
+           {
+            "option": "E",
+            "format": ":4!c//10*35x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Narrative"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "DECL",
+            "options": [
+             "E"
+            ],
+            "description": "Declaration Details"
+           },
+           {
+            "qualifier": "PACO",
+            "options": [
+             "C"
+            ],
+            "description": "Party Narrative"
+           }
+          ],
+          "repeated": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "16S",
+          "name": "End of Block",
+          "format": [
+           {
+            "option": "S",
+            "format": "CSHPRTY",
+            "components": [
+             {
+              "name": "Blk",
+              "constant": "CSHPRTY"
+             }
+            ]
+           }
+          ],
+          "mandatory": true
+         }
+        }
+       ]
+      }
+     },
+     {
+      "seq": {
+       "tag": "E/E3",
+       "value": "Amounts",
+       "repeated": true,
+       "children": [
+        {
+         "fld": {
+          "tag": "16R",
+          "name": "Start of Block",
+          "format": [
+           {
+            "option": "R",
+            "format": "AMT",
+            "components": [
+             {
+              "name": "Blk",
+              "constant": "AMT"
+             }
+            ]
+           }
+          ],
+          "mandatory": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "17B",
+          "name": "Flag",
+          "format": [
+           {
+            "option": "B",
+            "format": ":4!c//1!a",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Flag"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "ACRU",
+            "options": [
+             "B"
+            ],
+            "description": "Accrued Interest Flag"
+           },
+           {
+            "qualifier": "STAM",
+            "options": [
+             "B"
+            ],
+            "description": "Stamp Duty Flag"
+           },
+           {
+            "qualifier": "EXEC",
+            "options": [
+             "B"
+            ],
+            "description": "Brokerage Amount Flag"
+           }
+          ],
+          "repeated": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "19A",
+          "name": "Amount",
+          "format": [
+           {
+            "option": "A",
+            "format": ":4!c//[N]3!a15d",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Sign"
+             },
+             {
+              "name": "Currency Code"
+             },
+             {
+              "name": "Amount"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "ACRU",
+            "options": [
+             "A"
+            ],
+            "description": "Accrued Interest Amount"
+           },
+           {
+            "qualifier": "ANTO",
+            "options": [
+             "A"
+            ],
+            "description": "Net Gain/Loss Amount"
+           },
+           {
+            "qualifier": "BOOK",
+            "options": [
+             "A"
+            ],
+            "description": "Book Value"
+           },
+           {
+            "qualifier": "CHAR",
+            "options": [
+             "A"
+            ],
+            "description": "Charges/Fees"
+           },
+           {
+            "qualifier": "COMT",
+            "options": [
+             "A"
+            ],
+            "description": "Collateral Monitor Amount"
+           },
+           {
+            "qualifier": "COUN",
+            "options": [
+             "A"
+            ],
+            "description": "Country, National, Federal Tax"
+           },
+           {
+            "qualifier": "DEAL",
+            "options": [
+             "A"
+            ],
+            "description": "Trade Amount"
+           },
+           {
+            "qualifier": "ESTT",
+            "options": [
+             "A"
+            ],
+            "description": "Settled Amount"
+           },
+           {
+            "qualifier": "EXEC",
+            "options": [
+             "A"
+            ],
+            "description": "Executing Broker's Amount"
+           },
+           {
+            "qualifier": "ISDI",
+            "options": [
+             "A"
+            ],
+            "description": "Issue Discount/Allowance"
+           },
+           {
+            "qualifier": "LADT",
+            "options": [
+             "A"
+            ],
+            "description": "Local Tax (Country specific 1)"
+           },
+           {
+            "qualifier": "LEVY",
+            "options": [
+             "A"
+            ],
+            "description": "Payment Levy Tax"
+           },
+           {
+            "qualifier": "LOCL",
+            "options": [
+             "A"
+            ],
+            "description": "Local Tax"
+           },
+           {
+            "qualifier": "LOCO",
+            "options": [
+             "A"
+            ],
+            "description": "Local Broker's Commission"
+           },
+           {
+            "qualifier": "MARG",
+            "options": [
+             "A"
+            ],
+            "description": "Margin"
+           },
+           {
+            "qualifier": "OTHR",
+            "options": [
+             "A"
+            ],
+            "description": "Other Amount"
+           },
+           {
+            "qualifier": "REGF",
+            "options": [
+             "A"
+            ],
+            "description": "Regulatory Amount"
+           },
+           {
+            "qualifier": "SHIP",
+            "options": [
+             "A"
+            ],
+            "description": "Shipping Amount"
+           },
+           {
+            "qualifier": "SPCN",
+            "options": [
+             "A"
+            ],
+            "description": "Special Concessions Amount"
+           },
+           {
+            "qualifier": "STAM",
+            "options": [
+             "A"
+            ],
+            "description": "Stamp Duty"
+           },
+           {
+            "qualifier": "STEX",
+            "options": [
+             "A"
+            ],
+            "description": "Stock Exchange Tax"
+           },
+           {
+            "qualifier": "TRAN",
+            "options": [
+             "A"
+            ],
+            "description": "Transfer Tax"
+           },
+           {
+            "qualifier": "TRAX",
+            "options": [
+             "A"
+            ],
+            "description": "Transaction Tax"
+           },
+           {
+            "qualifier": "VATA",
+            "options": [
+             "A"
+            ],
+            "description": "Value-Added Tax"
+           },
+           {
+            "qualifier": "WITH",
+            "options": [
+             "A"
+            ],
+            "description": "Withholding Tax"
+           },
+           {
+            "qualifier": "COAX",
+            "options": [
+             "A"
+            ],
+            "description": "Consumption Tax"
+           },
+           {
+            "qualifier": "ACCA",
+            "options": [
+             "A"
+            ],
+            "description": "Accrued Capitalisation"
+           },
+           {
+            "qualifier": "RSCH",
+            "options": [
+             "A"
+            ],
+            "description": "Research Fee"
+           },
+           {
+            "qualifier": "RESU",
+            "options": [
+             "A"
+            ],
+            "description": "Resulting Amount"
+           },
+           {
+            "qualifier": "OCMT",
+            "options": [
+             "A"
+            ],
+            "description": "Original Currency and Ordered Amount"
+           }
+          ],
+          "mandatory": true,
+          "repeated": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "98a",
+          "name": "Date/Time",
+          "format": [
+           {
+            "option": "A",
+            "format": ":4!c//8!n",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Date"
+             }
+            ]
+           },
+           {
+            "option": "C",
+            "format": ":4!c//8!n6!n",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Date"
+             },
+             {
+              "name": "Time"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "VALU",
+            "options": [
+             "A",
+             "C"
+            ],
+            "description": "Value Date/Time"
+           }
+          ]
+         }
+        },
+        {
+         "fld": {
+          "tag": "92B",
+          "name": "Rate",
+          "format": [
+           {
+            "option": "B",
+            "format": ":4!c//3!a/3!a/15d",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "First Currency Code"
+             },
+             {
+              "name": "Second Currency Code"
+             },
+             {
+              "name": "Rate"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "EXCH",
+            "options": [
+             "B"
+            ],
+            "description": "Exchange Rate"
+           }
+          ]
+         }
+        },
+        {
+         "fld": {
+          "tag": "16S",
+          "name": "End of Block",
+          "format": [
+           {
+            "option": "S",
+            "format": "AMT",
+            "components": [
+             {
+              "name": "Blk",
+              "constant": "AMT"
+             }
+            ]
+           }
+          ],
+          "mandatory": true
+         }
+        }
+       ]
+      }
+     },
+     {
+      "fld": {
+       "tag": "16S",
+       "name": "End of Block",
+       "format": [
+        {
+         "option": "S",
+         "format": "SETDET",
+         "components": [
+          {
+           "name": "Blk",
+           "constant": "SETDET"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     }
+    ]
+   }
+  },
+  {
+   "seq": {
+    "tag": "F",
+    "value": "Other Parties",
+    "repeated": true,
+    "children": [
+     {
+      "fld": {
+       "tag": "16R",
+       "name": "Start of Block",
+       "format": [
+        {
+         "option": "R",
+         "format": "OTHRPRTY",
+         "components": [
+          {
+           "name": "Blk",
+           "constant": "OTHRPRTY"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "95a",
+       "name": "Party",
+       "format": [
+        {
+         "option": "C",
+         "format": ":4!c//2!a",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Country Code"
+          }
+         ]
+        },
+        {
+         "option": "L",
+         "format": ":4!c//18!c2!n",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Legal Entity Identifier"
+          }
+         ]
+        },
+        {
+         "option": "P",
+         "format": ":4!c//4!a2!a2!c[3!c]",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Identifier Code"
+          }
+         ]
+        },
+        {
+         "option": "Q",
+         "format": ":4!c//4*35x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Name and Address"
+          }
+         ]
+        },
+        {
+         "option": "R",
+         "format": ":4!c/8c/34x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Data Source Scheme"
+          },
+          {
+           "name": "Proprietary Code"
+          }
+         ]
+        },
+        {
+         "option": "S",
+         "format": ":4!c/[8c]/4!c/2!a/30x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Data Source Scheme"
+          },
+          {
+           "name": "Type of ID"
+          },
+          {
+           "name": "Country Code"
+          },
+          {
+           "name": "Alternate ID"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "EXCH",
+         "options": [
+          "P",
+          "Q",
+          "R"
+         ],
+         "description": "Stock Exchange"
+        },
+        {
+         "qualifier": "MEOR",
+         "options": [
+          "P",
+          "Q",
+          "R"
+         ],
+         "description": "Originator of Message"
+        },
+        {
+         "qualifier": "MERE",
+         "options": [
+          "P",
+          "Q",
+          "R"
+         ],
+         "description": "Recipient of Message"
+        },
+        {
+         "qualifier": "TRRE",
+         "options": [
+          "P",
+          "Q",
+          "R"
+         ],
+         "description": "Trade Regulator"
+        },
+        {
+         "qualifier": "INVE",
+         "options": [
+          "C",
+          "P",
+          "Q",
+          "R"
+         ],
+         "description": "Investor"
+        },
+        {
+         "qualifier": "VEND",
+         "options": [
+          "P",
+          "Q",
+          "R"
+         ],
+         "description": "Vendor"
+        },
+        {
+         "qualifier": "QFIN",
+         "options": [
+          "P",
+          "Q",
+          "R"
+         ],
+         "description": "Qualified Foreign Intermediary"
+        },
+        {
+         "qualifier": "TRAG",
+         "options": [
+          "P",
+          "Q",
+          "R"
+         ],
+         "description": "Triparty Agent"
+        },
+        {
+         "qualifier": "BRKR",
+         "options": [
+          "P",
+          "Q",
+          "R"
+         ],
+         "description": "Broker"
+        },
+        {
+         "qualifier": "ALTE",
+         "options": [
+          "L",
+          "S"
+         ],
+         "description": "Alternate Identification"
+        }
+       ],
+       "mandatory": true,
+       "repeated": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "97A",
+       "name": "Account",
+       "format": [
+        {
+         "option": "A",
+         "format": ":4!c//35x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Account Number"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "SAFE",
+         "options": [
+          "A"
+         ],
+         "description": "Safekeeping Account"
+        }
+       ]
+      }
+     },
+     {
+      "fld": {
+       "tag": "70a",
+       "name": "Narrative",
+       "format": [
+        {
+         "option": "C",
+         "format": ":4!c//4*35x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Narrative"
+          }
+         ]
+        },
+        {
+         "option": "D",
+         "format": ":4!c//6*35x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Narrative"
+          }
+         ]
+        },
+        {
+         "option": "E",
+         "format": ":4!c//10*35x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Narrative"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "DECL",
+         "options": [
+          "E"
+         ],
+         "description": "Declaration Details"
+        },
+        {
+         "qualifier": "REGI",
+         "options": [
+          "D"
+         ],
+         "description": "Registration Details"
+        },
+        {
+         "qualifier": "PACO",
+         "options": [
+          "C"
+         ],
+         "description": "Party Narrative"
+        }
+       ],
+       "repeated": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "20C",
+       "name": "Reference",
+       "format": [
+        {
+         "option": "C",
+         "format": ":4!c//16x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Reference"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "PROC",
+         "options": [
+          "C"
+         ],
+         "description": "Processing Reference"
+        }
+       ]
+      }
+     },
+     {
+      "fld": {
+       "tag": "16S",
+       "name": "End of Block",
+       "format": [
+        {
+         "option": "S",
+         "format": "OTHRPRTY",
+         "components": [
+          {
+           "name": "Blk",
+           "constant": "OTHRPRTY"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     }
+    ]
+   }
+  }
+ ]
+}

@@ -1,0 +1,1887 @@
+{
+ "uri": "urn::msg::swift::mt::SR2018::569",
+ "objs": [
+  {
+   "seq": {
+    "tag": "A",
+    "value": "General Information",
+    "mandatory": true,
+    "children": [
+     {
+      "fld": {
+       "tag": "16R",
+       "name": "Start of Block",
+       "format": [
+        {
+         "option": "R",
+         "format": "GENL",
+         "components": [
+          {
+           "name": "Blk",
+           "constant": "GENL"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "28E",
+       "name": "Page Number/Continuation Indicator",
+       "format": [
+        {
+         "option": "E",
+         "format": "5n/4!c",
+         "components": [
+          {
+           "name": "Page Number"
+          },
+          {
+           "name": "Continuation Indicator"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "13A",
+       "name": "Number Identification",
+       "format": [
+        {
+         "option": "A",
+         "format": ":4!c//3!c",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Number Id"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "STAT",
+         "options": [
+          "A"
+         ],
+         "description": "Statement Number"
+        }
+       ]
+      }
+     },
+     {
+      "fld": {
+       "tag": "20C",
+       "name": "Reference",
+       "format": [
+        {
+         "option": "C",
+         "format": ":4!c//16x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Reference"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "SEME",
+         "options": [
+          "C"
+         ],
+         "description": "Sender's Message Reference"
+        }
+       ],
+       "mandatory": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "23G",
+       "name": "Function of the Message",
+       "format": [
+        {
+         "option": "G",
+         "format": "4!c[/4!c]",
+         "components": [
+          {
+           "name": "Function"
+          },
+          {
+           "name": "Subfunction"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "98a",
+       "name": "Date/Time",
+       "format": [
+        {
+         "option": "A",
+         "format": ":4!c//8!n",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Date"
+          }
+         ]
+        },
+        {
+         "option": "C",
+         "format": ":4!c//8!n6!n",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Date"
+          },
+          {
+           "name": "Time"
+          }
+         ]
+        },
+        {
+         "option": "E",
+         "format": ":4!c//8!n6!n[,3n][/[N]2!n[2!n]]",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Date"
+          },
+          {
+           "name": "Time"
+          },
+          {
+           "name": "Decimals"
+          },
+          {
+           "name": "UTC Indicator"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "PREP",
+         "options": [
+          "A",
+          "C",
+          "E"
+         ],
+         "description": "Preparation Date/Time"
+        }
+       ]
+      }
+     },
+     {
+      "fld": {
+       "tag": "22a",
+       "name": "Indicator",
+       "format": [
+        {
+         "option": "F",
+         "format": ":4!c/[8c]/4!c",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Data Source Scheme"
+          },
+          {
+           "name": "Indicator"
+          }
+         ]
+        },
+        {
+         "option": "H",
+         "format": ":4!c//4!c",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Indicator"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "STBA",
+         "options": [
+          "F"
+         ],
+         "description": "Statement Basis Indicator"
+        },
+        {
+         "qualifier": "REPR",
+         "options": [
+          "H"
+         ],
+         "description": "Collateral Receive/Provide Indicator"
+        },
+        {
+         "qualifier": "SFRE",
+         "options": [
+          "F"
+         ],
+         "description": "Statement Frequency Indicator"
+        }
+       ],
+       "mandatory": true,
+       "repeated": true
+      }
+     },
+     {
+      "seq": {
+       "tag": "A/A1",
+       "value": "Collateral Parties",
+       "repeated": true,
+       "children": [
+        {
+         "fld": {
+          "tag": "16R",
+          "name": "Start of Block",
+          "format": [
+           {
+            "option": "R",
+            "format": "COLLPRTY",
+            "components": [
+             {
+              "name": "Blk",
+              "constant": "COLLPRTY"
+             }
+            ]
+           }
+          ],
+          "mandatory": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "95a",
+          "name": "Party",
+          "format": [
+           {
+            "option": "L",
+            "format": ":4!c//18!c2!n",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Legal Entity Identifier"
+             }
+            ]
+           },
+           {
+            "option": "P",
+            "format": ":4!c//4!a2!a2!c[3!c]",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Identifier Code"
+             }
+            ]
+           },
+           {
+            "option": "Q",
+            "format": ":4!c//4*35x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Name and Address"
+             }
+            ]
+           },
+           {
+            "option": "R",
+            "format": ":4!c/8c/34x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Data Source Scheme"
+             },
+             {
+              "name": "Proprietary Code"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "PTYA",
+            "options": [
+             "P",
+             "Q",
+             "R"
+            ],
+            "description": "Party A"
+           },
+           {
+            "qualifier": "CLPA",
+            "options": [
+             "P",
+             "Q",
+             "R"
+            ],
+            "description": "Party A's client"
+           },
+           {
+            "qualifier": "TRAG",
+            "options": [
+             "P",
+             "Q",
+             "R"
+            ],
+            "description": "Triparty Agent"
+           },
+           {
+            "qualifier": "ALTE",
+            "options": [
+             "L"
+            ],
+            "description": "Alternate Identification"
+           }
+          ],
+          "mandatory": true,
+          "repeated": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "97a",
+          "name": "Account",
+          "format": [
+           {
+            "option": "A",
+            "format": ":4!c//35x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Account Number"
+             }
+            ]
+           },
+           {
+            "option": "B",
+            "format": ":4!c/[8c]/4!c/35x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Data Source Scheme"
+             },
+             {
+              "name": "Account Type Code"
+             },
+             {
+              "name": "Account Number"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "SAFE",
+            "options": [
+             "A",
+             "B"
+            ],
+            "description": "Safekeeping Account"
+           }
+          ]
+         }
+        },
+        {
+         "fld": {
+          "tag": "16S",
+          "name": "End of Block",
+          "format": [
+           {
+            "option": "S",
+            "format": "COLLPRTY",
+            "components": [
+             {
+              "name": "Blk",
+              "constant": "COLLPRTY"
+             }
+            ]
+           }
+          ],
+          "mandatory": true
+         }
+        }
+       ]
+      }
+     },
+     {
+      "seq": {
+       "tag": "A/A2",
+       "value": "Linkages",
+       "repeated": true,
+       "children": [
+        {
+         "fld": {
+          "tag": "16R",
+          "name": "Start of Block",
+          "format": [
+           {
+            "option": "R",
+            "format": "LINK",
+            "components": [
+             {
+              "name": "Blk",
+              "constant": "LINK"
+             }
+            ]
+           }
+          ],
+          "mandatory": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "13a",
+          "name": "Number Identification",
+          "format": [
+           {
+            "option": "A",
+            "format": ":4!c//3!c",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Number Id"
+             }
+            ]
+           },
+           {
+            "option": "B",
+            "format": ":4!c/[8c]/30x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Data Source Scheme"
+             },
+             {
+              "name": "Number"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "LINK",
+            "options": [
+             "A",
+             "B"
+            ],
+            "description": "Linked Message"
+           }
+          ]
+         }
+        },
+        {
+         "fld": {
+          "tag": "20C",
+          "name": "Reference",
+          "format": [
+           {
+            "option": "C",
+            "format": ":4!c//16x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Reference"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "RELA",
+            "options": [
+             "C"
+            ],
+            "description": "Related Message Reference"
+           },
+           {
+            "qualifier": "PREV",
+            "options": [
+             "C"
+            ],
+            "description": "Previous Message Reference"
+           }
+          ],
+          "mandatory": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "16S",
+          "name": "End of Block",
+          "format": [
+           {
+            "option": "S",
+            "format": "LINK",
+            "components": [
+             {
+              "name": "Blk",
+              "constant": "LINK"
+             }
+            ]
+           }
+          ],
+          "mandatory": true
+         }
+        }
+       ]
+      }
+     },
+     {
+      "fld": {
+       "tag": "16S",
+       "name": "End of Block",
+       "format": [
+        {
+         "option": "S",
+         "format": "GENL",
+         "components": [
+          {
+           "name": "Blk",
+           "constant": "GENL"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     }
+    ]
+   }
+  },
+  {
+   "seq": {
+    "tag": "B",
+    "value": "Overall Summary",
+    "mandatory": true,
+    "children": [
+     {
+      "fld": {
+       "tag": "16R",
+       "name": "Start of Block",
+       "format": [
+        {
+         "option": "R",
+         "format": "SUMM",
+         "components": [
+          {
+           "name": "Blk",
+           "constant": "SUMM"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "19A",
+       "name": "Amount",
+       "format": [
+        {
+         "option": "A",
+         "format": ":4!c//[N]3!a15d",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Sign"
+          },
+          {
+           "name": "Currency Code"
+          },
+          {
+           "name": "Amount"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "COVA",
+         "options": [
+          "A"
+         ],
+         "description": "Value of Collateral Held"
+        },
+        {
+         "qualifier": "TEXA",
+         "options": [
+          "A"
+         ],
+         "description": "Total Exposure Amount"
+        },
+        {
+         "qualifier": "MARG",
+         "options": [
+          "A"
+         ],
+         "description": "Margin Amount"
+        },
+        {
+         "qualifier": "TACR",
+         "options": [
+          "A"
+         ],
+         "description": "Total Accrued Interest Amount"
+        },
+        {
+         "qualifier": "TCHA",
+         "options": [
+          "A"
+         ],
+         "description": "Total Fees/Commissions"
+        },
+        {
+         "qualifier": "TPRI",
+         "options": [
+          "A"
+         ],
+         "description": "Total of Principals"
+        },
+        {
+         "qualifier": "TPIN",
+         "options": [
+          "A"
+         ],
+         "description": "Total Pending Collateral In"
+        },
+        {
+         "qualifier": "TPOU",
+         "options": [
+          "A"
+         ],
+         "description": "Total Pending Collateral Out"
+        },
+        {
+         "qualifier": "TCOR",
+         "options": [
+          "A"
+         ],
+         "description": "Total Collateral Required"
+        },
+        {
+         "qualifier": "TCFA",
+         "options": [
+          "A"
+         ],
+         "description": "Total Cash Failed Amount"
+        }
+       ],
+       "mandatory": true,
+       "repeated": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "92A",
+       "name": "Rate",
+       "format": [
+        {
+         "option": "A",
+         "format": ":4!c//[N]15d",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Sign"
+          },
+          {
+           "name": "Rate"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "MARG",
+         "options": [
+          "A"
+         ],
+         "description": "Margin"
+        }
+       ]
+      }
+     },
+     {
+      "fld": {
+       "tag": "25D",
+       "name": "Status Code",
+       "format": [
+        {
+         "option": "D",
+         "format": ":4!c/[8c]/4!c",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Data Source Scheme"
+          },
+          {
+           "name": "Status Code"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "GCST",
+         "options": [
+          "D"
+         ],
+         "description": "Global Collateral Status"
+        }
+       ]
+      }
+     },
+     {
+      "fld": {
+       "tag": "98a",
+       "name": "Date/Time",
+       "format": [
+        {
+         "option": "A",
+         "format": ":4!c//8!n",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Date"
+          }
+         ]
+        },
+        {
+         "option": "C",
+         "format": ":4!c//8!n6!n",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Date"
+          },
+          {
+           "name": "Time"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "VALN",
+         "options": [
+          "A",
+          "C"
+         ],
+         "description": "Valuation Date/Time"
+        }
+       ],
+       "mandatory": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "70E",
+       "name": "Narrative",
+       "format": [
+        {
+         "option": "E",
+         "format": ":4!c//10*35x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Narrative"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "COLL",
+         "options": [
+          "E"
+         ],
+         "description": "Collateral Narrative"
+        }
+       ]
+      }
+     },
+     {
+      "fld": {
+       "tag": "16S",
+       "name": "End of Block",
+       "format": [
+        {
+         "option": "S",
+         "format": "SUMM",
+         "components": [
+          {
+           "name": "Blk",
+           "constant": "SUMM"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     }
+    ]
+   }
+  },
+  {
+   "seq": {
+    "tag": "C",
+    "value": "Summary by Exposure Type",
+    "repeated": true,
+    "mandatory": true,
+    "children": [
+     {
+      "fld": {
+       "tag": "16R",
+       "name": "Start of Block",
+       "format": [
+        {
+         "option": "R",
+         "format": "SUME",
+         "components": [
+          {
+           "name": "Blk",
+           "constant": "SUME"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "22a",
+       "name": "Indicator",
+       "format": [
+        {
+         "option": "F",
+         "format": ":4!c/[8c]/4!c",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Data Source Scheme"
+          },
+          {
+           "name": "Indicator"
+          }
+         ]
+        },
+        {
+         "option": "H",
+         "format": ":4!c//4!c",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Indicator"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "COLA",
+         "options": [
+          "F",
+          "H"
+         ],
+         "description": "Exposure Type Indicator"
+        },
+        {
+         "qualifier": "PRSS",
+         "options": [
+          "F"
+         ],
+         "description": "Process Indicator"
+        }
+       ],
+       "mandatory": true,
+       "repeated": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "19A",
+       "name": "Amount",
+       "format": [
+        {
+         "option": "A",
+         "format": ":4!c//[N]3!a15d",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Sign"
+          },
+          {
+           "name": "Currency Code"
+          },
+          {
+           "name": "Amount"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "COVA",
+         "options": [
+          "A"
+         ],
+         "description": "Value of Collateral Held"
+        },
+        {
+         "qualifier": "TEXA",
+         "options": [
+          "A"
+         ],
+         "description": "Total Exposure Amount"
+        },
+        {
+         "qualifier": "MARG",
+         "options": [
+          "A"
+         ],
+         "description": "Margin Amount"
+        },
+        {
+         "qualifier": "TACR",
+         "options": [
+          "A"
+         ],
+         "description": "Total Accrued Interest Amount"
+        },
+        {
+         "qualifier": "TCOR",
+         "options": [
+          "A"
+         ],
+         "description": "Total Collateral Required"
+        },
+        {
+         "qualifier": "TVOC",
+         "options": [
+          "A"
+         ],
+         "description": "Total Value of Own Collateral"
+        },
+        {
+         "qualifier": "TVRC",
+         "options": [
+          "A"
+         ],
+         "description": "Total Value of Reused Collateral"
+        },
+        {
+         "qualifier": "TPRI",
+         "options": [
+          "A"
+         ],
+         "description": "Total of Principals"
+        },
+        {
+         "qualifier": "TPIN",
+         "options": [
+          "A"
+         ],
+         "description": "Total Pending Collateral In"
+        },
+        {
+         "qualifier": "TPOU",
+         "options": [
+          "A"
+         ],
+         "description": "Total Pending Collateral Out"
+        },
+        {
+         "qualifier": "TCFA",
+         "options": [
+          "A"
+         ],
+         "description": "Total Cash Failed Amount"
+        }
+       ],
+       "mandatory": true,
+       "repeated": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "92A",
+       "name": "Rate",
+       "format": [
+        {
+         "option": "A",
+         "format": ":4!c//[N]15d",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Sign"
+          },
+          {
+           "name": "Rate"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "MARG",
+         "options": [
+          "A"
+         ],
+         "description": "Margin"
+        }
+       ]
+      }
+     },
+     {
+      "fld": {
+       "tag": "25D",
+       "name": "Status Code",
+       "format": [
+        {
+         "option": "D",
+         "format": ":4!c/[8c]/4!c",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Data Source Scheme"
+          },
+          {
+           "name": "Status Code"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "GETS",
+         "options": [
+          "D"
+         ],
+         "description": "Global Exposure Type Status"
+        }
+       ]
+      }
+     },
+     {
+      "seq": {
+       "tag": "C/C1",
+       "value": "Summary by Counterparty",
+       "repeated": true,
+       "children": [
+        {
+         "fld": {
+          "tag": "16R",
+          "name": "Start of Block",
+          "format": [
+           {
+            "option": "R",
+            "format": "SUMC",
+            "components": [
+             {
+              "name": "Blk",
+              "constant": "SUMC"
+             }
+            ]
+           }
+          ],
+          "mandatory": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "13B",
+          "name": "Number Identification",
+          "format": [
+           {
+            "option": "B",
+            "format": ":4!c/[8c]/30x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Data Source Scheme"
+             },
+             {
+              "name": "Number"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "PRBN",
+            "options": [
+             "B"
+            ],
+            "description": "Preferential Basket Identification Number"
+           },
+           {
+            "qualifier": "FSBN",
+            "options": [
+             "B"
+            ],
+            "description": "Fallback Starting Basket Identification Number"
+           },
+           {
+            "qualifier": "EXBN",
+            "options": [
+             "B"
+            ],
+            "description": "Exclusion Basket Identification Number"
+           },
+           {
+            "qualifier": "ELIG",
+            "options": [
+             "B"
+            ],
+            "description": "Eligibility Set Profile Number"
+           }
+          ],
+          "repeated": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "95a",
+          "name": "Party",
+          "format": [
+           {
+            "option": "L",
+            "format": ":4!c//18!c2!n",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Legal Entity Identifier"
+             }
+            ]
+           },
+           {
+            "option": "P",
+            "format": ":4!c//4!a2!a2!c[3!c]",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Identifier Code"
+             }
+            ]
+           },
+           {
+            "option": "Q",
+            "format": ":4!c//4*35x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Name and Address"
+             }
+            ]
+           },
+           {
+            "option": "R",
+            "format": ":4!c/8c/34x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Data Source Scheme"
+             },
+             {
+              "name": "Proprietary Code"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "PTYB",
+            "options": [
+             "P",
+             "Q",
+             "R"
+            ],
+            "description": "Party B"
+           },
+           {
+            "qualifier": "CLPB",
+            "options": [
+             "P",
+             "Q",
+             "R"
+            ],
+            "description": "Party B's Client"
+           },
+           {
+            "qualifier": "TRAG",
+            "options": [
+             "P",
+             "Q",
+             "R"
+            ],
+            "description": "Triparty Agent"
+           },
+           {
+            "qualifier": "ALTE",
+            "options": [
+             "L"
+            ],
+            "description": "Alternate Identification"
+           }
+          ],
+          "mandatory": true,
+          "repeated": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "19A",
+          "name": "Amount",
+          "format": [
+           {
+            "option": "A",
+            "format": ":4!c//[N]3!a15d",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Sign"
+             },
+             {
+              "name": "Currency Code"
+             },
+             {
+              "name": "Amount"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "COVA",
+            "options": [
+             "A"
+            ],
+            "description": "Value of Collateral Held"
+           },
+           {
+            "qualifier": "TEXA",
+            "options": [
+             "A"
+            ],
+            "description": "Total Exposure Amount"
+           },
+           {
+            "qualifier": "MARG",
+            "options": [
+             "A"
+            ],
+            "description": "Margin Amount"
+           },
+           {
+            "qualifier": "TACR",
+            "options": [
+             "A"
+            ],
+            "description": "Total Accrued Interest Amount"
+           },
+           {
+            "qualifier": "TCOR",
+            "options": [
+             "A"
+            ],
+            "description": "Total Collateral Required"
+           },
+           {
+            "qualifier": "TVOC",
+            "options": [
+             "A"
+            ],
+            "description": "Total Value of Own Collateral"
+           },
+           {
+            "qualifier": "TVRC",
+            "options": [
+             "A"
+            ],
+            "description": "Total Value of Reused Collateral"
+           },
+           {
+            "qualifier": "TPRI",
+            "options": [
+             "A"
+            ],
+            "description": "Total of Principals"
+           },
+           {
+            "qualifier": "TPIN",
+            "options": [
+             "A"
+            ],
+            "description": "Total Pending Collateral In"
+           },
+           {
+            "qualifier": "TPOU",
+            "options": [
+             "A"
+            ],
+            "description": "Total Pending Collateral Out"
+           },
+           {
+            "qualifier": "TCFA",
+            "options": [
+             "A"
+            ],
+            "description": "Total Cash Failed Amount"
+           }
+          ],
+          "mandatory": true,
+          "repeated": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "92A",
+          "name": "Rate",
+          "format": [
+           {
+            "option": "A",
+            "format": ":4!c//[N]15d",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Sign"
+             },
+             {
+              "name": "Rate"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "MARG",
+            "options": [
+             "A"
+            ],
+            "description": "Margin"
+           }
+          ]
+         }
+        },
+        {
+         "fld": {
+          "tag": "25D",
+          "name": "Status Code",
+          "format": [
+           {
+            "option": "D",
+            "format": ":4!c/[8c]/4!c",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Data Source Scheme"
+             },
+             {
+              "name": "Status Code"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "GCOS",
+            "options": [
+             "D"
+            ],
+            "description": "Global Counterparty Status"
+           }
+          ]
+         }
+        },
+        {
+         "seq": {
+          "tag": "C/C1/C1a",
+          "value": "Transaction Details",
+          "repeated": true,
+          "mandatory": true,
+          "children": [
+           {
+            "fld": {
+             "tag": "16R",
+             "name": "Start of Block",
+             "format": [
+              {
+               "option": "R",
+               "format": "TRANSDET",
+               "components": [
+                {
+                 "name": "Blk",
+                 "constant": "TRANSDET"
+                }
+               ]
+              }
+             ],
+             "mandatory": true
+            }
+           },
+           {
+            "fld": {
+             "tag": "20C",
+             "name": "Reference",
+             "format": [
+              {
+               "option": "C",
+               "format": ":4!c//16x",
+               "components": [
+                {
+                 "name": "Qualifier"
+                },
+                {
+                 "name": "Reference"
+                }
+               ]
+              }
+             ],
+             "qualifier": [
+              {
+               "qualifier": "CLTR",
+               "options": [
+                "C"
+               ],
+               "description": "Client's Triparty Collateral Transaction Reference"
+              },
+              {
+               "qualifier": "CCTR",
+               "options": [
+                "C"
+               ],
+               "description": "Counterparty's Collateral Transaction Reference"
+              },
+              {
+               "qualifier": "TCTR",
+               "options": [
+                "C"
+               ],
+               "description": "Triparty-Agent's/Service-Provider's Collateral Transaction Reference"
+              }
+             ],
+             "mandatory": true,
+             "repeated": true
+            }
+           },
+           {
+            "fld": {
+             "tag": "98a",
+             "name": "Date/Time",
+             "format": [
+              {
+               "option": "A",
+               "format": ":4!c//8!n",
+               "components": [
+                {
+                 "name": "Qualifier"
+                },
+                {
+                 "name": "Date"
+                }
+               ]
+              },
+              {
+               "option": "B",
+               "format": ":4!c/[8c]/4!c",
+               "components": [
+                {
+                 "name": "Qualifier"
+                },
+                {
+                 "name": "Data Source Scheme"
+                },
+                {
+                 "name": "Date Code"
+                }
+               ]
+              },
+              {
+               "option": "C",
+               "format": ":4!c//8!n6!n",
+               "components": [
+                {
+                 "name": "Qualifier"
+                },
+                {
+                 "name": "Date"
+                },
+                {
+                 "name": "Time"
+                }
+               ]
+              }
+             ],
+             "qualifier": [
+              {
+               "qualifier": "TERM",
+               "options": [
+                "A",
+                "B",
+                "C"
+               ],
+               "description": "Closing Date/Time"
+              },
+              {
+               "qualifier": "EXRQ",
+               "options": [
+                "A",
+                "B",
+                "C"
+               ],
+               "description": "Execution Requested Date/Time"
+              }
+             ],
+             "mandatory": true,
+             "repeated": true
+            }
+           },
+           {
+            "fld": {
+             "tag": "19A",
+             "name": "Amount",
+             "format": [
+              {
+               "option": "A",
+               "format": ":4!c//[N]3!a15d",
+               "components": [
+                {
+                 "name": "Qualifier"
+                },
+                {
+                 "name": "Sign"
+                },
+                {
+                 "name": "Currency Code"
+                },
+                {
+                 "name": "Amount"
+                }
+               ]
+              }
+             ],
+             "qualifier": [
+              {
+               "qualifier": "COVA",
+               "options": [
+                "A"
+               ],
+               "description": "Value of Collateral Held"
+              },
+              {
+               "qualifier": "TEXA",
+               "options": [
+                "A"
+               ],
+               "description": "Total Exposure Amount"
+              },
+              {
+               "qualifier": "TRAA",
+               "options": [
+                "A"
+               ],
+               "description": "Transaction Amount"
+              },
+              {
+               "qualifier": "MARG",
+               "options": [
+                "A"
+               ],
+               "description": "Margin Amount"
+              },
+              {
+               "qualifier": "TACR",
+               "options": [
+                "A"
+               ],
+               "description": "Total Accrued Interest Amount"
+              },
+              {
+               "qualifier": "TCOR",
+               "options": [
+                "A"
+               ],
+               "description": "Total Collateral Required"
+              },
+              {
+               "qualifier": "TPIN",
+               "options": [
+                "A"
+               ],
+               "description": "Total Pending Collateral In"
+              },
+              {
+               "qualifier": "TPOU",
+               "options": [
+                "A"
+               ],
+               "description": "Total Pending Collateral Out"
+              },
+              {
+               "qualifier": "TPRI",
+               "options": [
+                "A"
+               ],
+               "description": "Total of Principals"
+              },
+              {
+               "qualifier": "TRTE",
+               "options": [
+                "A"
+               ],
+               "description": "Termination Transaction Amount"
+              },
+              {
+               "qualifier": "TCFA",
+               "options": [
+                "A"
+               ],
+               "description": "Total Cash Failed Amount"
+              }
+             ],
+             "mandatory": true,
+             "repeated": true
+            }
+           },
+           {
+            "fld": {
+             "tag": "22F",
+             "name": "Indicator",
+             "format": [
+              {
+               "option": "F",
+               "format": ":4!c/[8c]/4!c",
+               "components": [
+                {
+                 "name": "Qualifier"
+                },
+                {
+                 "name": "Data Source Scheme"
+                },
+                {
+                 "name": "Indicator"
+                }
+               ]
+              }
+             ],
+             "qualifier": [
+              {
+               "qualifier": "MICO",
+               "options": [
+                "F"
+               ],
+               "description": "Method of Interest Computation Indicator"
+              },
+              {
+               "qualifier": "AUTA",
+               "options": [
+                "F"
+               ],
+               "description": "Automatic Allocation Indicator"
+              }
+             ],
+             "repeated": true
+            }
+           },
+           {
+            "fld": {
+             "tag": "92a",
+             "name": "Rate",
+             "format": [
+              {
+               "option": "A",
+               "format": ":4!c//[N]15d",
+               "components": [
+                {
+                 "name": "Qualifier"
+                },
+                {
+                 "name": "Sign"
+                },
+                {
+                 "name": "Rate"
+                }
+               ]
+              },
+              {
+               "option": "C",
+               "format": ":4!c/[8c]/24x",
+               "components": [
+                {
+                 "name": "Qualifier"
+                },
+                {
+                 "name": "Data Source Scheme"
+                },
+                {
+                 "name": "Rate Name"
+                }
+               ]
+              }
+             ],
+             "qualifier": [
+              {
+               "qualifier": "PRIC",
+               "options": [
+                "A",
+                "C"
+               ],
+               "description": "Pricing Rate"
+              },
+              {
+               "qualifier": "MARG",
+               "options": [
+                "A"
+               ],
+               "description": "Margin"
+              },
+              {
+               "qualifier": "RSPR",
+               "options": [
+                "A"
+               ],
+               "description": "Spread Rate"
+              }
+             ],
+             "repeated": true
+            }
+           },
+           {
+            "fld": {
+             "tag": "25D",
+             "name": "Status Code",
+             "format": [
+              {
+               "option": "D",
+               "format": ":4!c/[8c]/4!c",
+               "components": [
+                {
+                 "name": "Qualifier"
+                },
+                {
+                 "name": "Data Source Scheme"
+                },
+                {
+                 "name": "Status Code"
+                }
+               ]
+              }
+             ],
+             "qualifier": [
+              {
+               "qualifier": "TRAN",
+               "options": [
+                "D"
+               ],
+               "description": "Transaction Coverage Status"
+              },
+              {
+               "qualifier": "TREX",
+               "options": [
+                "D"
+               ],
+               "description": "Transaction Execution Status"
+              }
+             ],
+             "repeated": true
+            }
+           }
+          ]
+         }
+        }
+       ]
+      }
+     }
+    ]
+   }
+  }
+ ]
+}

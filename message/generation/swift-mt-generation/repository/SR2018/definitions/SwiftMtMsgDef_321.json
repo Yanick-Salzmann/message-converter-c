@@ -1,0 +1,1295 @@
+{
+ "uri": "urn::msg::swift::mt::SR2018::321",
+ "objs": [
+  {
+   "seq": {
+    "tag": "A",
+    "value": "General Information",
+    "mandatory": true,
+    "children": [
+     {
+      "fld": {
+       "tag": "16R",
+       "name": "Start of Block",
+       "format": [
+        {
+         "option": "R",
+         "format": "GENL",
+         "components": [
+          {
+           "name": "Blk",
+           "constant": "GENL"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "20C",
+       "name": "Reference",
+       "format": [
+        {
+         "option": "C",
+         "format": ":4!c//16x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Reference"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "SEME",
+         "options": [
+          "C"
+         ],
+         "description": "Sender's Message Reference"
+        },
+        {
+         "qualifier": "LDCR",
+         "options": [
+          "C"
+         ],
+         "description": "Deposit Common Reference"
+        }
+       ],
+       "mandatory": true,
+       "repeated": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "23G",
+       "name": "Function of the Message",
+       "format": [
+        {
+         "option": "G",
+         "format": "4!c[/4!c]",
+         "components": [
+          {
+           "name": "Function"
+          },
+          {
+           "name": "Subfunction"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "22H",
+       "name": "Indicator",
+       "format": [
+        {
+         "option": "H",
+         "format": ":4!c//4!c",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Indicator"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "TLDE",
+         "options": [
+          "H"
+         ],
+         "description": "Type of Loan/Deposit Event"
+        },
+        {
+         "qualifier": "BLOC",
+         "options": [
+          "H"
+         ],
+         "description": "Block Trade Indicator"
+        }
+       ],
+       "mandatory": true,
+       "repeated": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "99B",
+       "name": "Number Count",
+       "format": [
+        {
+         "option": "B",
+         "format": ":4!c//3!n",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Number"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "SETT",
+         "options": [
+          "B"
+         ],
+         "description": "Current Settlement Instruction Number"
+        },
+        {
+         "qualifier": "TOSE",
+         "options": [
+          "B"
+         ],
+         "description": "Total of Linked Settlement Instructions"
+        }
+       ],
+       "repeated": true
+      }
+     },
+     {
+      "seq": {
+       "tag": "A/A1",
+       "value": "Linkages",
+       "repeated": true,
+       "children": [
+        {
+         "fld": {
+          "tag": "16R",
+          "name": "Start of Block",
+          "format": [
+           {
+            "option": "R",
+            "format": "LINK",
+            "components": [
+             {
+              "name": "Blk",
+              "constant": "LINK"
+             }
+            ]
+           }
+          ],
+          "mandatory": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "13a",
+          "name": "Number Identification",
+          "format": [
+           {
+            "option": "A",
+            "format": ":4!c//3!c",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Number Id"
+             }
+            ]
+           },
+           {
+            "option": "B",
+            "format": ":4!c/[8c]/30x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Data Source Scheme"
+             },
+             {
+              "name": "Number"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "LINK",
+            "options": [
+             "A",
+             "B"
+            ],
+            "description": "Linked Message"
+           }
+          ]
+         }
+        },
+        {
+         "fld": {
+          "tag": "20C",
+          "name": "Reference",
+          "format": [
+           {
+            "option": "C",
+            "format": ":4!c//16x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Reference"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "POOL",
+            "options": [
+             "C"
+            ],
+            "description": "Pool Reference"
+           },
+           {
+            "qualifier": "PREV",
+            "options": [
+             "C"
+            ],
+            "description": "Previous Reference"
+           },
+           {
+            "qualifier": "RELA",
+            "options": [
+             "C"
+            ],
+            "description": "Related Reference"
+           }
+          ],
+          "mandatory": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "16S",
+          "name": "End of Block",
+          "format": [
+           {
+            "option": "S",
+            "format": "LINK",
+            "components": [
+             {
+              "name": "Blk",
+              "constant": "LINK"
+             }
+            ]
+           }
+          ],
+          "mandatory": true
+         }
+        }
+       ]
+      }
+     },
+     {
+      "fld": {
+       "tag": "16S",
+       "name": "End of Block",
+       "format": [
+        {
+         "option": "S",
+         "format": "GENL",
+         "components": [
+          {
+           "name": "Blk",
+           "constant": "GENL"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     }
+    ]
+   }
+  },
+  {
+   "seq": {
+    "tag": "B",
+    "value": "Loan/Deposit Details",
+    "mandatory": true,
+    "children": [
+     {
+      "fld": {
+       "tag": "16R",
+       "name": "Start of Block",
+       "format": [
+        {
+         "option": "R",
+         "format": "LDDET",
+         "components": [
+          {
+           "name": "Blk",
+           "constant": "LDDET"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "20C",
+       "name": "Reference",
+       "format": [
+        {
+         "option": "C",
+         "format": ":4!c//16x",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Reference"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "CONU",
+         "options": [
+          "C"
+         ],
+         "description": "Contract Number Reference"
+        }
+       ],
+       "mandatory": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "22H",
+       "name": "Indicator",
+       "format": [
+        {
+         "option": "H",
+         "format": ":4!c//4!c",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Indicator"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "DPLO",
+         "options": [
+          "H"
+         ],
+         "description": "Lender/Borrower Indicator"
+        },
+        {
+         "qualifier": "MICO",
+         "options": [
+          "H"
+         ],
+         "description": "Method of Interest Computation Indicator"
+        }
+       ],
+       "mandatory": true,
+       "repeated": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "98A",
+       "name": "Date/Time",
+       "format": [
+        {
+         "option": "A",
+         "format": ":4!c//8!n",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Date"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "TRAD",
+         "options": [
+          "A"
+         ],
+         "description": "Trade Date"
+        },
+        {
+         "qualifier": "VALU",
+         "options": [
+          "A"
+         ],
+         "description": "Value Date"
+        },
+        {
+         "qualifier": "MATU",
+         "options": [
+          "A"
+         ],
+         "description": "Maturity Date"
+        },
+        {
+         "qualifier": "INTR",
+         "options": [
+          "A"
+         ],
+         "description": "Next Interest Due Date"
+        },
+        {
+         "qualifier": "LDFP",
+         "options": [
+          "A"
+         ],
+         "description": "Last Day of First Interest Period"
+        }
+       ],
+       "mandatory": true,
+       "repeated": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "19A",
+       "name": "Amount",
+       "format": [
+        {
+         "option": "A",
+         "format": ":4!c//[N]3!a15d",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Sign"
+          },
+          {
+           "name": "Currency Code"
+          },
+          {
+           "name": "Amount"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "PRIN",
+         "options": [
+          "A"
+         ],
+         "description": "Principal Currency and Amount"
+        },
+        {
+         "qualifier": "SETT",
+         "options": [
+          "A"
+         ],
+         "description": "Currency and Amount to be Settled"
+        },
+        {
+         "qualifier": "NINT",
+         "options": [
+          "A"
+         ],
+         "description": "Currency and Next Interest Amount"
+        },
+        {
+         "qualifier": "CINT",
+         "options": [
+          "A"
+         ],
+         "description": "Currency and Current Interest Amount"
+        },
+        {
+         "qualifier": "RODI",
+         "options": [
+          "A"
+         ],
+         "description": "Currency and Increase/Decrease Amount"
+        }
+       ],
+       "mandatory": true,
+       "repeated": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "92A",
+       "name": "Rate",
+       "format": [
+        {
+         "option": "A",
+         "format": ":4!c//[N]15d",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Sign"
+          },
+          {
+           "name": "Rate"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "INTR",
+         "options": [
+          "A"
+         ],
+         "description": "Interest Rate"
+        }
+       ],
+       "mandatory": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "99B",
+       "name": "Number Count",
+       "format": [
+        {
+         "option": "B",
+         "format": ":4!c//3!n",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Number"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "DAAC",
+         "options": [
+          "B"
+         ],
+         "description": "Number of Days Accrued"
+        }
+       ]
+      }
+     },
+     {
+      "fld": {
+       "tag": "94C",
+       "name": "Payment Clearing Centre",
+       "format": [
+        {
+         "option": "C",
+         "format": ":4!c//2!a",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Country Code"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "COUN",
+         "options": [
+          "C"
+         ],
+         "description": "Country"
+        }
+       ]
+      }
+     },
+     {
+      "seq": {
+       "tag": "B/B1",
+       "value": "Loan/Deposit Parties 1",
+       "mandatory": true,
+       "children": [
+        {
+         "fld": {
+          "tag": "16R",
+          "name": "Start of Block",
+          "format": [
+           {
+            "option": "R",
+            "format": "LDPRTY1",
+            "components": [
+             {
+              "name": "Blk",
+              "constant": "LDPRTY1"
+             }
+            ]
+           }
+          ],
+          "mandatory": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "95a",
+          "name": "Party",
+          "format": [
+           {
+            "option": "P",
+            "format": ":4!c//4!a2!a2!c[3!c]",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Identifier Code"
+             }
+            ]
+           },
+           {
+            "option": "Q",
+            "format": ":4!c//4*35x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Name and Address"
+             }
+            ]
+           },
+           {
+            "option": "R",
+            "format": ":4!c/8c/34x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Data Source Scheme"
+             },
+             {
+              "name": "Proprietary Code"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "LDCO",
+            "options": [
+             "P",
+             "Q",
+             "R"
+            ],
+            "description": "Loan/Deposit Counterparty"
+           }
+          ],
+          "mandatory": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "16S",
+          "name": "End of Block",
+          "format": [
+           {
+            "option": "S",
+            "format": "LDPRTY1",
+            "components": [
+             {
+              "name": "Blk",
+              "constant": "LDPRTY1"
+             }
+            ]
+           }
+          ],
+          "mandatory": true
+         }
+        }
+       ]
+      }
+     },
+     {
+      "seq": {
+       "tag": "B/B2",
+       "value": "Loan/Deposit Parties 2",
+       "mandatory": true,
+       "children": [
+        {
+         "fld": {
+          "tag": "16R",
+          "name": "Start of Block",
+          "format": [
+           {
+            "option": "R",
+            "format": "LDPRTY2",
+            "components": [
+             {
+              "name": "Blk",
+              "constant": "LDPRTY2"
+             }
+            ]
+           }
+          ],
+          "mandatory": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "95a",
+          "name": "Party",
+          "format": [
+           {
+            "option": "P",
+            "format": ":4!c//4!a2!a2!c[3!c]",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Identifier Code"
+             }
+            ]
+           },
+           {
+            "option": "Q",
+            "format": ":4!c//4*35x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Name and Address"
+             }
+            ]
+           },
+           {
+            "option": "R",
+            "format": ":4!c/8c/34x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Data Source Scheme"
+             },
+             {
+              "name": "Proprietary Code"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "INVE",
+            "options": [
+             "P",
+             "Q",
+             "R"
+            ],
+            "description": "Investor"
+           }
+          ]
+         }
+        },
+        {
+         "fld": {
+          "tag": "97A",
+          "name": "Account",
+          "format": [
+           {
+            "option": "A",
+            "format": ":4!c//35x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Account Number"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "SAFE",
+            "options": [
+             "A"
+            ],
+            "description": "Safekeeping Account"
+           }
+          ],
+          "mandatory": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "16S",
+          "name": "End of Block",
+          "format": [
+           {
+            "option": "S",
+            "format": "LDPRTY2",
+            "components": [
+             {
+              "name": "Blk",
+              "constant": "LDPRTY2"
+             }
+            ]
+           }
+          ],
+          "mandatory": true
+         }
+        }
+       ]
+      }
+     },
+     {
+      "seq": {
+       "tag": "B/B3",
+       "value": "Other Parties",
+       "children": [
+        {
+         "fld": {
+          "tag": "16R",
+          "name": "Start of Block",
+          "format": [
+           {
+            "option": "R",
+            "format": "OTHRPRTY",
+            "components": [
+             {
+              "name": "Blk",
+              "constant": "OTHRPRTY"
+             }
+            ]
+           }
+          ],
+          "mandatory": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "95a",
+          "name": "Party",
+          "format": [
+           {
+            "option": "P",
+            "format": ":4!c//4!a2!a2!c[3!c]",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Identifier Code"
+             }
+            ]
+           },
+           {
+            "option": "Q",
+            "format": ":4!c//4*35x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Name and Address"
+             }
+            ]
+           },
+           {
+            "option": "R",
+            "format": ":4!c/8c/34x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Data Source Scheme"
+             },
+             {
+              "name": "Proprietary Code"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "EXBO",
+            "options": [
+             "P",
+             "Q",
+             "R"
+            ],
+            "description": "Executing Broker"
+           },
+           {
+            "qualifier": "MEOR",
+            "options": [
+             "P",
+             "Q",
+             "R"
+            ],
+            "description": "Originator of Message"
+           }
+          ],
+          "mandatory": true,
+          "repeated": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "16S",
+          "name": "End of Block",
+          "format": [
+           {
+            "option": "S",
+            "format": "OTHRPRTY",
+            "components": [
+             {
+              "name": "Blk",
+              "constant": "OTHRPRTY"
+             }
+            ]
+           }
+          ],
+          "mandatory": true
+         }
+        }
+       ]
+      }
+     },
+     {
+      "fld": {
+       "tag": "16S",
+       "name": "End of Block",
+       "format": [
+        {
+         "option": "S",
+         "format": "LDDET",
+         "components": [
+          {
+           "name": "Blk",
+           "constant": "LDDET"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     }
+    ]
+   }
+  },
+  {
+   "seq": {
+    "tag": "C",
+    "value": "Settlement Details",
+    "repeated": true,
+    "mandatory": true,
+    "children": [
+     {
+      "fld": {
+       "tag": "16R",
+       "name": "Start of Block",
+       "format": [
+        {
+         "option": "R",
+         "format": "SETDET",
+         "components": [
+          {
+           "name": "Blk",
+           "constant": "SETDET"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     },
+     {
+      "fld": {
+       "tag": "22H",
+       "name": "Indicator",
+       "format": [
+        {
+         "option": "H",
+         "format": ":4!c//4!c",
+         "components": [
+          {
+           "name": "Qualifier"
+          },
+          {
+           "name": "Indicator"
+          }
+         ]
+        }
+       ],
+       "qualifier": [
+        {
+         "qualifier": "PRIT",
+         "options": [
+          "H"
+         ],
+         "description": "Principal and Interest"
+        }
+       ],
+       "mandatory": true
+      }
+     },
+     {
+      "seq": {
+       "tag": "C/C1",
+       "value": "Settlement Parties",
+       "repeated": true,
+       "mandatory": true,
+       "children": [
+        {
+         "fld": {
+          "tag": "16R",
+          "name": "Start of Block",
+          "format": [
+           {
+            "option": "R",
+            "format": "SETPRTY",
+            "components": [
+             {
+              "name": "Blk",
+              "constant": "SETPRTY"
+             }
+            ]
+           }
+          ],
+          "mandatory": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "95a",
+          "name": "Party",
+          "format": [
+           {
+            "option": "P",
+            "format": ":4!c//4!a2!a2!c[3!c]",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Identifier Code"
+             }
+            ]
+           },
+           {
+            "option": "Q",
+            "format": ":4!c//4*35x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Name and Address"
+             }
+            ]
+           },
+           {
+            "option": "R",
+            "format": ":4!c/8c/34x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Data Source Scheme"
+             },
+             {
+              "name": "Proprietary Code"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "CDEA",
+            "options": [
+             "P",
+             "Q",
+             "R"
+            ],
+            "description": "Cash Delivery Agent"
+           },
+           {
+            "qualifier": "INT2",
+            "options": [
+             "P",
+             "Q",
+             "R"
+            ],
+            "description": "Second Intermediary"
+           },
+           {
+            "qualifier": "INTE",
+            "options": [
+             "P",
+             "Q",
+             "R"
+            ],
+            "description": "Intermediary"
+           },
+           {
+            "qualifier": "ACCW",
+            "options": [
+             "P",
+             "Q",
+             "R"
+            ],
+            "description": "Account With Institution"
+           },
+           {
+            "qualifier": "BENM",
+            "options": [
+             "P",
+             "Q",
+             "R"
+            ],
+            "description": "Beneficiary of Money"
+           },
+           {
+            "qualifier": "ALTE",
+            "options": [
+             "R"
+            ],
+            "description": "Alternate Identification"
+           }
+          ],
+          "mandatory": true,
+          "repeated": true
+         }
+        },
+        {
+         "fld": {
+          "tag": "97A",
+          "name": "Account",
+          "format": [
+           {
+            "option": "A",
+            "format": ":4!c//35x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Account Number"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "CASH",
+            "options": [
+             "A"
+            ],
+            "description": "Cash Account"
+           }
+          ]
+         }
+        },
+        {
+         "fld": {
+          "tag": "70C",
+          "name": "Narrative",
+          "format": [
+           {
+            "option": "C",
+            "format": ":4!c//4*35x",
+            "components": [
+             {
+              "name": "Qualifier"
+             },
+             {
+              "name": "Narrative"
+             }
+            ]
+           }
+          ],
+          "qualifier": [
+           {
+            "qualifier": "PACO",
+            "options": [
+             "C"
+            ],
+            "description": "Party Contact Narrative"
+           }
+          ]
+         }
+        },
+        {
+         "fld": {
+          "tag": "16S",
+          "name": "End of Block",
+          "format": [
+           {
+            "option": "S",
+            "format": "SETPRTY",
+            "components": [
+             {
+              "name": "Blk",
+              "constant": "SETPRTY"
+             }
+            ]
+           }
+          ],
+          "mandatory": true
+         }
+        }
+       ]
+      }
+     },
+     {
+      "fld": {
+       "tag": "16S",
+       "name": "End of Block",
+       "format": [
+        {
+         "option": "S",
+         "format": "SETDET",
+         "components": [
+          {
+           "name": "Blk",
+           "constant": "SETDET"
+          }
+         ]
+        }
+       ],
+       "mandatory": true
+      }
+     }
+    ]
+   }
+  }
+ ]
+}

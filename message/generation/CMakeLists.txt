@@ -3,4 +3,5 @@ project(message-generation)
 
 add_subdirectory(office-utils)
 add_subdirectory(http-utils)
-add_subdirectory(swift-mt)
+add_subdirectory(swift-mt-definition)
+add_subdirectory(swift-mt-generation)

@@ -1,4 +1,12 @@
 
+#include "repository/ISwiftMtParser.h"
+#include "SwiftMtMessage.pb.h"
+#include <vector>
+#include <string>
+#include "BaseErrorListener.h"
+#include "SwiftMtParser_MT110Lexer.h"
+
+
 // Generated from C:/programming/message-converter-c/message/generation/swift-mt-generation/repository/SR2018/grammars/SwiftMtParser_MT110.g4 by ANTLR 4.7.2
 
 #pragma once
@@ -31,6 +39,62 @@ public:
   virtual const std::vector<std::string>& getTokenNames() const override { return _tokenNames; }; // deprecated: use vocabulary instead.
   virtual const std::vector<std::string>& getRuleNames() const override;
   virtual antlr4::dfa::Vocabulary& getVocabulary() const override;
+
+
+  public:
+      typedef SwiftMtParser_MT110Lexer tLexer;
+      typedef SwiftMtParser_MT110Parser tParser;
+
+  private:
+      std::vector<std::string> _errors;
+
+  public:
+      [[nodiscard]] const std::vector<std::string>& errors() const { return _errors; }
+
+  private:
+      class DefaultErrorListener : public antlr4::BaseErrorListener {
+      private:
+          std::vector<std::string>& _errors;
+
+      public:
+          explicit DefaultErrorListener(std::vector<std::string>& errors) : _errors(errors) { }
+
+          void syntaxError(Recognizer *recognizer, antlr4::Token * offendingSymbol, size_t line, size_t charPositionInLine,
+                                 const std::string &msg, std::exception_ptr e) override {
+              _errors.push_back(msg);
+          }
+      };
+
+      DefaultErrorListener _error_listener { _errors };
+
+  public:
+      class Helper : public ISwiftMtParser {
+      public:
+          bool parse_message(const std::string& message, std::vector<std::string>& errors) override {
+              antlr4::ANTLRInputStream stream{message};
+              tLexer lexer{&stream};
+              antlr4::CommonTokenStream token_stream{&lexer};
+
+              tParser parser{&token_stream};
+              return parser.process(errors);
+          }
+      };
+
+  private:
+      bool process(std::vector<std::string>& errors) {
+          _errors.clear();
+          removeErrorListeners();
+          addErrorListener(&_error_listener);
+
+          message();
+          if(!_errors.empty()) {
+              errors.insert(errors.end(), _errors.begin(), _errors.end());
+              return false;
+          }
+
+          return true;
+      }
+  public:
 
 
   class MessageContext;

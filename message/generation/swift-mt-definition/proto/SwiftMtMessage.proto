@@ -4,4 +4,32 @@ package message.definition.swift.mt;
 
 message SwiftMtMessage {
     string uri = 1;
+    MessageText msg_text = 5;
+}
+
+message MessageText {
+    repeated Object objects = 1;
+}
+
+message Object {
+    oneof obj_oneof {
+        Sequence sequence = 1;
+        Field field = 5;
+    }
+}
+
+message Sequence {
+    string tag = 1;
+    repeated Object objects = 5;
+}
+
+message Field {
+    string tag = 1;
+    string qualifier = 2;
+    repeated Component components = 5;
+}
+
+message Component {
+    string name = 1;
+    string value = 5;
 }

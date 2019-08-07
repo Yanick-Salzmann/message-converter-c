@@ -5,6 +5,7 @@
     <mapping directory="$PROJECT_DIR$/message/generation/http-utils/curl" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/message/generation/http-utils/gumbo-query" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/message/generation/office-utils/xlnt" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/message/generation/swift-mt-generation/antlr4" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/utils/inja" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/utils/json" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/utils/spdlog" vcs="Git" />

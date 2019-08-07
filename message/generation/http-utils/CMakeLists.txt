@@ -12,7 +12,6 @@ add_subdirectory(curl)
 add_subdirectory(gumbo-query)
 
 pkg_check_modules(gumbo REQUIRED gumbo)
-MESSAGE("Found GUMBO: ${gumbo_VERSION}")
 
 include_directories(${gumbo_INCLUDEDIR})
 include_directories(${PROJECT_SOURCE_DIR}/curl/include)

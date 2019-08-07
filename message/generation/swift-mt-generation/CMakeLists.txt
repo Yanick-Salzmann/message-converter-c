@@ -4,8 +4,11 @@ project(swift-mt-generation)
 add_subdirectory(antlr4/runtime/Cpp)
 
 include_directories(antlr4/runtime/Cpp/runtime/src)
+include_directories(${PROJECT_SOURCE_DIR})
+include_directories(../swift-mt-definition/proto)
 
 find_package(java REQUIRED COMPONENTS Development)
+find_package(protobuf REQUIRED)
 
 execute_process(
         COMMAND ${Java_JAVAC_EXECUTABLE} -cp "jsoup-1.12.1.jar;." ${PROJECT_SOURCE_DIR}/helpers/java/MessageListHelper.java
@@ -20,6 +23,8 @@ execute_process(
 )
 
 string(REGEX MATCHALL "[n0-9][0-9][0-9]\r?\n" MESSAGE_TYPE_LIST ${MESSAGE_TYPES_RAW})
+
+#set(MESSAGE_TYPE_LIST "530;578;518;548")
 
 list(LENGTH MESSAGE_TYPE_LIST NUM_MESSAGE_TYPES)
 math(EXPR NUM_MESSAGE_TYPES "${NUM_MESSAGE_TYPES} - 1")
@@ -76,15 +81,17 @@ foreach (loop_var RANGE ${NUM_MESSAGE_TYPES})
             ${PROJECT_SOURCE_DIR}/repository/SR2018/parsers/SwiftMtParser_MT${MESSAGE_TYPE}Listener.h)
 endforeach ()
 
-set_source_files_properties(${GENERATED_PARSER_FILES}
-        PROPERTIES GENERATED TRUE)
+set_source_files_properties(${GENERATED_PARSER_FILES} PROPERTIES GENERATED TRUE)
 
 add_custom_target(swift-mt-generation-grammars ALL DEPENDS ${GRAMMAR_FILES})
 add_custom_target(swift-mt-generation-parsers ALL DEPENDS ${PARSER_FILES})
 add_dependencies(swift-mt-generation-parsers swift-mt-generation-grammars)
 add_dependencies(swift-mt-generation-parsers swift-mt-definition)
-add_library(swift-mt-generation STATIC ${GENERATED_PARSER_FILES})
-target_link_libraries(swift-mt-generation antlr4_shared)
+
+add_definitions("-DANTLR4CPP_STATIC")
+
+add_library(swift-mt-generation STATIC ${GENERATED_PARSER_FILES} repository/ISwiftMtParser.h ../swift-mt-definition/proto/SwiftMtMessage.pb.h ../swift-mt-definition/proto/SwiftMtMessage.pb.cc)
+target_link_libraries(swift-mt-generation antlr4_shared protobuf)
 
 option(MESSAGE_SWIFT_MT_GENERATE_PARSERS "Generate parsers for SWIFT MT (this takes a lot of time)" ON)
 

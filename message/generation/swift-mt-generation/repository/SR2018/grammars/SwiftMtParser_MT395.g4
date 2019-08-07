@@ -1,5 +1,79 @@
 grammar SwiftMtParser_MT395;
 
+@lexer::header {
+#include "repository/ISwiftMtParser.h"
+#include "SwiftMtMessage.pb.h"
+#include <vector>
+#include <string>
+#include "BaseErrorListener.h"
+}
+
+@parser::header {
+#include "repository/ISwiftMtParser.h"
+#include "SwiftMtMessage.pb.h"
+#include <vector>
+#include <string>
+#include "BaseErrorListener.h"
+#include "SwiftMtParser_MT395Lexer.h"
+}
+
+@parser::members {
+public:
+    typedef SwiftMtParser_MT395Lexer tLexer;
+    typedef SwiftMtParser_MT395Parser tParser;
+
+private:
+    std::vector<std::string> _errors;
+
+public:
+    [[nodiscard]] const std::vector<std::string>& errors() const { return _errors; }
+
+private:
+    class DefaultErrorListener : public antlr4::BaseErrorListener {
+    private:
+        std::vector<std::string>& _errors;
+
+    public:
+        explicit DefaultErrorListener(std::vector<std::string>& errors) : _errors(errors) { }
+
+        void syntaxError(Recognizer *recognizer, antlr4::Token * offendingSymbol, size_t line, size_t charPositionInLine,
+                               const std::string &msg, std::exception_ptr e) override {
+            _errors.push_back(msg);
+        }
+    };
+
+    DefaultErrorListener _error_listener { _errors };
+
+public:
+    class Helper : public ISwiftMtParser {
+    public:
+        bool parse_message(const std::string& message, std::vector<std::string>& errors) override {
+            antlr4::ANTLRInputStream stream{message};
+            tLexer lexer{&stream};
+            antlr4::CommonTokenStream token_stream{&lexer};
+
+            tParser parser{&token_stream};
+            return parser.process(errors);
+        }
+    };
+
+private:
+    bool process(std::vector<std::string>& errors) {
+        _errors.clear();
+        removeErrorListeners();
+        addErrorListener(&_error_listener);
+
+        message();
+        if(!_errors.empty()) {
+            errors.insert(errors.end(), _errors.begin(), _errors.end());
+            return false;
+        }
+
+        return true;
+    }
+public:
+}
+
 message                : bh ah uh? mt tr? EOF;
 bh                     : TAG_BH bh_content RBRACE ;
 bh_content             : ~(RBRACE)+ ;

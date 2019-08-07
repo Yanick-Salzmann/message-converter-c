@@ -72,7 +72,6 @@ fld_90a_B2b            : fld_90a_B2b_A | fld_90a_B2b_B ;
 fld_22F_B2b            : fld_22F_B2b_F ;
 fld_16S_B2b            : START_OF_FIELD '16S:' ~(START_OF_FIELD)+ ;
 fld_22a_B2             : fld_22a_B2_F | fld_22a_B2_H ;
-fld_98a_B2             : fld_98a_B2_A | fld_98a_B2_C ;
 fld_16R_B2c            : START_OF_FIELD '16R:' ~(START_OF_FIELD)+ ;
 fld_95a_B2c            : fld_95a_B2c_L | fld_95a_B2c_P | fld_95a_B2c_Q | fld_95a_B2c_R | fld_95a_B2c_S ;
 fld_97a_B2c            : fld_97a_B2c_A | fld_97a_B2c_B ;
@@ -163,9 +162,6 @@ fld_22F_B2b_F          : START_OF_FIELD '22F:' ~(START_OF_FIELD)+ ;
 
 fld_22a_B2_F           : START_OF_FIELD '22F:' ~(START_OF_FIELD)+ ;
 fld_22a_B2_H           : START_OF_FIELD '22H:' ~(START_OF_FIELD)+ ;
-
-fld_98a_B2_A           : START_OF_FIELD '98A:' ~(START_OF_FIELD)+ ;
-fld_98a_B2_C           : START_OF_FIELD '98C:' ~(START_OF_FIELD)+ ;
 
 fld_95a_B2c_L          : START_OF_FIELD '95L:' ~(START_OF_FIELD)+ ;
 fld_95a_B2c_P          : START_OF_FIELD '95P:' ~(START_OF_FIELD)+ ;

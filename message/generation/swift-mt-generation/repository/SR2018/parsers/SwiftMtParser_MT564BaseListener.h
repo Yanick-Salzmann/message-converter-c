@@ -1,5 +1,5 @@
 
-// Generated from C:/programming/message-converter-c/message/generation/swift-mt-generation/repository/SR2018/grammars\SwiftMtParser_MT564.g4 by ANTLR 4.7.2
+// Generated from C:/programming/message-converter-c/message/generation/swift-mt-generation/repository/SR2018/grammars/SwiftMtParser_MT564.g4 by ANTLR 4.7.2
 
 #pragma once
 
@@ -8,7 +8,7 @@
 #include "SwiftMtParser_MT564Listener.h"
 
 
-namespace message::definition::swift::mt::sr2018 {
+namespace message::definition::swift::mt::parsers::sr2018 {
 
 /**
  * This class provides an empty implementation of SwiftMtParser_MT564Listener,
@@ -965,4 +965,4 @@ public:
 
 };
 
-}  // namespace message::definition::swift::mt::sr2018
+}  // namespace message::definition::swift::mt::parsers::sr2018

@@ -1,5 +1,5 @@
 
-// Generated from C:/programming/message-converter-c/message/generation/swift-mt-generation/repository/SR2018/grammars\SwiftMtParser_MT515.g4 by ANTLR 4.7.2
+// Generated from C:/programming/message-converter-c/message/generation/swift-mt-generation/repository/SR2018/grammars/SwiftMtParser_MT515.g4 by ANTLR 4.7.2
 
 
 #include "SwiftMtParser_MT515Listener.h"
@@ -8,7 +8,7 @@
 
 
 using namespace antlrcpp;
-using namespace message::definition::swift::mt::sr2018;
+using namespace message::definition::swift::mt::parsers::sr2018;
 using namespace antlr4;
 
 SwiftMtParser_MT515Parser::SwiftMtParser_MT515Parser(TokenStream *input) : Parser(input) {

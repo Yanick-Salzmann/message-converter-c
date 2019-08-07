@@ -17,10 +17,6 @@ namespace message::generation::swift::mt {
 
     }
 
-    void StandardRepository::generate_definitions() {
-        for_each_message(std::bind(&StandardRepository::process_message_definition, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
-    }
-
     void StandardRepository::process_message_definition(const std::string &mt, const std::string &description, const std::string &href) {
         log->info("MT{} -> {}", mt, href);
 
@@ -131,5 +127,9 @@ namespace message::generation::swift::mt {
         }
 
         return result[1].str();
+    }
+
+    void StandardRepository::load_message_definition(const std::string &mt) {
+        process_message_definition(mt, "Desc", std::string("finmt").append(mt).append(".htm"));
     }
 }

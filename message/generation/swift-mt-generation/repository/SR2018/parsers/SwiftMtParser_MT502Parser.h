@@ -1,5 +1,5 @@
 
-// Generated from C:/programming/message-converter-c/message/generation/swift-mt-generation/repository/SR2018/grammars\SwiftMtParser_MT502.g4 by ANTLR 4.7.2
+// Generated from C:/programming/message-converter-c/message/generation/swift-mt-generation/repository/SR2018/grammars/SwiftMtParser_MT502.g4 by ANTLR 4.7.2
 
 #pragma once
 
@@ -7,7 +7,7 @@
 #include "antlr4-runtime.h"
 
 
-namespace message::definition::swift::mt::sr2018 {
+namespace message::definition::swift::mt::parsers::sr2018 {
 
 
 class  SwiftMtParser_MT502Parser : public antlr4::Parser {
@@ -3583,4 +3583,4 @@ private:
   static Initializer _init;
 };
 
-}  // namespace message::definition::swift::mt::sr2018
+}  // namespace message::definition::swift::mt::parsers::sr2018

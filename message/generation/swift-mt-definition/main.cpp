@@ -42,7 +42,18 @@ void print_field_options(const std::string &cur_seq, std::stringstream &stream, 
             seq_tag = seq_tag.substr(idx_slash + 1);
         }
 
+        std::map<std::string, int> field_map{};
         for (const auto &child : obj.seq().children()) {
+            if(child.has_fld()) {
+                const auto tag = child.fld().tag();
+                if(field_map.find(tag) != field_map.end()) {
+                    // TODO: Add suffix like fld_95P_A_P_1
+                    continue;
+                }
+
+                field_map.emplace(tag, 1);
+            }
+
             print_field_options(seq_tag, stream, child);
         }
     } else {
@@ -132,11 +143,21 @@ void print_sequences(std::stringstream &stream, const message::definition::swift
 
 void print_field(const std::string &cur_seq, std::stringstream &stream, const message::definition::swift::mt::ObjDef &obj) {
     if (obj.has_seq()) {
+        std::map<std::string, int> field_map{};
         for (const auto &child : obj.seq().children()) {
             auto seq_tag = obj.seq().tag();
             auto idx_slash = seq_tag.rfind('/');
             if (idx_slash != std::string::npos) {
                 seq_tag = seq_tag.substr(idx_slash + 1);
+            }
+
+            if(child.has_fld()) {
+                const auto tag = child.fld().tag();
+                if(field_map.find(tag) != field_map.end()) {
+                    continue;
+                }
+
+                field_map.emplace(tag, 1);
             }
 
             print_field(seq_tag, stream, child);
@@ -147,10 +168,11 @@ void print_field(const std::string &cur_seq, std::stringstream &stream, const me
 }
 
 int main(int argc, const char *argv[]) {
-    std::string sr = argc > 1 ? argv[1] : "SR2018";
-    std::string url = argc > 2 ? argv[2] : "https://www2.swift.com/knowledgecentre/rest/v1/publications/usgf_20180720/3.0/";
-    std::string local_dir = argc > 3 ? argv[3] : ".";
-    std::string cur_dir = argc > 4 ? argv[4] : ".";
+    std::string mt = argv[1];
+    std::string sr = argc > 2 ? argv[2] : "SR2018";
+    std::string url = argc > 3 ? argv[3] : "https://www2.swift.com/knowledgecentre/rest/v1/publications/usgf_20180720/3.0/";
+    std::string local_dir = argc > 4 ? argv[4] : ".";
+    std::string cur_dir = argc > 5 ? argv[5] : ".";
 
     auto grammar_dir = std::filesystem::path{local_dir};
     grammar_dir /= sr;
@@ -162,7 +184,7 @@ int main(int argc, const char *argv[]) {
 
     message::generation::swift::mt::StandardRepository repo{sr, url, local_dir};
 
-    repo.generate_definitions();
+    repo.load_message_definition(mt);
 
     for (const auto &pair : repo.message_cache()) {
         const auto defn = pair.second;

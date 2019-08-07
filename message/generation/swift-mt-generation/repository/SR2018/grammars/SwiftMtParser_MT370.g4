@@ -37,7 +37,6 @@ fld_16R_A2             : START_OF_FIELD '16R:' ~(START_OF_FIELD)+ ;
 fld_95a_A2             : fld_95a_A2_P | fld_95a_A2_Q | fld_95a_A2_R ;
 fld_97A_A2             : fld_97A_A2_A ;
 fld_16S_A2             : START_OF_FIELD '16S:' ~(START_OF_FIELD)+ ;
-fld_95P_A              : fld_95P_A_P ;
 fld_16S_A              : START_OF_FIELD '16S:' ~(START_OF_FIELD)+ ;
 fld_16R_B              : START_OF_FIELD '16R:' ~(START_OF_FIELD)+ ;
 fld_20C_B              : fld_20C_B_C ;
@@ -73,8 +72,6 @@ fld_95a_A2_Q           : START_OF_FIELD '95Q:' ~(START_OF_FIELD)+ ;
 fld_95a_A2_R           : START_OF_FIELD '95R:' ~(START_OF_FIELD)+ ;
 
 fld_97A_A2_A           : START_OF_FIELD '97A:' ~(START_OF_FIELD)+ ;
-
-fld_95P_A_P            : START_OF_FIELD '95P:' ~(START_OF_FIELD)+ ;
 
 fld_20C_B_C            : START_OF_FIELD '20C:' ~(START_OF_FIELD)+ ;
 

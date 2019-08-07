@@ -32,7 +32,7 @@ namespace message::generation::swift::mt {
     public:
         StandardRepository(std::string sr, std::string base_url, std::string local_directory);
 
-        void generate_definitions();
+        void load_message_definition(const std::string& sr);
 
         definition::swift::mt::SwiftMtMessageDefinition message_definition(const std::string& mt) {
             return _message_cache.at(mt);

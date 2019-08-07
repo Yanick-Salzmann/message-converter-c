@@ -16,3 +16,6 @@
 [submodule "utils/spdlog"]
 	path = utils/spdlog
 	url = https://github.com/gabime/spdlog.git
+[submodule "message/generation/swift-mt-generation/antlr4"]
+	path = message/generation/swift-mt-generation/antlr4
+	url = https://github.com/antlr/antlr4.git

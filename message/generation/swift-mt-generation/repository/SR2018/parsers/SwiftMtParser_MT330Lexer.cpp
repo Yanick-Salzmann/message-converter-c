@@ -1,5 +1,5 @@
 
-// Generated from C:/programming/message-converter-c/message/generation/swift-mt-generation/repository/SR2018/grammars\SwiftMtParser_MT330.g4 by ANTLR 4.7.2
+// Generated from C:/programming/message-converter-c/message/generation/swift-mt-generation/repository/SR2018/grammars/SwiftMtParser_MT330.g4 by ANTLR 4.7.2
 
 
 #include "SwiftMtParser_MT330Lexer.h"
@@ -7,7 +7,7 @@
 
 using namespace antlr4;
 
-using namespace message::definition::swift::mt::sr2018;
+using namespace message::definition::swift::mt::parsers::sr2018;
 
 SwiftMtParser_MT330Lexer::SwiftMtParser_MT330Lexer(CharStream *input) : Lexer(input) {
   _interpreter = new atn::LexerATNSimulator(this, _atn, _decisionToDFA, _sharedContextCache);

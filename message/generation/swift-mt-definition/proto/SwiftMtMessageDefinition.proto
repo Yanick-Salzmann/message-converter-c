@@ -26,6 +26,7 @@ message SeqDef {
 message CmpDef {
     string name = 1;
     string constant = 5;
+    string format = 10;
 }
 
 message OptnFrmt {
@@ -47,4 +48,24 @@ message FldDef {
     repeated FldQlfr qualifier = 15;
     bool mandatory = 20;
     bool repeated = 25;
+}
+
+message ComponentFormat {
+    enum CharType {
+        NUMERIC = 0;
+        ALPHA = 1;
+        ALPHA_NUMERIC = 2;
+        HEX = 3;
+        CHARSET_X = 4;
+        CHARSET_Y = 5;
+        CHARSET_Z = 6;
+        DECIMAL = 7;
+        BLANK = 8;
+    }
+
+    int32 min_length = 1;
+    int32 max_length = 2;
+    bool fixed_length = 3;
+    int32 line_count = 4;
+    CharType type = 5;
 }

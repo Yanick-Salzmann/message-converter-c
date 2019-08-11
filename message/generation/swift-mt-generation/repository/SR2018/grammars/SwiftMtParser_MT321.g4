@@ -47,21 +47,25 @@ private:
 public:
     class Helper : public ISwiftMtParser {
     public:
-        bool parse_message(const std::string& message, std::vector<std::string>& errors) override {
+        bool parse_message(const std::string& message, std::vector<std::string>& errors, SwiftMtMessage& out_message) override {
             antlr4::ANTLRInputStream stream{message};
             tLexer lexer{&stream};
             antlr4::CommonTokenStream token_stream{&lexer};
 
             tParser parser{&token_stream};
-            return parser.process(errors);
+            return parser.process(errors, out_message);
         }
     };
 
 private:
-    bool process(std::vector<std::string>& errors) {
+    SwiftMtMessage _message_builder{};
+
+    bool process(std::vector<std::string>& errors, SwiftMtMessage& out_message) {
         _errors.clear();
         removeErrorListeners();
         addErrorListener(&_error_listener);
+
+        _message_builder = SwiftMtMessage{};
 
         message();
         if(!_errors.empty()) {
@@ -69,9 +73,14 @@ private:
             return false;
         }
 
+        out_message = _message_builder;
         return true;
     }
 public:
+
+    [[nodiscard]] SwiftMtMessage parsed_message() const {
+        return _message_builder;
+    }
 }
 
 message                : bh ah uh? mt tr? EOF;
@@ -90,107 +99,300 @@ sys_element            : LBRACE sys_element_key COLON sys_element_content RBRACE
 sys_element_key        : ~( COLON | RBRACE )+ ;
 sys_element_content    : ~( RBRACE )+ ;
 
-mt                     : TAG_MT seq_A seq_B seq_C+  MT_END;
+mt                     returns [message::definition::swift::mt::MessageText elem] @after { _message_builder.mutable_msg_text()->MergeFrom($elem); }
+                       : TAG_MT seq_A seq_B seq_C+  MT_END;
 
-seq_A                  : fld_16R_A fld_20C_A+ fld_23G_A fld_22H_A+ fld_99B_A* seq_A1* fld_16S_A ;
-seq_A1                 : fld_16R_A1 fld_13a_A1? fld_20C_A1 fld_16S_A1 ;
-seq_B                  : fld_16R_B fld_20C_B fld_22H_B+ fld_98A_B+ fld_19A_B+ fld_92A_B fld_99B_B? fld_94C_B? seq_B1 seq_B2 seq_B3? fld_16S_B ;
-seq_B1                 : fld_16R_B1 fld_95a_B1 fld_16S_B1 ;
-seq_B2                 : fld_16R_B2 fld_95a_B2? fld_97A_B2 fld_16S_B2 ;
-seq_B3                 : fld_16R_B3 fld_95a_B3+ fld_16S_B3 ;
-seq_C                  : fld_16R_C fld_22H_C seq_C1+ fld_16S_C ;
-seq_C1                 : fld_16R_C1 fld_95a_C1+ fld_97A_C1? fld_70C_C1? fld_16S_C1 ;
+seq_A                  returns [message::definition::swift::mt::Sequence elem] @init { $elem.set_tag("A"); } :
+                       fld_16R_A { $elem.mutable_objects()->Add()->mutable_field()->MergeFrom($fld_16R_A.fld); }
+                       fld_20C_A+ { $elem.mutable_objects()->Add()->mutable_field()->MergeFrom($fld_20C_A.fld); }
+                       fld_23G_A { $elem.mutable_objects()->Add()->mutable_field()->MergeFrom($fld_23G_A.fld); }
+                       fld_22H_A+ { $elem.mutable_objects()->Add()->mutable_field()->MergeFrom($fld_22H_A.fld); }
+                       fld_99B_A* { $elem.mutable_objects()->Add()->mutable_field()->MergeFrom($fld_99B_A.fld); }
+                       seq_A1* { $elem.mutable_objects()->Add()->mutable_sequence()->MergeFrom($seq_A1.elem); }
+                       fld_16S_A { $elem.mutable_objects()->Add()->mutable_field()->MergeFrom($fld_16S_A.fld); }
+                       ;
+
+seq_A1                 returns [message::definition::swift::mt::Sequence elem] @init { $elem.set_tag("A1"); } :
+                       fld_16R_A1 { $elem.mutable_objects()->Add()->mutable_field()->MergeFrom($fld_16R_A1.fld); }
+                       fld_13a_A1? { $elem.mutable_objects()->Add()->mutable_field()->MergeFrom($fld_13a_A1.fld); }
+                       fld_20C_A1 { $elem.mutable_objects()->Add()->mutable_field()->MergeFrom($fld_20C_A1.fld); }
+                       fld_16S_A1 { $elem.mutable_objects()->Add()->mutable_field()->MergeFrom($fld_16S_A1.fld); }
+                       ;
+
+seq_B                  returns [message::definition::swift::mt::Sequence elem] @init { $elem.set_tag("B"); } :
+                       fld_16R_B { $elem.mutable_objects()->Add()->mutable_field()->MergeFrom($fld_16R_B.fld); }
+                       fld_20C_B { $elem.mutable_objects()->Add()->mutable_field()->MergeFrom($fld_20C_B.fld); }
+                       fld_22H_B+ { $elem.mutable_objects()->Add()->mutable_field()->MergeFrom($fld_22H_B.fld); }
+                       fld_98A_B+ { $elem.mutable_objects()->Add()->mutable_field()->MergeFrom($fld_98A_B.fld); }
+                       fld_19A_B+ { $elem.mutable_objects()->Add()->mutable_field()->MergeFrom($fld_19A_B.fld); }
+                       fld_92A_B { $elem.mutable_objects()->Add()->mutable_field()->MergeFrom($fld_92A_B.fld); }
+                       fld_99B_B? { $elem.mutable_objects()->Add()->mutable_field()->MergeFrom($fld_99B_B.fld); }
+                       fld_94C_B? { $elem.mutable_objects()->Add()->mutable_field()->MergeFrom($fld_94C_B.fld); }
+                       seq_B1 { $elem.mutable_objects()->Add()->mutable_sequence()->MergeFrom($seq_B1.elem); }
+                       seq_B2 { $elem.mutable_objects()->Add()->mutable_sequence()->MergeFrom($seq_B2.elem); }
+                       seq_B3? { $elem.mutable_objects()->Add()->mutable_sequence()->MergeFrom($seq_B3.elem); }
+                       fld_16S_B { $elem.mutable_objects()->Add()->mutable_field()->MergeFrom($fld_16S_B.fld); }
+                       ;
+
+seq_B1                 returns [message::definition::swift::mt::Sequence elem] @init { $elem.set_tag("B1"); } :
+                       fld_16R_B1 { $elem.mutable_objects()->Add()->mutable_field()->MergeFrom($fld_16R_B1.fld); }
+                       fld_95a_B1 { $elem.mutable_objects()->Add()->mutable_field()->MergeFrom($fld_95a_B1.fld); }
+                       fld_16S_B1 { $elem.mutable_objects()->Add()->mutable_field()->MergeFrom($fld_16S_B1.fld); }
+                       ;
+
+seq_B2                 returns [message::definition::swift::mt::Sequence elem] @init { $elem.set_tag("B2"); } :
+                       fld_16R_B2 { $elem.mutable_objects()->Add()->mutable_field()->MergeFrom($fld_16R_B2.fld); }
+                       fld_95a_B2? { $elem.mutable_objects()->Add()->mutable_field()->MergeFrom($fld_95a_B2.fld); }
+                       fld_97A_B2 { $elem.mutable_objects()->Add()->mutable_field()->MergeFrom($fld_97A_B2.fld); }
+                       fld_16S_B2 { $elem.mutable_objects()->Add()->mutable_field()->MergeFrom($fld_16S_B2.fld); }
+                       ;
+
+seq_B3                 returns [message::definition::swift::mt::Sequence elem] @init { $elem.set_tag("B3"); } :
+                       fld_16R_B3 { $elem.mutable_objects()->Add()->mutable_field()->MergeFrom($fld_16R_B3.fld); }
+                       fld_95a_B3+ { $elem.mutable_objects()->Add()->mutable_field()->MergeFrom($fld_95a_B3.fld); }
+                       fld_16S_B3 { $elem.mutable_objects()->Add()->mutable_field()->MergeFrom($fld_16S_B3.fld); }
+                       ;
+
+seq_C                  returns [message::definition::swift::mt::Sequence elem] @init { $elem.set_tag("C"); } :
+                       fld_16R_C { $elem.mutable_objects()->Add()->mutable_field()->MergeFrom($fld_16R_C.fld); }
+                       fld_22H_C { $elem.mutable_objects()->Add()->mutable_field()->MergeFrom($fld_22H_C.fld); }
+                       seq_C1+ { $elem.mutable_objects()->Add()->mutable_sequence()->MergeFrom($seq_C1.elem); }
+                       fld_16S_C { $elem.mutable_objects()->Add()->mutable_field()->MergeFrom($fld_16S_C.fld); }
+                       ;
+
+seq_C1                 returns [message::definition::swift::mt::Sequence elem] @init { $elem.set_tag("C1"); } :
+                       fld_16R_C1 { $elem.mutable_objects()->Add()->mutable_field()->MergeFrom($fld_16R_C1.fld); }
+                       fld_95a_C1+ { $elem.mutable_objects()->Add()->mutable_field()->MergeFrom($fld_95a_C1.fld); }
+                       fld_97A_C1? { $elem.mutable_objects()->Add()->mutable_field()->MergeFrom($fld_97A_C1.fld); }
+                       fld_70C_C1? { $elem.mutable_objects()->Add()->mutable_field()->MergeFrom($fld_70C_C1.fld); }
+                       fld_16S_C1 { $elem.mutable_objects()->Add()->mutable_field()->MergeFrom($fld_16S_C1.fld); }
+                       ;
 
 
-fld_16R_A              : START_OF_FIELD '16R:' ~(START_OF_FIELD)+ ;
-fld_20C_A              : fld_20C_A_C ;
-fld_23G_A              : fld_23G_A_G ;
-fld_22H_A              : fld_22H_A_H ;
-fld_99B_A              : fld_99B_A_B ;
-fld_16R_A1             : START_OF_FIELD '16R:' ~(START_OF_FIELD)+ ;
-fld_13a_A1             : fld_13a_A1_A | fld_13a_A1_B ;
-fld_20C_A1             : fld_20C_A1_C ;
-fld_16S_A1             : START_OF_FIELD '16S:' ~(START_OF_FIELD)+ ;
-fld_16S_A              : START_OF_FIELD '16S:' ~(START_OF_FIELD)+ ;
-fld_16R_B              : START_OF_FIELD '16R:' ~(START_OF_FIELD)+ ;
-fld_20C_B              : fld_20C_B_C ;
-fld_22H_B              : fld_22H_B_H ;
-fld_98A_B              : fld_98A_B_A ;
-fld_19A_B              : fld_19A_B_A ;
-fld_92A_B              : fld_92A_B_A ;
-fld_99B_B              : fld_99B_B_B ;
-fld_94C_B              : fld_94C_B_C ;
-fld_16R_B1             : START_OF_FIELD '16R:' ~(START_OF_FIELD)+ ;
-fld_95a_B1             : fld_95a_B1_P | fld_95a_B1_Q | fld_95a_B1_R ;
-fld_16S_B1             : START_OF_FIELD '16S:' ~(START_OF_FIELD)+ ;
-fld_16R_B2             : START_OF_FIELD '16R:' ~(START_OF_FIELD)+ ;
-fld_95a_B2             : fld_95a_B2_P | fld_95a_B2_Q | fld_95a_B2_R ;
-fld_97A_B2             : fld_97A_B2_A ;
-fld_16S_B2             : START_OF_FIELD '16S:' ~(START_OF_FIELD)+ ;
-fld_16R_B3             : START_OF_FIELD '16R:' ~(START_OF_FIELD)+ ;
-fld_95a_B3             : fld_95a_B3_P | fld_95a_B3_Q | fld_95a_B3_R ;
-fld_16S_B3             : START_OF_FIELD '16S:' ~(START_OF_FIELD)+ ;
-fld_16S_B              : START_OF_FIELD '16S:' ~(START_OF_FIELD)+ ;
-fld_16R_C              : START_OF_FIELD '16R:' ~(START_OF_FIELD)+ ;
-fld_22H_C              : fld_22H_C_H ;
-fld_16R_C1             : START_OF_FIELD '16R:' ~(START_OF_FIELD)+ ;
-fld_95a_C1             : fld_95a_C1_P | fld_95a_C1_Q | fld_95a_C1_R ;
-fld_97A_C1             : fld_97A_C1_A ;
-fld_70C_C1             : fld_70C_C1_C ;
-fld_16S_C1             : START_OF_FIELD '16S:' ~(START_OF_FIELD)+ ;
-fld_16S_C              : START_OF_FIELD '16S:' ~(START_OF_FIELD)+ ;
+
+fld_16R_A              returns [message::definition::swift::mt::Field fld] @init { $fld.set_tag("16R"); } : 
+                       START_OF_FIELD '16R:' ~(START_OF_FIELD)+;
+
+fld_20C_A              returns [message::definition::swift::mt::Field fld]  :
+                       fld_20C_A_C { $fld.MergeFrom($fld_20C_A_C.fld); }
+                       ;
+
+fld_23G_A              returns [message::definition::swift::mt::Field fld]  :
+                       fld_23G_A_G { $fld.MergeFrom($fld_23G_A_G.fld); }
+                       ;
+
+fld_22H_A              returns [message::definition::swift::mt::Field fld]  :
+                       fld_22H_A_H { $fld.MergeFrom($fld_22H_A_H.fld); }
+                       ;
+
+fld_99B_A              returns [message::definition::swift::mt::Field fld]  :
+                       fld_99B_A_B { $fld.MergeFrom($fld_99B_A_B.fld); }
+                       ;
+
+fld_16R_A1             returns [message::definition::swift::mt::Field fld] @init { $fld.set_tag("16R"); } : 
+                       START_OF_FIELD '16R:' ~(START_OF_FIELD)+;
+
+fld_13a_A1             returns [message::definition::swift::mt::Field fld]  :
+                         fld_13a_A1_A { $fld.MergeFrom($fld_13a_A1_A.fld); }
+                       | fld_13a_A1_B { $fld.MergeFrom($fld_13a_A1_B.fld); }
+                       ;
+
+fld_20C_A1             returns [message::definition::swift::mt::Field fld]  :
+                       fld_20C_A1_C { $fld.MergeFrom($fld_20C_A1_C.fld); }
+                       ;
+
+fld_16S_A1             returns [message::definition::swift::mt::Field fld] @init { $fld.set_tag("16S"); } : 
+                       START_OF_FIELD '16S:' ~(START_OF_FIELD)+;
+
+fld_16S_A              returns [message::definition::swift::mt::Field fld] @init { $fld.set_tag("16S"); } : 
+                       START_OF_FIELD '16S:' ~(START_OF_FIELD)+;
+
+fld_16R_B              returns [message::definition::swift::mt::Field fld] @init { $fld.set_tag("16R"); } : 
+                       START_OF_FIELD '16R:' ~(START_OF_FIELD)+;
+
+fld_20C_B              returns [message::definition::swift::mt::Field fld]  :
+                       fld_20C_B_C { $fld.MergeFrom($fld_20C_B_C.fld); }
+                       ;
+
+fld_22H_B              returns [message::definition::swift::mt::Field fld]  :
+                       fld_22H_B_H { $fld.MergeFrom($fld_22H_B_H.fld); }
+                       ;
+
+fld_98A_B              returns [message::definition::swift::mt::Field fld]  :
+                       fld_98A_B_A { $fld.MergeFrom($fld_98A_B_A.fld); }
+                       ;
+
+fld_19A_B              returns [message::definition::swift::mt::Field fld]  :
+                       fld_19A_B_A { $fld.MergeFrom($fld_19A_B_A.fld); }
+                       ;
+
+fld_92A_B              returns [message::definition::swift::mt::Field fld]  :
+                       fld_92A_B_A { $fld.MergeFrom($fld_92A_B_A.fld); }
+                       ;
+
+fld_99B_B              returns [message::definition::swift::mt::Field fld]  :
+                       fld_99B_B_B { $fld.MergeFrom($fld_99B_B_B.fld); }
+                       ;
+
+fld_94C_B              returns [message::definition::swift::mt::Field fld]  :
+                       fld_94C_B_C { $fld.MergeFrom($fld_94C_B_C.fld); }
+                       ;
+
+fld_16R_B1             returns [message::definition::swift::mt::Field fld] @init { $fld.set_tag("16R"); } : 
+                       START_OF_FIELD '16R:' ~(START_OF_FIELD)+;
+
+fld_95a_B1             returns [message::definition::swift::mt::Field fld]  :
+                         fld_95a_B1_P { $fld.MergeFrom($fld_95a_B1_P.fld); }
+                       | fld_95a_B1_Q { $fld.MergeFrom($fld_95a_B1_Q.fld); }
+                       | fld_95a_B1_R { $fld.MergeFrom($fld_95a_B1_R.fld); }
+                       ;
+
+fld_16S_B1             returns [message::definition::swift::mt::Field fld] @init { $fld.set_tag("16S"); } : 
+                       START_OF_FIELD '16S:' ~(START_OF_FIELD)+;
+
+fld_16R_B2             returns [message::definition::swift::mt::Field fld] @init { $fld.set_tag("16R"); } : 
+                       START_OF_FIELD '16R:' ~(START_OF_FIELD)+;
+
+fld_95a_B2             returns [message::definition::swift::mt::Field fld]  :
+                         fld_95a_B2_P { $fld.MergeFrom($fld_95a_B2_P.fld); }
+                       | fld_95a_B2_Q { $fld.MergeFrom($fld_95a_B2_Q.fld); }
+                       | fld_95a_B2_R { $fld.MergeFrom($fld_95a_B2_R.fld); }
+                       ;
+
+fld_97A_B2             returns [message::definition::swift::mt::Field fld]  :
+                       fld_97A_B2_A { $fld.MergeFrom($fld_97A_B2_A.fld); }
+                       ;
+
+fld_16S_B2             returns [message::definition::swift::mt::Field fld] @init { $fld.set_tag("16S"); } : 
+                       START_OF_FIELD '16S:' ~(START_OF_FIELD)+;
+
+fld_16R_B3             returns [message::definition::swift::mt::Field fld] @init { $fld.set_tag("16R"); } : 
+                       START_OF_FIELD '16R:' ~(START_OF_FIELD)+;
+
+fld_95a_B3             returns [message::definition::swift::mt::Field fld]  :
+                         fld_95a_B3_P { $fld.MergeFrom($fld_95a_B3_P.fld); }
+                       | fld_95a_B3_Q { $fld.MergeFrom($fld_95a_B3_Q.fld); }
+                       | fld_95a_B3_R { $fld.MergeFrom($fld_95a_B3_R.fld); }
+                       ;
+
+fld_16S_B3             returns [message::definition::swift::mt::Field fld] @init { $fld.set_tag("16S"); } : 
+                       START_OF_FIELD '16S:' ~(START_OF_FIELD)+;
+
+fld_16S_B              returns [message::definition::swift::mt::Field fld] @init { $fld.set_tag("16S"); } : 
+                       START_OF_FIELD '16S:' ~(START_OF_FIELD)+;
+
+fld_16R_C              returns [message::definition::swift::mt::Field fld] @init { $fld.set_tag("16R"); } : 
+                       START_OF_FIELD '16R:' ~(START_OF_FIELD)+;
+
+fld_22H_C              returns [message::definition::swift::mt::Field fld]  :
+                       fld_22H_C_H { $fld.MergeFrom($fld_22H_C_H.fld); }
+                       ;
+
+fld_16R_C1             returns [message::definition::swift::mt::Field fld] @init { $fld.set_tag("16R"); } : 
+                       START_OF_FIELD '16R:' ~(START_OF_FIELD)+;
+
+fld_95a_C1             returns [message::definition::swift::mt::Field fld]  :
+                         fld_95a_C1_P { $fld.MergeFrom($fld_95a_C1_P.fld); }
+                       | fld_95a_C1_Q { $fld.MergeFrom($fld_95a_C1_Q.fld); }
+                       | fld_95a_C1_R { $fld.MergeFrom($fld_95a_C1_R.fld); }
+                       ;
+
+fld_97A_C1             returns [message::definition::swift::mt::Field fld]  :
+                       fld_97A_C1_A { $fld.MergeFrom($fld_97A_C1_A.fld); }
+                       ;
+
+fld_70C_C1             returns [message::definition::swift::mt::Field fld]  :
+                       fld_70C_C1_C { $fld.MergeFrom($fld_70C_C1_C.fld); }
+                       ;
+
+fld_16S_C1             returns [message::definition::swift::mt::Field fld] @init { $fld.set_tag("16S"); } : 
+                       START_OF_FIELD '16S:' ~(START_OF_FIELD)+;
+
+fld_16S_C              returns [message::definition::swift::mt::Field fld] @init { $fld.set_tag("16S"); } : 
+                       START_OF_FIELD '16S:' ~(START_OF_FIELD)+;
 
 
-fld_20C_A_C            : START_OF_FIELD '20C:' ~(START_OF_FIELD)+ ;
 
-fld_23G_A_G            : START_OF_FIELD '23G:' ~(START_OF_FIELD)+ ;
+fld_20C_A_C            returns [message::definition::swift::mt::Field fld] @init { $fld.set_tag("20C"); }:
+                       START_OF_FIELD '20C:' ~(START_OF_FIELD)+ ;
 
-fld_22H_A_H            : START_OF_FIELD '22H:' ~(START_OF_FIELD)+ ;
+fld_23G_A_G            returns [message::definition::swift::mt::Field fld] @init { $fld.set_tag("23G"); }:
+                       START_OF_FIELD '23G:' ~(START_OF_FIELD)+ ;
 
-fld_99B_A_B            : START_OF_FIELD '99B:' ~(START_OF_FIELD)+ ;
+fld_22H_A_H            returns [message::definition::swift::mt::Field fld] @init { $fld.set_tag("22H"); }:
+                       START_OF_FIELD '22H:' ~(START_OF_FIELD)+ ;
 
-fld_13a_A1_A           : START_OF_FIELD '13A:' ~(START_OF_FIELD)+ ;
-fld_13a_A1_B           : START_OF_FIELD '13B:' ~(START_OF_FIELD)+ ;
+fld_99B_A_B            returns [message::definition::swift::mt::Field fld] @init { $fld.set_tag("99B"); }:
+                       START_OF_FIELD '99B:' ~(START_OF_FIELD)+ ;
 
-fld_20C_A1_C           : START_OF_FIELD '20C:' ~(START_OF_FIELD)+ ;
+fld_13a_A1_A           returns [message::definition::swift::mt::Field fld] @init { $fld.set_tag("13A"); }:
+                       START_OF_FIELD '13A:' ~(START_OF_FIELD)+ ;
+fld_13a_A1_B           returns [message::definition::swift::mt::Field fld] @init { $fld.set_tag("13B"); }:
+                       START_OF_FIELD '13B:' ~(START_OF_FIELD)+ ;
 
-fld_20C_B_C            : START_OF_FIELD '20C:' ~(START_OF_FIELD)+ ;
+fld_20C_A1_C           returns [message::definition::swift::mt::Field fld] @init { $fld.set_tag("20C"); }:
+                       START_OF_FIELD '20C:' ~(START_OF_FIELD)+ ;
 
-fld_22H_B_H            : START_OF_FIELD '22H:' ~(START_OF_FIELD)+ ;
+fld_20C_B_C            returns [message::definition::swift::mt::Field fld] @init { $fld.set_tag("20C"); }:
+                       START_OF_FIELD '20C:' ~(START_OF_FIELD)+ ;
 
-fld_98A_B_A            : START_OF_FIELD '98A:' ~(START_OF_FIELD)+ ;
+fld_22H_B_H            returns [message::definition::swift::mt::Field fld] @init { $fld.set_tag("22H"); }:
+                       START_OF_FIELD '22H:' ~(START_OF_FIELD)+ ;
 
-fld_19A_B_A            : START_OF_FIELD '19A:' ~(START_OF_FIELD)+ ;
+fld_98A_B_A            returns [message::definition::swift::mt::Field fld] @init { $fld.set_tag("98A"); }:
+                       START_OF_FIELD '98A:' ~(START_OF_FIELD)+ ;
 
-fld_92A_B_A            : START_OF_FIELD '92A:' ~(START_OF_FIELD)+ ;
+fld_19A_B_A            returns [message::definition::swift::mt::Field fld] @init { $fld.set_tag("19A"); }:
+                       START_OF_FIELD '19A:' ~(START_OF_FIELD)+ ;
 
-fld_99B_B_B            : START_OF_FIELD '99B:' ~(START_OF_FIELD)+ ;
+fld_92A_B_A            returns [message::definition::swift::mt::Field fld] @init { $fld.set_tag("92A"); }:
+                       START_OF_FIELD '92A:' ~(START_OF_FIELD)+ ;
 
-fld_94C_B_C            : START_OF_FIELD '94C:' ~(START_OF_FIELD)+ ;
+fld_99B_B_B            returns [message::definition::swift::mt::Field fld] @init { $fld.set_tag("99B"); }:
+                       START_OF_FIELD '99B:' ~(START_OF_FIELD)+ ;
 
-fld_95a_B1_P           : START_OF_FIELD '95P:' ~(START_OF_FIELD)+ ;
-fld_95a_B1_Q           : START_OF_FIELD '95Q:' ~(START_OF_FIELD)+ ;
-fld_95a_B1_R           : START_OF_FIELD '95R:' ~(START_OF_FIELD)+ ;
+fld_94C_B_C            returns [message::definition::swift::mt::Field fld] @init { $fld.set_tag("94C"); }:
+                       START_OF_FIELD '94C:' ~(START_OF_FIELD)+ ;
 
-fld_95a_B2_P           : START_OF_FIELD '95P:' ~(START_OF_FIELD)+ ;
-fld_95a_B2_Q           : START_OF_FIELD '95Q:' ~(START_OF_FIELD)+ ;
-fld_95a_B2_R           : START_OF_FIELD '95R:' ~(START_OF_FIELD)+ ;
+fld_95a_B1_P           returns [message::definition::swift::mt::Field fld] @init { $fld.set_tag("95P"); }:
+                       START_OF_FIELD '95P:' ~(START_OF_FIELD)+ ;
+fld_95a_B1_Q           returns [message::definition::swift::mt::Field fld] @init { $fld.set_tag("95Q"); }:
+                       START_OF_FIELD '95Q:' ~(START_OF_FIELD)+ ;
+fld_95a_B1_R           returns [message::definition::swift::mt::Field fld] @init { $fld.set_tag("95R"); }:
+                       START_OF_FIELD '95R:' ~(START_OF_FIELD)+ ;
 
-fld_97A_B2_A           : START_OF_FIELD '97A:' ~(START_OF_FIELD)+ ;
+fld_95a_B2_P           returns [message::definition::swift::mt::Field fld] @init { $fld.set_tag("95P"); }:
+                       START_OF_FIELD '95P:' ~(START_OF_FIELD)+ ;
+fld_95a_B2_Q           returns [message::definition::swift::mt::Field fld] @init { $fld.set_tag("95Q"); }:
+                       START_OF_FIELD '95Q:' ~(START_OF_FIELD)+ ;
+fld_95a_B2_R           returns [message::definition::swift::mt::Field fld] @init { $fld.set_tag("95R"); }:
+                       START_OF_FIELD '95R:' ~(START_OF_FIELD)+ ;
 
-fld_95a_B3_P           : START_OF_FIELD '95P:' ~(START_OF_FIELD)+ ;
-fld_95a_B3_Q           : START_OF_FIELD '95Q:' ~(START_OF_FIELD)+ ;
-fld_95a_B3_R           : START_OF_FIELD '95R:' ~(START_OF_FIELD)+ ;
+fld_97A_B2_A           returns [message::definition::swift::mt::Field fld] @init { $fld.set_tag("97A"); }:
+                       START_OF_FIELD '97A:' ~(START_OF_FIELD)+ ;
 
-fld_22H_C_H            : START_OF_FIELD '22H:' ~(START_OF_FIELD)+ ;
+fld_95a_B3_P           returns [message::definition::swift::mt::Field fld] @init { $fld.set_tag("95P"); }:
+                       START_OF_FIELD '95P:' ~(START_OF_FIELD)+ ;
+fld_95a_B3_Q           returns [message::definition::swift::mt::Field fld] @init { $fld.set_tag("95Q"); }:
+                       START_OF_FIELD '95Q:' ~(START_OF_FIELD)+ ;
+fld_95a_B3_R           returns [message::definition::swift::mt::Field fld] @init { $fld.set_tag("95R"); }:
+                       START_OF_FIELD '95R:' ~(START_OF_FIELD)+ ;
 
-fld_95a_C1_P           : START_OF_FIELD '95P:' ~(START_OF_FIELD)+ ;
-fld_95a_C1_Q           : START_OF_FIELD '95Q:' ~(START_OF_FIELD)+ ;
-fld_95a_C1_R           : START_OF_FIELD '95R:' ~(START_OF_FIELD)+ ;
+fld_22H_C_H            returns [message::definition::swift::mt::Field fld] @init { $fld.set_tag("22H"); }:
+                       START_OF_FIELD '22H:' ~(START_OF_FIELD)+ ;
 
-fld_97A_C1_A           : START_OF_FIELD '97A:' ~(START_OF_FIELD)+ ;
+fld_95a_C1_P           returns [message::definition::swift::mt::Field fld] @init { $fld.set_tag("95P"); }:
+                       START_OF_FIELD '95P:' ~(START_OF_FIELD)+ ;
+fld_95a_C1_Q           returns [message::definition::swift::mt::Field fld] @init { $fld.set_tag("95Q"); }:
+                       START_OF_FIELD '95Q:' ~(START_OF_FIELD)+ ;
+fld_95a_C1_R           returns [message::definition::swift::mt::Field fld] @init { $fld.set_tag("95R"); }:
+                       START_OF_FIELD '95R:' ~(START_OF_FIELD)+ ;
 
-fld_70C_C1_C           : START_OF_FIELD '70C:' ~(START_OF_FIELD)+ ;
+fld_97A_C1_A           returns [message::definition::swift::mt::Field fld] @init { $fld.set_tag("97A"); }:
+                       START_OF_FIELD '97A:' ~(START_OF_FIELD)+ ;
+
+fld_70C_C1_C           returns [message::definition::swift::mt::Field fld] @init { $fld.set_tag("70C"); }:
+                       START_OF_FIELD '70C:' ~(START_OF_FIELD)+ ;
 
 
 

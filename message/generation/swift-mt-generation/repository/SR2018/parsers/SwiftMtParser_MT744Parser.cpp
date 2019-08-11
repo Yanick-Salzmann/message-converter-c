@@ -880,7 +880,8 @@ SwiftMtParser_MT744Parser::MtContext* SwiftMtParser_MT744Parser::mt() {
     match(SwiftMtParser_MT744Parser::TAG_MT);
     setState(83);
     match(SwiftMtParser_MT744Parser::MT_END);
-   
+   _ctx->stop = _input->LT(-1);
+     _message_builder.mutable_msg_text()->MergeFrom(_localctx->elem); 
   }
   catch (RecognitionException &e) {
     _errHandler->reportError(this, e);

@@ -47,21 +47,25 @@ private:
 public:
     class Helper : public ISwiftMtParser {
     public:
-        bool parse_message(const std::string& message, std::vector<std::string>& errors) override {
+        bool parse_message(const std::string& message, std::vector<std::string>& errors, SwiftMtMessage& out_message) override {
             antlr4::ANTLRInputStream stream{message};
             tLexer lexer{&stream};
             antlr4::CommonTokenStream token_stream{&lexer};
 
             tParser parser{&token_stream};
-            return parser.process(errors);
+            return parser.process(errors, out_message);
         }
     };
 
 private:
-    bool process(std::vector<std::string>& errors) {
+    SwiftMtMessage _message_builder{};
+
+    bool process(std::vector<std::string>& errors, SwiftMtMessage& out_message) {
         _errors.clear();
         removeErrorListeners();
         addErrorListener(&_error_listener);
+
+        _message_builder = SwiftMtMessage{};
 
         message();
         if(!_errors.empty()) {
@@ -69,9 +73,14 @@ private:
             return false;
         }
 
+        out_message = _message_builder;
         return true;
     }
 public:
+
+    [[nodiscard]] SwiftMtMessage parsed_message() const {
+        return _message_builder;
+    }
 }
 
 message                : bh ah uh? mt tr? EOF;
@@ -90,7 +99,8 @@ sys_element            : LBRACE sys_element_key COLON sys_element_content RBRACE
 sys_element_key        : ~( COLON | RBRACE )+ ;
 sys_element_content    : ~( RBRACE )+ ;
 
-mt                     : TAG_MT {{print_mt_body}} MT_END;
+mt                     returns [message::definition::swift::mt::MessageText elem] @after { _message_builder.mutable_msg_text()->MergeFrom($elem); }
+                       : TAG_MT {{print_mt_body}} MT_END;
 
 {{print_sequences}}
 

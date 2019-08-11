@@ -135,21 +135,25 @@ public:
   public:
       class Helper : public ISwiftMtParser {
       public:
-          bool parse_message(const std::string& message, std::vector<std::string>& errors) override {
+          bool parse_message(const std::string& message, std::vector<std::string>& errors, SwiftMtMessage& out_message) override {
               antlr4::ANTLRInputStream stream{message};
               tLexer lexer{&stream};
               antlr4::CommonTokenStream token_stream{&lexer};
 
               tParser parser{&token_stream};
-              return parser.process(errors);
+              return parser.process(errors, out_message);
           }
       };
 
   private:
-      bool process(std::vector<std::string>& errors) {
+      SwiftMtMessage _message_builder{};
+
+      bool process(std::vector<std::string>& errors, SwiftMtMessage& out_message) {
           _errors.clear();
           removeErrorListeners();
           addErrorListener(&_error_listener);
+
+          _message_builder = SwiftMtMessage{};
 
           message();
           if(!_errors.empty()) {
@@ -157,9 +161,14 @@ public:
               return false;
           }
 
+          out_message = _message_builder;
           return true;
       }
   public:
+
+      [[nodiscard]] SwiftMtMessage parsed_message() const {
+          return _message_builder;
+      }
 
 
   class MessageContext;
@@ -540,6 +549,7 @@ public:
 
   class  MtContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::MessageText elem;
     MtContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     antlr4::tree::TerminalNode *TAG_MT();
@@ -559,6 +569,19 @@ public:
 
   class  Seq_AContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Sequence elem;
+    SwiftMtParser_MT586Parser::Fld_16R_AContext *fld_16R_AContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_28E_AContext *fld_28E_AContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_13a_AContext *fld_13a_AContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_20C_AContext *fld_20C_AContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_23G_AContext *fld_23G_AContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_98a_AContext *fld_98a_AContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_22F_AContext *fld_22F_AContext = nullptr;;
+    SwiftMtParser_MT586Parser::Seq_A1Context *seq_A1Context = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_95a_AContext *fld_95a_AContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_97a_AContext *fld_97a_AContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_17B_AContext *fld_17B_AContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_16S_AContext *fld_16S_AContext = nullptr;;
     Seq_AContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_16R_AContext *fld_16R_A();
@@ -587,6 +610,11 @@ public:
 
   class  Seq_A1Context : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Sequence elem;
+    SwiftMtParser_MT586Parser::Fld_16R_A1Context *fld_16R_A1Context = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_13a_A1Context *fld_13a_A1Context = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_20C_A1Context *fld_20C_A1Context = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_16S_A1Context *fld_16S_A1Context = nullptr;;
     Seq_A1Context(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_16R_A1Context *fld_16R_A1();
@@ -603,6 +631,21 @@ public:
 
   class  Seq_BContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Sequence elem;
+    SwiftMtParser_MT586Parser::Fld_16R_BContext *fld_16R_BContext = nullptr;;
+    SwiftMtParser_MT586Parser::Seq_B1Context *seq_B1Context = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_25D_BContext *fld_25D_BContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_94a_BContext *fld_94a_BContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_98a_BContext *fld_98a_BContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_90a_BContext *fld_90a_BContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_99A_BContext *fld_99A_BContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_35B_BContext *fld_35B_BContext = nullptr;;
+    SwiftMtParser_MT586Parser::Seq_B2Context *seq_B2Context = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_22a_BContext *fld_22a_BContext = nullptr;;
+    SwiftMtParser_MT586Parser::Seq_B3Context *seq_B3Context = nullptr;;
+    SwiftMtParser_MT586Parser::Seq_B4Context *seq_B4Context = nullptr;;
+    SwiftMtParser_MT586Parser::Seq_B5Context *seq_B5Context = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_16S_BContext *fld_16S_BContext = nullptr;;
     Seq_BContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_16R_BContext *fld_16R_B();
@@ -633,6 +676,11 @@ public:
 
   class  Seq_B1Context : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Sequence elem;
+    SwiftMtParser_MT586Parser::Fld_16R_B1Context *fld_16R_B1Context = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_13a_B1Context *fld_13a_B1Context = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_20C_B1Context *fld_20C_B1Context = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_16S_B1Context *fld_16S_B1Context = nullptr;;
     Seq_B1Context(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_16R_B1Context *fld_16R_B1();
@@ -649,6 +697,21 @@ public:
 
   class  Seq_B2Context : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Sequence elem;
+    SwiftMtParser_MT586Parser::Fld_16R_B2Context *fld_16R_B2Context = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_94B_B2Context *fld_94B_B2Context = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_22F_B2Context *fld_22F_B2Context = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_12a_B2Context *fld_12a_B2Context = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_11A_B2Context *fld_11A_B2Context = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_98A_B2Context *fld_98A_B2Context = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_92A_B2Context *fld_92A_B2Context = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_13a_B2Context *fld_13a_B2Context = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_17B_B2Context *fld_17B_B2Context = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_90a_B2Context *fld_90a_B2Context = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_36B_B2Context *fld_36B_B2Context = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_35B_B2Context *fld_35B_B2Context = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_70E_B2Context *fld_70E_B2Context = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_16S_B2Context *fld_16S_B2Context = nullptr;;
     Seq_B2Context(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_16R_B2Context *fld_16R_B2();
@@ -684,6 +747,14 @@ public:
 
   class  Seq_B3Context : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Sequence elem;
+    SwiftMtParser_MT586Parser::Fld_16R_B3Context *fld_16R_B3Context = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_36B_B3Context *fld_36B_B3Context = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_70D_B3Context *fld_70D_B3Context = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_97a_B3Context *fld_97a_B3Context = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_94a_B3Context *fld_94a_B3Context = nullptr;;
+    SwiftMtParser_MT586Parser::Seq_B3aContext *seq_B3aContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_16S_B3Context *fld_16S_B3Context = nullptr;;
     Seq_B3Context(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_16R_B3Context *fld_16R_B3();
@@ -705,6 +776,14 @@ public:
 
   class  Seq_B3aContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Sequence elem;
+    SwiftMtParser_MT586Parser::Fld_16R_B3aContext *fld_16R_B3aContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_13B_B3aContext *fld_13B_B3aContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_36B_B3aContext *fld_36B_B3aContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_98a_B3aContext *fld_98a_B3aContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_90a_B3aContext *fld_90a_B3aContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_22F_B3aContext *fld_22F_B3aContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_16S_B3aContext *fld_16S_B3aContext = nullptr;;
     Seq_B3aContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_16R_B3aContext *fld_16R_B3a();
@@ -724,6 +803,16 @@ public:
 
   class  Seq_B4Context : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Sequence elem;
+    SwiftMtParser_MT586Parser::Fld_16R_B4Context *fld_16R_B4Context = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_98a_B4Context *fld_98a_B4Context = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_22F_B4Context *fld_22F_B4Context = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_20C_B4Context *fld_20C_B4Context = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_92a_B4Context *fld_92a_B4Context = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_99B_B4Context *fld_99B_B4Context = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_19A_B4Context *fld_19A_B4Context = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_70C_B4Context *fld_70C_B4Context = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_16S_B4Context *fld_16S_B4Context = nullptr;;
     Seq_B4Context(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_16R_B4Context *fld_16R_B4();
@@ -749,6 +838,12 @@ public:
 
   class  Seq_B5Context : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Sequence elem;
+    SwiftMtParser_MT586Parser::Fld_16R_B5Context *fld_16R_B5Context = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_22F_B5Context *fld_22F_B5Context = nullptr;;
+    SwiftMtParser_MT586Parser::Seq_B5aContext *seq_B5aContext = nullptr;;
+    SwiftMtParser_MT586Parser::Seq_B5bContext *seq_B5bContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_16S_B5Context *fld_16S_B5Context = nullptr;;
     Seq_B5Context(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_16R_B5Context *fld_16R_B5();
@@ -769,6 +864,14 @@ public:
 
   class  Seq_B5aContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Sequence elem;
+    SwiftMtParser_MT586Parser::Fld_16R_B5aContext *fld_16R_B5aContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_95a_B5aContext *fld_95a_B5aContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_97a_B5aContext *fld_97a_B5aContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_98a_B5aContext *fld_98a_B5aContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_20C_B5aContext *fld_20C_B5aContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_70a_B5aContext *fld_70a_B5aContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_16S_B5aContext *fld_16S_B5aContext = nullptr;;
     Seq_B5aContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_16R_B5aContext *fld_16R_B5a();
@@ -790,6 +893,12 @@ public:
 
   class  Seq_B5bContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Sequence elem;
+    SwiftMtParser_MT586Parser::Fld_16R_B5bContext *fld_16R_B5bContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_19A_B5bContext *fld_19A_B5bContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_98a_B5bContext *fld_98a_B5bContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_92B_B5bContext *fld_92B_B5bContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_16S_B5bContext *fld_16S_B5bContext = nullptr;;
     Seq_B5bContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_16R_B5bContext *fld_16R_B5b();
@@ -808,6 +917,10 @@ public:
 
   class  Seq_CContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Sequence elem;
+    SwiftMtParser_MT586Parser::Fld_16R_CContext *fld_16R_CContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_95a_CContext *fld_95a_CContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_16S_CContext *fld_16S_CContext = nullptr;;
     Seq_CContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_16R_CContext *fld_16R_C();
@@ -824,6 +937,7 @@ public:
 
   class  Fld_16R_AContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_16R_AContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -838,6 +952,8 @@ public:
 
   class  Fld_28E_AContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_28E_A_EContext *fld_28E_A_EContext = nullptr;;
     Fld_28E_AContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_28E_A_EContext *fld_28E_A_E();
@@ -851,6 +967,9 @@ public:
 
   class  Fld_13a_AContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_13a_A_AContext *fld_13a_A_AContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_13a_A_JContext *fld_13a_A_JContext = nullptr;;
     Fld_13a_AContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_13a_A_AContext *fld_13a_A_A();
@@ -865,6 +984,8 @@ public:
 
   class  Fld_20C_AContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_20C_A_CContext *fld_20C_A_CContext = nullptr;;
     Fld_20C_AContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_20C_A_CContext *fld_20C_A_C();
@@ -878,6 +999,8 @@ public:
 
   class  Fld_23G_AContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_23G_A_GContext *fld_23G_A_GContext = nullptr;;
     Fld_23G_AContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_23G_A_GContext *fld_23G_A_G();
@@ -891,6 +1014,10 @@ public:
 
   class  Fld_98a_AContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_98a_A_AContext *fld_98a_A_AContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_98a_A_CContext *fld_98a_A_CContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_98a_A_EContext *fld_98a_A_EContext = nullptr;;
     Fld_98a_AContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_98a_A_AContext *fld_98a_A_A();
@@ -906,6 +1033,8 @@ public:
 
   class  Fld_22F_AContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_22F_A_FContext *fld_22F_A_FContext = nullptr;;
     Fld_22F_AContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_22F_A_FContext *fld_22F_A_F();
@@ -919,6 +1048,7 @@ public:
 
   class  Fld_16R_A1Context : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_16R_A1Context(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -933,6 +1063,9 @@ public:
 
   class  Fld_13a_A1Context : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_13a_A1_AContext *fld_13a_A1_AContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_13a_A1_BContext *fld_13a_A1_BContext = nullptr;;
     Fld_13a_A1Context(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_13a_A1_AContext *fld_13a_A1_A();
@@ -947,6 +1080,8 @@ public:
 
   class  Fld_20C_A1Context : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_20C_A1_CContext *fld_20C_A1_CContext = nullptr;;
     Fld_20C_A1Context(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_20C_A1_CContext *fld_20C_A1_C();
@@ -960,6 +1095,7 @@ public:
 
   class  Fld_16S_A1Context : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_16S_A1Context(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -974,6 +1110,11 @@ public:
 
   class  Fld_95a_AContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_95a_A_LContext *fld_95a_A_LContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_95a_A_PContext *fld_95a_A_PContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_95a_A_QContext *fld_95a_A_QContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_95a_A_RContext *fld_95a_A_RContext = nullptr;;
     Fld_95a_AContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_95a_A_LContext *fld_95a_A_L();
@@ -990,6 +1131,9 @@ public:
 
   class  Fld_97a_AContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_97a_A_AContext *fld_97a_A_AContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_97a_A_BContext *fld_97a_A_BContext = nullptr;;
     Fld_97a_AContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_97a_A_AContext *fld_97a_A_A();
@@ -1004,6 +1148,8 @@ public:
 
   class  Fld_17B_AContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_17B_A_BContext *fld_17B_A_BContext = nullptr;;
     Fld_17B_AContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_17B_A_BContext *fld_17B_A_B();
@@ -1017,6 +1163,7 @@ public:
 
   class  Fld_16S_AContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_16S_AContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -1031,6 +1178,7 @@ public:
 
   class  Fld_16R_BContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_16R_BContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -1045,6 +1193,7 @@ public:
 
   class  Fld_16R_B1Context : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_16R_B1Context(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -1059,6 +1208,9 @@ public:
 
   class  Fld_13a_B1Context : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_13a_B1_AContext *fld_13a_B1_AContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_13a_B1_BContext *fld_13a_B1_BContext = nullptr;;
     Fld_13a_B1Context(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_13a_B1_AContext *fld_13a_B1_A();
@@ -1073,6 +1225,8 @@ public:
 
   class  Fld_20C_B1Context : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_20C_B1_CContext *fld_20C_B1_CContext = nullptr;;
     Fld_20C_B1Context(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_20C_B1_CContext *fld_20C_B1_C();
@@ -1086,6 +1240,7 @@ public:
 
   class  Fld_16S_B1Context : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_16S_B1Context(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -1100,6 +1255,8 @@ public:
 
   class  Fld_25D_BContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_25D_B_DContext *fld_25D_B_DContext = nullptr;;
     Fld_25D_BContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_25D_B_DContext *fld_25D_B_D();
@@ -1113,6 +1270,10 @@ public:
 
   class  Fld_94a_BContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_94a_B_BContext *fld_94a_B_BContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_94a_B_HContext *fld_94a_B_HContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_94a_B_LContext *fld_94a_B_LContext = nullptr;;
     Fld_94a_BContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_94a_B_BContext *fld_94a_B_B();
@@ -1128,6 +1289,10 @@ public:
 
   class  Fld_98a_BContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_98a_B_AContext *fld_98a_B_AContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_98a_B_BContext *fld_98a_B_BContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_98a_B_CContext *fld_98a_B_CContext = nullptr;;
     Fld_98a_BContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_98a_B_AContext *fld_98a_B_A();
@@ -1143,6 +1308,9 @@ public:
 
   class  Fld_90a_BContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_90a_B_AContext *fld_90a_B_AContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_90a_B_BContext *fld_90a_B_BContext = nullptr;;
     Fld_90a_BContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_90a_B_AContext *fld_90a_B_A();
@@ -1157,6 +1325,8 @@ public:
 
   class  Fld_99A_BContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_99A_B_AContext *fld_99A_B_AContext = nullptr;;
     Fld_99A_BContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_99A_B_AContext *fld_99A_B_A();
@@ -1170,6 +1340,8 @@ public:
 
   class  Fld_35B_BContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_35B_B_BContext *fld_35B_B_BContext = nullptr;;
     Fld_35B_BContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_35B_B_BContext *fld_35B_B_B();
@@ -1183,6 +1355,7 @@ public:
 
   class  Fld_16R_B2Context : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_16R_B2Context(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -1197,6 +1370,8 @@ public:
 
   class  Fld_94B_B2Context : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_94B_B2_BContext *fld_94B_B2_BContext = nullptr;;
     Fld_94B_B2Context(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_94B_B2_BContext *fld_94B_B2_B();
@@ -1210,6 +1385,8 @@ public:
 
   class  Fld_22F_B2Context : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_22F_B2_FContext *fld_22F_B2_FContext = nullptr;;
     Fld_22F_B2Context(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_22F_B2_FContext *fld_22F_B2_F();
@@ -1223,6 +1400,10 @@ public:
 
   class  Fld_12a_B2Context : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_12a_B2_AContext *fld_12a_B2_AContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_12a_B2_BContext *fld_12a_B2_BContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_12a_B2_CContext *fld_12a_B2_CContext = nullptr;;
     Fld_12a_B2Context(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_12a_B2_AContext *fld_12a_B2_A();
@@ -1238,6 +1419,8 @@ public:
 
   class  Fld_11A_B2Context : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_11A_B2_AContext *fld_11A_B2_AContext = nullptr;;
     Fld_11A_B2Context(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_11A_B2_AContext *fld_11A_B2_A();
@@ -1251,6 +1434,8 @@ public:
 
   class  Fld_98A_B2Context : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_98A_B2_AContext *fld_98A_B2_AContext = nullptr;;
     Fld_98A_B2Context(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_98A_B2_AContext *fld_98A_B2_A();
@@ -1264,6 +1449,8 @@ public:
 
   class  Fld_92A_B2Context : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_92A_B2_AContext *fld_92A_B2_AContext = nullptr;;
     Fld_92A_B2Context(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_92A_B2_AContext *fld_92A_B2_A();
@@ -1277,6 +1464,9 @@ public:
 
   class  Fld_13a_B2Context : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_13a_B2_AContext *fld_13a_B2_AContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_13a_B2_BContext *fld_13a_B2_BContext = nullptr;;
     Fld_13a_B2Context(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_13a_B2_AContext *fld_13a_B2_A();
@@ -1291,6 +1481,8 @@ public:
 
   class  Fld_17B_B2Context : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_17B_B2_BContext *fld_17B_B2_BContext = nullptr;;
     Fld_17B_B2Context(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_17B_B2_BContext *fld_17B_B2_B();
@@ -1304,6 +1496,9 @@ public:
 
   class  Fld_90a_B2Context : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_90a_B2_AContext *fld_90a_B2_AContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_90a_B2_BContext *fld_90a_B2_BContext = nullptr;;
     Fld_90a_B2Context(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_90a_B2_AContext *fld_90a_B2_A();
@@ -1318,6 +1513,8 @@ public:
 
   class  Fld_36B_B2Context : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_36B_B2_BContext *fld_36B_B2_BContext = nullptr;;
     Fld_36B_B2Context(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_36B_B2_BContext *fld_36B_B2_B();
@@ -1331,6 +1528,8 @@ public:
 
   class  Fld_35B_B2Context : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_35B_B2_BContext *fld_35B_B2_BContext = nullptr;;
     Fld_35B_B2Context(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_35B_B2_BContext *fld_35B_B2_B();
@@ -1344,6 +1543,8 @@ public:
 
   class  Fld_70E_B2Context : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_70E_B2_EContext *fld_70E_B2_EContext = nullptr;;
     Fld_70E_B2Context(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_70E_B2_EContext *fld_70E_B2_E();
@@ -1357,6 +1558,7 @@ public:
 
   class  Fld_16S_B2Context : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_16S_B2Context(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -1371,6 +1573,9 @@ public:
 
   class  Fld_22a_BContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_22a_B_FContext *fld_22a_B_FContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_22a_B_HContext *fld_22a_B_HContext = nullptr;;
     Fld_22a_BContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_22a_B_FContext *fld_22a_B_F();
@@ -1385,6 +1590,7 @@ public:
 
   class  Fld_16R_B3Context : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_16R_B3Context(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -1399,6 +1605,8 @@ public:
 
   class  Fld_36B_B3Context : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_36B_B3_BContext *fld_36B_B3_BContext = nullptr;;
     Fld_36B_B3Context(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_36B_B3_BContext *fld_36B_B3_B();
@@ -1412,6 +1620,8 @@ public:
 
   class  Fld_70D_B3Context : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_70D_B3_DContext *fld_70D_B3_DContext = nullptr;;
     Fld_70D_B3Context(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_70D_B3_DContext *fld_70D_B3_D();
@@ -1425,6 +1635,9 @@ public:
 
   class  Fld_97a_B3Context : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_97a_B3_AContext *fld_97a_B3_AContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_97a_B3_EContext *fld_97a_B3_EContext = nullptr;;
     Fld_97a_B3Context(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_97a_B3_AContext *fld_97a_B3_A();
@@ -1439,6 +1652,11 @@ public:
 
   class  Fld_94a_B3Context : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_94a_B3_BContext *fld_94a_B3_BContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_94a_B3_CContext *fld_94a_B3_CContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_94a_B3_FContext *fld_94a_B3_FContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_94a_B3_LContext *fld_94a_B3_LContext = nullptr;;
     Fld_94a_B3Context(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_94a_B3_BContext *fld_94a_B3_B();
@@ -1455,6 +1673,7 @@ public:
 
   class  Fld_16R_B3aContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_16R_B3aContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -1469,6 +1688,8 @@ public:
 
   class  Fld_13B_B3aContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_13B_B3a_BContext *fld_13B_B3a_BContext = nullptr;;
     Fld_13B_B3aContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_13B_B3a_BContext *fld_13B_B3a_B();
@@ -1482,6 +1703,8 @@ public:
 
   class  Fld_36B_B3aContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_36B_B3a_BContext *fld_36B_B3a_BContext = nullptr;;
     Fld_36B_B3aContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_36B_B3a_BContext *fld_36B_B3a_B();
@@ -1495,6 +1718,10 @@ public:
 
   class  Fld_98a_B3aContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_98a_B3a_AContext *fld_98a_B3a_AContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_98a_B3a_CContext *fld_98a_B3a_CContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_98a_B3a_EContext *fld_98a_B3a_EContext = nullptr;;
     Fld_98a_B3aContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_98a_B3a_AContext *fld_98a_B3a_A();
@@ -1510,6 +1737,9 @@ public:
 
   class  Fld_90a_B3aContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_90a_B3a_AContext *fld_90a_B3a_AContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_90a_B3a_BContext *fld_90a_B3a_BContext = nullptr;;
     Fld_90a_B3aContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_90a_B3a_AContext *fld_90a_B3a_A();
@@ -1524,6 +1754,8 @@ public:
 
   class  Fld_22F_B3aContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_22F_B3a_FContext *fld_22F_B3a_FContext = nullptr;;
     Fld_22F_B3aContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_22F_B3a_FContext *fld_22F_B3a_F();
@@ -1537,6 +1769,7 @@ public:
 
   class  Fld_16S_B3aContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_16S_B3aContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -1551,6 +1784,7 @@ public:
 
   class  Fld_16S_B3Context : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_16S_B3Context(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -1565,6 +1799,7 @@ public:
 
   class  Fld_16R_B4Context : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_16R_B4Context(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -1579,6 +1814,10 @@ public:
 
   class  Fld_98a_B4Context : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_98a_B4_AContext *fld_98a_B4_AContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_98a_B4_BContext *fld_98a_B4_BContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_98a_B4_CContext *fld_98a_B4_CContext = nullptr;;
     Fld_98a_B4Context(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_98a_B4_AContext *fld_98a_B4_A();
@@ -1594,6 +1833,8 @@ public:
 
   class  Fld_22F_B4Context : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_22F_B4_FContext *fld_22F_B4_FContext = nullptr;;
     Fld_22F_B4Context(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_22F_B4_FContext *fld_22F_B4_F();
@@ -1607,6 +1848,8 @@ public:
 
   class  Fld_20C_B4Context : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_20C_B4_CContext *fld_20C_B4_CContext = nullptr;;
     Fld_20C_B4Context(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_20C_B4_CContext *fld_20C_B4_C();
@@ -1620,6 +1863,9 @@ public:
 
   class  Fld_92a_B4Context : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_92a_B4_AContext *fld_92a_B4_AContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_92a_B4_CContext *fld_92a_B4_CContext = nullptr;;
     Fld_92a_B4Context(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_92a_B4_AContext *fld_92a_B4_A();
@@ -1634,6 +1880,8 @@ public:
 
   class  Fld_99B_B4Context : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_99B_B4_BContext *fld_99B_B4_BContext = nullptr;;
     Fld_99B_B4Context(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_99B_B4_BContext *fld_99B_B4_B();
@@ -1647,6 +1895,8 @@ public:
 
   class  Fld_19A_B4Context : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_19A_B4_AContext *fld_19A_B4_AContext = nullptr;;
     Fld_19A_B4Context(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_19A_B4_AContext *fld_19A_B4_A();
@@ -1660,6 +1910,8 @@ public:
 
   class  Fld_70C_B4Context : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_70C_B4_CContext *fld_70C_B4_CContext = nullptr;;
     Fld_70C_B4Context(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_70C_B4_CContext *fld_70C_B4_C();
@@ -1673,6 +1925,7 @@ public:
 
   class  Fld_16S_B4Context : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_16S_B4Context(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -1687,6 +1940,7 @@ public:
 
   class  Fld_16R_B5Context : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_16R_B5Context(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -1701,6 +1955,8 @@ public:
 
   class  Fld_22F_B5Context : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_22F_B5_FContext *fld_22F_B5_FContext = nullptr;;
     Fld_22F_B5Context(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_22F_B5_FContext *fld_22F_B5_F();
@@ -1714,6 +1970,7 @@ public:
 
   class  Fld_16R_B5aContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_16R_B5aContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -1728,6 +1985,13 @@ public:
 
   class  Fld_95a_B5aContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_95a_B5a_CContext *fld_95a_B5a_CContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_95a_B5a_LContext *fld_95a_B5a_LContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_95a_B5a_PContext *fld_95a_B5a_PContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_95a_B5a_QContext *fld_95a_B5a_QContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_95a_B5a_RContext *fld_95a_B5a_RContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_95a_B5a_SContext *fld_95a_B5a_SContext = nullptr;;
     Fld_95a_B5aContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_95a_B5a_CContext *fld_95a_B5a_C();
@@ -1746,6 +2010,9 @@ public:
 
   class  Fld_97a_B5aContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_97a_B5a_AContext *fld_97a_B5a_AContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_97a_B5a_BContext *fld_97a_B5a_BContext = nullptr;;
     Fld_97a_B5aContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_97a_B5a_AContext *fld_97a_B5a_A();
@@ -1760,6 +2027,9 @@ public:
 
   class  Fld_98a_B5aContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_98a_B5a_AContext *fld_98a_B5a_AContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_98a_B5a_CContext *fld_98a_B5a_CContext = nullptr;;
     Fld_98a_B5aContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_98a_B5a_AContext *fld_98a_B5a_A();
@@ -1774,6 +2044,8 @@ public:
 
   class  Fld_20C_B5aContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_20C_B5a_CContext *fld_20C_B5a_CContext = nullptr;;
     Fld_20C_B5aContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_20C_B5a_CContext *fld_20C_B5a_C();
@@ -1787,6 +2059,10 @@ public:
 
   class  Fld_70a_B5aContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_70a_B5a_CContext *fld_70a_B5a_CContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_70a_B5a_DContext *fld_70a_B5a_DContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_70a_B5a_EContext *fld_70a_B5a_EContext = nullptr;;
     Fld_70a_B5aContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_70a_B5a_CContext *fld_70a_B5a_C();
@@ -1802,6 +2078,7 @@ public:
 
   class  Fld_16S_B5aContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_16S_B5aContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -1816,6 +2093,7 @@ public:
 
   class  Fld_16R_B5bContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_16R_B5bContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -1830,6 +2108,8 @@ public:
 
   class  Fld_19A_B5bContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_19A_B5b_AContext *fld_19A_B5b_AContext = nullptr;;
     Fld_19A_B5bContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_19A_B5b_AContext *fld_19A_B5b_A();
@@ -1843,6 +2123,9 @@ public:
 
   class  Fld_98a_B5bContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_98a_B5b_AContext *fld_98a_B5b_AContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_98a_B5b_CContext *fld_98a_B5b_CContext = nullptr;;
     Fld_98a_B5bContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_98a_B5b_AContext *fld_98a_B5b_A();
@@ -1857,6 +2140,8 @@ public:
 
   class  Fld_92B_B5bContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_92B_B5b_BContext *fld_92B_B5b_BContext = nullptr;;
     Fld_92B_B5bContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_92B_B5b_BContext *fld_92B_B5b_B();
@@ -1870,6 +2155,7 @@ public:
 
   class  Fld_16S_B5bContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_16S_B5bContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -1884,6 +2170,7 @@ public:
 
   class  Fld_16S_B5Context : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_16S_B5Context(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -1898,6 +2185,7 @@ public:
 
   class  Fld_16S_BContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_16S_BContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -1912,6 +2200,7 @@ public:
 
   class  Fld_16R_CContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_16R_CContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -1926,6 +2215,13 @@ public:
 
   class  Fld_95a_CContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
+    SwiftMtParser_MT586Parser::Fld_95a_C_CContext *fld_95a_C_CContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_95a_C_LContext *fld_95a_C_LContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_95a_C_PContext *fld_95a_C_PContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_95a_C_QContext *fld_95a_C_QContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_95a_C_RContext *fld_95a_C_RContext = nullptr;;
+    SwiftMtParser_MT586Parser::Fld_95a_C_SContext *fld_95a_C_SContext = nullptr;;
     Fld_95a_CContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     Fld_95a_C_CContext *fld_95a_C_C();
@@ -1944,6 +2240,7 @@ public:
 
   class  Fld_16S_CContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_16S_CContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -1958,6 +2255,7 @@ public:
 
   class  Fld_28E_A_EContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_28E_A_EContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -1972,6 +2270,7 @@ public:
 
   class  Fld_13a_A_AContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_13a_A_AContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -1986,6 +2285,7 @@ public:
 
   class  Fld_13a_A_JContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_13a_A_JContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2000,6 +2300,7 @@ public:
 
   class  Fld_20C_A_CContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_20C_A_CContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2014,6 +2315,7 @@ public:
 
   class  Fld_23G_A_GContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_23G_A_GContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2028,6 +2330,7 @@ public:
 
   class  Fld_98a_A_AContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_98a_A_AContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2042,6 +2345,7 @@ public:
 
   class  Fld_98a_A_CContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_98a_A_CContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2056,6 +2360,7 @@ public:
 
   class  Fld_98a_A_EContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_98a_A_EContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2070,6 +2375,7 @@ public:
 
   class  Fld_22F_A_FContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_22F_A_FContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2084,6 +2390,7 @@ public:
 
   class  Fld_13a_A1_AContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_13a_A1_AContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2098,6 +2405,7 @@ public:
 
   class  Fld_13a_A1_BContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_13a_A1_BContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2112,6 +2420,7 @@ public:
 
   class  Fld_20C_A1_CContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_20C_A1_CContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2126,6 +2435,7 @@ public:
 
   class  Fld_95a_A_LContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_95a_A_LContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2140,6 +2450,7 @@ public:
 
   class  Fld_95a_A_PContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_95a_A_PContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2154,6 +2465,7 @@ public:
 
   class  Fld_95a_A_QContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_95a_A_QContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2168,6 +2480,7 @@ public:
 
   class  Fld_95a_A_RContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_95a_A_RContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2182,6 +2495,7 @@ public:
 
   class  Fld_97a_A_AContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_97a_A_AContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2196,6 +2510,7 @@ public:
 
   class  Fld_97a_A_BContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_97a_A_BContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2210,6 +2525,7 @@ public:
 
   class  Fld_17B_A_BContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_17B_A_BContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2224,6 +2540,7 @@ public:
 
   class  Fld_13a_B1_AContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_13a_B1_AContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2238,6 +2555,7 @@ public:
 
   class  Fld_13a_B1_BContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_13a_B1_BContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2252,6 +2570,7 @@ public:
 
   class  Fld_20C_B1_CContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_20C_B1_CContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2266,6 +2585,7 @@ public:
 
   class  Fld_25D_B_DContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_25D_B_DContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2280,6 +2600,7 @@ public:
 
   class  Fld_94a_B_BContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_94a_B_BContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2294,6 +2615,7 @@ public:
 
   class  Fld_94a_B_HContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_94a_B_HContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2308,6 +2630,7 @@ public:
 
   class  Fld_94a_B_LContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_94a_B_LContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2322,6 +2645,7 @@ public:
 
   class  Fld_98a_B_AContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_98a_B_AContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2336,6 +2660,7 @@ public:
 
   class  Fld_98a_B_BContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_98a_B_BContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2350,6 +2675,7 @@ public:
 
   class  Fld_98a_B_CContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_98a_B_CContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2364,6 +2690,7 @@ public:
 
   class  Fld_90a_B_AContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_90a_B_AContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2378,6 +2705,7 @@ public:
 
   class  Fld_90a_B_BContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_90a_B_BContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2392,6 +2720,7 @@ public:
 
   class  Fld_99A_B_AContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_99A_B_AContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2406,6 +2735,7 @@ public:
 
   class  Fld_35B_B_BContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_35B_B_BContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2420,6 +2750,7 @@ public:
 
   class  Fld_94B_B2_BContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_94B_B2_BContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2434,6 +2765,7 @@ public:
 
   class  Fld_22F_B2_FContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_22F_B2_FContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2448,6 +2780,7 @@ public:
 
   class  Fld_12a_B2_AContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_12a_B2_AContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2462,6 +2795,7 @@ public:
 
   class  Fld_12a_B2_BContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_12a_B2_BContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2476,6 +2810,7 @@ public:
 
   class  Fld_12a_B2_CContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_12a_B2_CContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2490,6 +2825,7 @@ public:
 
   class  Fld_11A_B2_AContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_11A_B2_AContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2504,6 +2840,7 @@ public:
 
   class  Fld_98A_B2_AContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_98A_B2_AContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2518,6 +2855,7 @@ public:
 
   class  Fld_92A_B2_AContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_92A_B2_AContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2532,6 +2870,7 @@ public:
 
   class  Fld_13a_B2_AContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_13a_B2_AContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2546,6 +2885,7 @@ public:
 
   class  Fld_13a_B2_BContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_13a_B2_BContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2560,6 +2900,7 @@ public:
 
   class  Fld_17B_B2_BContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_17B_B2_BContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2574,6 +2915,7 @@ public:
 
   class  Fld_90a_B2_AContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_90a_B2_AContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2588,6 +2930,7 @@ public:
 
   class  Fld_90a_B2_BContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_90a_B2_BContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2602,6 +2945,7 @@ public:
 
   class  Fld_36B_B2_BContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_36B_B2_BContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2616,6 +2960,7 @@ public:
 
   class  Fld_35B_B2_BContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_35B_B2_BContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2630,6 +2975,7 @@ public:
 
   class  Fld_70E_B2_EContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_70E_B2_EContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2644,6 +2990,7 @@ public:
 
   class  Fld_22a_B_FContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_22a_B_FContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2658,6 +3005,7 @@ public:
 
   class  Fld_22a_B_HContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_22a_B_HContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2672,6 +3020,7 @@ public:
 
   class  Fld_36B_B3_BContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_36B_B3_BContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2686,6 +3035,7 @@ public:
 
   class  Fld_70D_B3_DContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_70D_B3_DContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2700,6 +3050,7 @@ public:
 
   class  Fld_97a_B3_AContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_97a_B3_AContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2714,6 +3065,7 @@ public:
 
   class  Fld_97a_B3_EContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_97a_B3_EContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2728,6 +3080,7 @@ public:
 
   class  Fld_94a_B3_BContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_94a_B3_BContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2742,6 +3095,7 @@ public:
 
   class  Fld_94a_B3_CContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_94a_B3_CContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2756,6 +3110,7 @@ public:
 
   class  Fld_94a_B3_FContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_94a_B3_FContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2770,6 +3125,7 @@ public:
 
   class  Fld_94a_B3_LContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_94a_B3_LContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2784,6 +3140,7 @@ public:
 
   class  Fld_13B_B3a_BContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_13B_B3a_BContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2798,6 +3155,7 @@ public:
 
   class  Fld_36B_B3a_BContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_36B_B3a_BContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2812,6 +3170,7 @@ public:
 
   class  Fld_98a_B3a_AContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_98a_B3a_AContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2826,6 +3185,7 @@ public:
 
   class  Fld_98a_B3a_CContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_98a_B3a_CContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2840,6 +3200,7 @@ public:
 
   class  Fld_98a_B3a_EContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_98a_B3a_EContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2854,6 +3215,7 @@ public:
 
   class  Fld_90a_B3a_AContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_90a_B3a_AContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2868,6 +3230,7 @@ public:
 
   class  Fld_90a_B3a_BContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_90a_B3a_BContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2882,6 +3245,7 @@ public:
 
   class  Fld_22F_B3a_FContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_22F_B3a_FContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2896,6 +3260,7 @@ public:
 
   class  Fld_98a_B4_AContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_98a_B4_AContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2910,6 +3275,7 @@ public:
 
   class  Fld_98a_B4_BContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_98a_B4_BContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2924,6 +3290,7 @@ public:
 
   class  Fld_98a_B4_CContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_98a_B4_CContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2938,6 +3305,7 @@ public:
 
   class  Fld_22F_B4_FContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_22F_B4_FContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2952,6 +3320,7 @@ public:
 
   class  Fld_20C_B4_CContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_20C_B4_CContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2966,6 +3335,7 @@ public:
 
   class  Fld_92a_B4_AContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_92a_B4_AContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2980,6 +3350,7 @@ public:
 
   class  Fld_92a_B4_CContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_92a_B4_CContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -2994,6 +3365,7 @@ public:
 
   class  Fld_99B_B4_BContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_99B_B4_BContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -3008,6 +3380,7 @@ public:
 
   class  Fld_19A_B4_AContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_19A_B4_AContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -3022,6 +3395,7 @@ public:
 
   class  Fld_70C_B4_CContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_70C_B4_CContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -3036,6 +3410,7 @@ public:
 
   class  Fld_22F_B5_FContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_22F_B5_FContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -3050,6 +3425,7 @@ public:
 
   class  Fld_95a_B5a_CContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_95a_B5a_CContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -3064,6 +3440,7 @@ public:
 
   class  Fld_95a_B5a_LContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_95a_B5a_LContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -3078,6 +3455,7 @@ public:
 
   class  Fld_95a_B5a_PContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_95a_B5a_PContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -3092,6 +3470,7 @@ public:
 
   class  Fld_95a_B5a_QContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_95a_B5a_QContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -3106,6 +3485,7 @@ public:
 
   class  Fld_95a_B5a_RContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_95a_B5a_RContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -3120,6 +3500,7 @@ public:
 
   class  Fld_95a_B5a_SContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_95a_B5a_SContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -3134,6 +3515,7 @@ public:
 
   class  Fld_97a_B5a_AContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_97a_B5a_AContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -3148,6 +3530,7 @@ public:
 
   class  Fld_97a_B5a_BContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_97a_B5a_BContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -3162,6 +3545,7 @@ public:
 
   class  Fld_98a_B5a_AContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_98a_B5a_AContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -3176,6 +3560,7 @@ public:
 
   class  Fld_98a_B5a_CContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_98a_B5a_CContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -3190,6 +3575,7 @@ public:
 
   class  Fld_20C_B5a_CContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_20C_B5a_CContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -3204,6 +3590,7 @@ public:
 
   class  Fld_70a_B5a_CContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_70a_B5a_CContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -3218,6 +3605,7 @@ public:
 
   class  Fld_70a_B5a_DContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_70a_B5a_DContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -3232,6 +3620,7 @@ public:
 
   class  Fld_70a_B5a_EContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_70a_B5a_EContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -3246,6 +3635,7 @@ public:
 
   class  Fld_19A_B5b_AContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_19A_B5b_AContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -3260,6 +3650,7 @@ public:
 
   class  Fld_98a_B5b_AContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_98a_B5b_AContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -3274,6 +3665,7 @@ public:
 
   class  Fld_98a_B5b_CContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_98a_B5b_CContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -3288,6 +3680,7 @@ public:
 
   class  Fld_92B_B5b_BContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_92B_B5b_BContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -3302,6 +3695,7 @@ public:
 
   class  Fld_95a_C_CContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_95a_C_CContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -3316,6 +3710,7 @@ public:
 
   class  Fld_95a_C_LContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_95a_C_LContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -3330,6 +3725,7 @@ public:
 
   class  Fld_95a_C_PContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_95a_C_PContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -3344,6 +3740,7 @@ public:
 
   class  Fld_95a_C_QContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_95a_C_QContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -3358,6 +3755,7 @@ public:
 
   class  Fld_95a_C_RContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_95a_C_RContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();
@@ -3372,6 +3770,7 @@ public:
 
   class  Fld_95a_C_SContext : public antlr4::ParserRuleContext {
   public:
+    message::definition::swift::mt::Field fld;
     Fld_95a_C_SContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     std::vector<antlr4::tree::TerminalNode *> START_OF_FIELD();

@@ -17,7 +17,17 @@ include(../../../proto-helper/CMakeLists.txt)
 
 configure_file(${PROJECT_SOURCE_DIR}/templates/SwiftMtParser.g4 SwiftMtParser.g4 COPYONLY)
 
-add_executable(swift-mt-definition main.cpp ${GENERATED_FILES} definition/StandardRepository.cpp definition/StandardRepository.h definition/DefinitionParser.cpp definition/DefinitionParser.h definition/SequenceStack.cpp definition/SequenceStack.h)
+add_executable(swift-mt-definition main.cpp ${GENERATED_FILES}
+        definition/StandardRepository.cpp
+        definition/StandardRepository.h
+        definition/DefinitionParser.cpp
+        definition/DefinitionParser.h
+        definition/SequenceStack.cpp
+        definition/SequenceStack.h
+        definition/GrammarGenerator.cpp
+        definition/GrammarGenerator.h
+        )
+
 add_dependencies(swift-mt-definition swift-mt-proto)
 
 link_directories(${ICU_LIBRARY_DIRS})

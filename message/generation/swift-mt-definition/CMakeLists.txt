@@ -26,6 +26,8 @@ add_executable(swift-mt-definition main.cpp ${GENERATED_FILES}
         definition/SequenceStack.h
         definition/GrammarGenerator.cpp
         definition/GrammarGenerator.h
+        definition/ComponentFormatParser.cpp
+        definition/ComponentFormatParser.h
         )
 
 add_dependencies(swift-mt-definition swift-mt-proto)

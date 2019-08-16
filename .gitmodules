@@ -19,3 +19,6 @@
 [submodule "message/generation/swift-mt-generation/antlr4"]
 	path = message/generation/swift-mt-generation/antlr4
 	url = https://github.com/antlr/antlr4.git
+[submodule "third_party/grpc"]
+	path = third_party/grpc
+	url = https://github.com/grpc/grpc.git

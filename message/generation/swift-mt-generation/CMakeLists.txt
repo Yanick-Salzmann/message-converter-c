@@ -96,6 +96,9 @@ add_dependencies(swift-mt-generation-parsers swift-mt-definition)
 
 add_definitions("-DANTLR4CPP_STATIC")
 
+set(EXTERNAL_PROTOBUF_FILES "../swift-mt-definition/proto/SwiftMtMessage.pb.h;../swift-mt-definition/proto/SwiftMtMessage.pb.cc")
+set_source_files_properties(${EXTERNAL_PROTOBUF_FILES} PROPERTIES GENERATED TRUE)
+
 add_library(swift-mt-generation STATIC ${GENERATED_PARSER_FILES} repository/ISwiftMtParser.h ../swift-mt-definition/proto/SwiftMtMessage.pb.h ../swift-mt-definition/proto/SwiftMtMessage.pb.cc)
 target_link_libraries(swift-mt-generation antlr4_shared protobuf)
 

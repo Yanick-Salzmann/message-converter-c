@@ -35,14 +35,14 @@ ExternalProject_Add(zlib
 
 if (WIN32)
     set(_FINDPACKAGE_PROTOBUF_CONFIG_DIR "${CMAKE_CURRENT_BINARY_DIR}/protobuf/cmake")
-else()
+else ()
     set(_FINDPACKAGE_PROTOBUF_CONFIG_DIR "${CMAKE_CURRENT_BINARY_DIR}/protobuf/lib/cmake/protobuf")
-endif()
+endif ()
 
 set(_CMAKE_ARGS_OPENSSL_ROOT_DIR "")
 if (OPENSSL_ROOT_DIR)
     set(_CMAKE_ARGS_OPENSSL_ROOT_DIR "-DOPENSSL_ROOT_DIR:PATH=${OPENSSL_ROOT_DIR}")
-endif()
+endif ()
 
 ExternalProject_Add(grpc
         PREFIX grpc
@@ -116,13 +116,19 @@ foreach (loop_var RANGE 0)
     message("file name " ${PROTO_FILE_NAME})
     message("file path " ${PROTO_PATH})
 
+    if (WIN32)
+        set(GRPC_PLUGIN_EXECUTABLE grpc_cpp_plugin.exe)
+    else ()
+        set(GRPC_PLUGIN_EXECUTABLE grpc_cpp_plugin)
+    endif ()
+
     add_custom_command(
             OUTPUT "${PROTO_FILE_NAME}.grpc.pb.h"
             "${PROTO_FILE_NAME}.grpc.pb.cc"
             COMMAND ${CMAKE_CURRENT_BINARY_DIR}/protobuf/bin/protoc
             ARGS "--proto_path=${PROTO_PATH}"
             "--grpc_out=${GENERATED_PROTOBUF_PATH}"
-            "--plugin=protoc-gen-grpc=${CMAKE_CURRENT_BINARY_DIR}/grpc/bin/grpc_cpp_plugin.exe"
+            "--plugin=protoc-gen-grpc=${CMAKE_CURRENT_BINARY_DIR}/grpc/bin/${GRPC_PLUGIN_EXECUTABLE}"
             "${PROTO_PATH}/${PROTO_FILE_NAME}.proto"
     )
 
@@ -144,9 +150,9 @@ find_package(Threads)
 
 link_directories(${CMAKE_CURRENT_BINARY_DIR}/grpc/lib ${CMAKE_CURRENT_BINARY_DIR}/protobuf/lib ${CMAKE_CURRENT_BINARY_DIR}/c-ares/lib ${CMAKE_CURRENT_BINARY_DIR}/zlib/lib)
 link_libraries(grpc++_unsecure grpc++ grpc protobuf cares gpr zlibstatic Threads::Threads address_sorting)
-if(WIN32)
+if (WIN32)
     link_libraries(wsock32 ws2_32)
-endif()
+endif ()
 
 set_source_files_properties(${GENERATED_FILES}
         PROPERTIES GENERATED TRUE)

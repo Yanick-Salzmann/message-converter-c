@@ -10,13 +10,19 @@ include_directories(../swift-mt-definition/proto)
 find_package(java REQUIRED COMPONENTS Development)
 find_package(protobuf REQUIRED)
 
+if (WIN32)
+    set(HELPER_CLASS_PATH "jsoup-1.12.1.jar;.")
+else ()
+    set(HELPER_CLASS_PATH "jsoup-1.12.1.jar:.")
+endif ()
+
 execute_process(
-        COMMAND ${Java_JAVAC_EXECUTABLE} -cp "jsoup-1.12.1.jar;." ${PROJECT_SOURCE_DIR}/helpers/java/MessageListHelper.java
+        COMMAND ${Java_JAVAC_EXECUTABLE} -cp "${HELPER_CLASS_PATH}" ${PROJECT_SOURCE_DIR}/helpers/java/MessageListHelper.java
         WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/helpers/java
 )
 
 execute_process(
-        COMMAND ${Java_JAVA_EXECUTABLE} -cp "jsoup-1.12.1.jar;." MessageListHelper https://www2.swift.com/knowledgecentre/rest/v1/publications/usgf_20180720/3.0/idx_msg.htm
+        COMMAND ${Java_JAVA_EXECUTABLE} -cp "${HELPER_CLASS_PATH}" MessageListHelper https://www2.swift.com/knowledgecentre/rest/v1/publications/usgf_20180720/3.0/idx_msg.htm
         WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/helpers/java
         OUTPUT_STRIP_TRAILING_WHITESPACE
         OUTPUT_VARIABLE MESSAGE_TYPES_RAW
@@ -96,5 +102,5 @@ target_link_libraries(swift-mt-generation antlr4_shared protobuf)
 option(MESSAGE_SWIFT_MT_GENERATE_PARSERS "Generate parsers for SWIFT MT (this takes a lot of time)" ON)
 
 #if(${MESSAGE_SWIFT_MT_GENERATE_PARSERS})
-    add_dependencies(swift-mt-generation swift-mt-generation-parsers)
+add_dependencies(swift-mt-generation swift-mt-generation-parsers)
 #endif()

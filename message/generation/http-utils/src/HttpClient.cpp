@@ -27,9 +27,9 @@ namespace message::utils::http {
         curl_easy_setopt(_curl, CURLOPT_URL, url.c_str());
         curl_easy_setopt(_curl, CURLOPT_WRITEFUNCTION, &HttpClient::data_callback);
         curl_easy_setopt(_curl, CURLOPT_WRITEDATA, this);
-        curl_easy_setopt(_curl, CURLOPT_SSL_VERIFYHOST, FALSE);
-        curl_easy_setopt(_curl, CURLOPT_SSL_VERIFYPEER, FALSE);
-        curl_easy_setopt(_curl, CURLOPT_FOLLOWLOCATION, TRUE);
+        curl_easy_setopt(_curl, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_easy_setopt(_curl, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_easy_setopt(_curl, CURLOPT_FOLLOWLOCATION, 1);
         curl_easy_setopt(_curl, CURLOPT_COOKIEFILE, "");
 
         const auto rc = curl_easy_perform(_curl);

@@ -1,57 +1,20 @@
 #include "ComponentFormatParser.h"
+#include "../format/SwiftMtComponentFormatParser.h"
 
-namespace message::definition::swift::mt {
+namespace message::generation::swift::mt {
+    LOGGER_IMPL(ComponentFormatParser);
 
-    std::vector<ComponentFormat> ComponentFormatParser::parse_format(const std::string &format) {
-        ParserState state{format};
-        while(state.has_more()) {
-            uint32_t num0 = 0;
-            if(state.read_number(num0)) {
+    std::vector<definition::swift::mt::ComponentFormat> ComponentFormatParser::parse_format(const std::string &format) {
+        std::vector<definition::swift::mt::ComponentFormat> formats;
+        std::vector<std::string> errors;
 
-            }
-        }
-        return {};
-    }
-
-    bool ComponentFormatParser::ParserState::read_number(uint32_t &out_number) {
-        char digit0 = read();
-        if (!std::isdigit(digit0)) {
-            return false;
+        if(!definition::swift::mt::SwiftMtComponentFormatParser::parse(format, formats, errors)) {
+            std::stringstream error_stream;
+            std::copy(errors.begin(), errors.end(), std::ostream_iterator<std::string>{error_stream, ", "});
+            log->error("Error parsing format {}. Errors: {}", format, error_stream.str());
+            return {};
         }
 
-        const auto num0 =(uint32_t) (digit0 - '0');
-        char digit1 = peek();
-        if (!std::isdigit(digit1)) {
-            out_number = num0;
-            return true;
-        }
-
-        ++_position;
-
-        const auto num1 = (uint32_t) (digit1 - '0');
-        out_number = num0 + num1 * 10;
-        return true;
-    }
-
-    void ComponentFormatParser::ParserState::read_multiplicity(bool &exact, bool &range, bool& multi_line) {
-        switch(peek()) {
-            case '*': {
-                multi_line = true;
-                read();
-                break;
-            }
-
-            case '-': {
-                range = true;
-                read();
-                break;
-            }
-
-            case '!': {
-                exact = true;
-                read();
-                break;
-            }
-        }
+        return formats;
     }
 }

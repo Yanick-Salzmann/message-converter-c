@@ -3,34 +3,14 @@
 
 #include "proto/SwiftMtMessageDefinition.pb.h"
 #include <vector>
+#include <utils/Log.h>
 
-namespace message::definition::swift::mt {
+namespace message::generation::swift::mt {
     class ComponentFormatParser {
-    private:
-        class ParserState {
-            std::string _format;
-            std::string::size_type _position = 0;
+        LOGGER;
 
-        public:
-            explicit ParserState(std::string format) : _format(std::move(format)) { }
-
-            [[nodiscard]] bool has_more() const {
-                return _position < _format.size();
-            }
-
-            bool read_number(uint32_t& out_number);
-            void read_multiplicity(bool& exact, bool& range, bool& multi_line);
-
-            char read() {
-                return _format.at(_position++);
-            }
-
-            char peek() {
-                return _format.at(_position);
-            }
-        };
     public:
-        static std::vector<ComponentFormat> parse_format(const std::string& format);
+        static std::vector<definition::swift::mt::ComponentFormat> parse_format(const std::string& format);
     };
 }
 

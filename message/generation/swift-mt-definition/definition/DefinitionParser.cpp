@@ -2,6 +2,7 @@
 #include "DefinitionParser.h"
 #include "SequenceStack.h"
 #include <google/protobuf/util/json_util.h>
+#include "ComponentFormatParser.h"
 
 #include <regex>
 
@@ -216,13 +217,21 @@ namespace message::generation::swift::mt {
                 components = (*fld_itr++).node_text();
             }
 
+            const auto comp_formats = ComponentFormatParser::parse_format(format);
+
             definition::swift::mt::OptnFrmt* opt = fld_def.mutable_format()->Add();
             opt->set_option(option);
             opt->set_format(format);
             const auto comps = split_components(components);
+
+            auto cur_index = 0u;
             for(const auto& comp : comps) {
                 auto cmp = opt->mutable_components()->Add();
                 cmp->set_name(comp);
+
+                if(comp_formats.size() == comps.size()) {
+                    cmp->mutable_format()->MergeFrom(comp_formats[cur_index++]);
+                }
             }
         }
     }

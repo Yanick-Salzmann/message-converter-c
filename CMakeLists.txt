@@ -3,6 +3,7 @@ project(message_converter_c)
 
 find_package(Git)
 
+#[[
 if (GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
     # Update submodules as needed
     option(GIT_SUBMODULE "Check submodules during build" ON)
@@ -17,6 +18,7 @@ if (GIT_FOUND AND EXISTS "${PROJECT_SOURCE_DIR}/.git")
         endif ()
     endif ()
 endif ()
+]]
 
 add_subdirectory(utils)
 add_subdirectory(message)
